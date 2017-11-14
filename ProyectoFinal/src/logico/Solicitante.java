@@ -1,6 +1,8 @@
 package logico;
 
-public class Solicitante {
+import java.util.ArrayList;
+
+public abstract class Solicitante {
 	protected String cedula;
 	protected String nombre;
 	protected String apellidos;
@@ -9,6 +11,7 @@ public class Solicitante {
 	protected String paisOrigen;
 	protected String paisResidencia;
 	protected boolean trabajo;
+	protected ArrayList<Solicitud> misSolicitudes;
 	
 	public Solicitante(String cedula, String nombre, String apellidos, String nacimiento, String genero,
 			String paisOrigen, String paisResidencia, boolean trabajo) {
@@ -21,6 +24,7 @@ public class Solicitante {
 		this.paisOrigen = paisOrigen;
 		this.paisResidencia = paisResidencia;
 		this.trabajo = trabajo;
+		this.misSolicitudes = new ArrayList<>();
 	}
 
 	public String getCedula() {
