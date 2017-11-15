@@ -32,6 +32,63 @@ public class Controladora {
 		misSolicitudes.add(sol);
 	}
 
+	public Solicitante buscarSolicitante(String cedula){
+		Solicitante solicitante = null;
+		boolean find = false;
+		int i = 0;
+		while(!find && i < misSolicitantes.size()){
+			if(misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)){
+				solicitante = misSolicitantes.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return solicitante;
+	}
+	
+	public Empresa buscarEmpresa(String codigo){
+		Empresa empresa = null;
+		boolean find = false;
+		int i = 0;
+		while(!find && i < misEmpresas.size()){
+			if(misEmpresas.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				empresa = misEmpresas.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return empresa;
+	}
+	
+	public Solicitud buscarSolicitud(String codigo){
+		Solicitud solicitud = null;
+		boolean find = false;
+		int i = 0;
+		while(!find && i < misSolicitudes.size()){
+			if(misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				solicitud = misSolicitudes.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return solicitud;
+	}
+	
+	public Empleo buscarEmpleo(String codigo){
+		Empleo empleo = null;
+		boolean find = false;
+		int i = 0;
+		while(!find && i < misEmpleos.size()){
+			if(misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				empleo = misEmpleos.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return empleo;
+	}
+	
+	
 	public ArrayList<Solicitante> getMisSolicitantes() {
 		return misSolicitantes;
 	}
