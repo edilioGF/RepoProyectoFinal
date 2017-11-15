@@ -7,13 +7,29 @@ public class Controladora {
 	private ArrayList<Empresa> misEmpresas;
 	private ArrayList<Solicitud> misSolicitudes;
 	private ArrayList<Empleo> misEmpleos;
-	
+
 	public Controladora() {
 		super();
 		this.misSolicitantes = new ArrayList<>();
 		this.misEmpresas = new ArrayList<>();
 		this.misSolicitudes = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
+	}
+
+	public void addSolicitante(Solicitante soli) {
+		misSolicitantes.add(soli);
+	}
+
+	public void addEmpresa(Empresa emp) {
+		misEmpresas.add(emp);
+	}
+
+	public void addEmpleo(Empleo empl) {
+		misEmpleos.add(empl);
+	}
+
+	public void addSolicitud(Solicitud sol) {
+		misSolicitudes.add(sol);
 	}
 
 	public ArrayList<Solicitante> getMisSolicitantes() {
