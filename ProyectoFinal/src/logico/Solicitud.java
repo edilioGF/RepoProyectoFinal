@@ -3,7 +3,6 @@ package logico;
 import java.util.ArrayList;
 
 public class Solicitud {
-
 	private String codigo;
 	private String fecha;
 	private Solicitante solicitante;
@@ -13,6 +12,14 @@ public class Solicitud {
 	private boolean mudarse;
 	private int experiencia;
 	private boolean activa;
+
+	public boolean isActiva() {
+		return activa;
+	}
+
+	public void setActiva(boolean activa) {
+		this.activa = activa;
+	}
 
 	public Solicitud(String codigo, String fecha, Solicitante solicitante, ArrayList<String> idiomas, boolean remoto,
 			boolean licencia, boolean mudarse, int experiencia, boolean activa) {
