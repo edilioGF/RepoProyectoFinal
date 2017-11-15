@@ -6,12 +6,13 @@ public class Solicitud {
 	
 	private String codigo;
 	private String fecha;
-	Solicitante solicitante;
-	ArrayList<String> idiomas;
+	private Solicitante solicitante;
+	private ArrayList<String> idiomas;
 	private boolean remoto;
 	private boolean licencia;
 	private boolean mudarse;
 	private int experiencia;
+	private boolean activa;
 	
 	public Solicitud(String codigo, String fecha, Solicitante solicitante, boolean remoto, boolean licencia,
 			boolean mudarse, int experiencia) {
