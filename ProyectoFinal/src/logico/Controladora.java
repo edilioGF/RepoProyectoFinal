@@ -59,6 +59,7 @@ public class Controladora {
 	private void evaluarSolicitud(Solicitud solicitud, Empleo empleo) {
 		solicitud.getSolicitante().setTrabajo(true);
 		solicitud.setSatisfecha(true);
+		empleo.setSatisfecho(true);
 		empleo.setVacantes(empleo.getVacantes() - 1);
 		empleo.inactivarSolicitudes();
 	}

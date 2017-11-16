@@ -8,7 +8,7 @@ public class Empleo {
 	private String titulo;
 	private String fecha;
 	private int vacantes;
-	private String cargo;
+	private String descripcion;
 	private float salario;
 	private int horaInicial;
 	private int horaFinal;
@@ -29,7 +29,7 @@ public class Empleo {
 
 	private Solicitante empleado;
 
-	public Empleo(String codigo, String titulo, int vacantes, String cargo, float salario, int horaInicial,
+	public Empleo(String codigo, String titulo, int vacantes, String descripcion, float salario, int horaInicial,
 			int horaFinal, boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia,
 			boolean graduado, boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad) {
 		super();
@@ -37,7 +37,7 @@ public class Empleo {
 		this.titulo = titulo;
 		this.fecha = (new Date()).toString();
 		this.vacantes = vacantes;
-		this.cargo = cargo;
+		this.descripcion = descripcion;
 		this.salario = salario;
 		this.horaInicial = horaInicial;
 		this.horaFinal = horaFinal;
@@ -54,6 +54,14 @@ public class Empleo {
 		this.area = area;
 		this.habilidad = habilidad;
 		this.empleado = null;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Solicitante getEmpleado() {
@@ -148,14 +156,6 @@ public class Empleo {
 
 	public void setVacantes(int vacantes) {
 		this.vacantes = vacantes;
-	}
-
-	public String getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
 	}
 
 	public float getSalario() {
