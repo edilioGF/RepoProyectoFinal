@@ -27,11 +27,22 @@ public class Empleo {
 	private String area;
 	private String habilidad;
 
+	private Empresa empresa;
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 	private Solicitante empleado;
 
 	public Empleo(String codigo, String titulo, int vacantes, String descripcion, float salario, int horaInicial,
 			int horaFinal, boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia,
-			boolean graduado, boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad) {
+			boolean graduado, boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad,
+			Empresa empresa) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
@@ -53,6 +64,7 @@ public class Empleo {
 		this.tituloTecnico = tituloTecnico;
 		this.area = area;
 		this.habilidad = habilidad;
+		this.empresa = empresa;
 		this.empleado = null;
 	}
 

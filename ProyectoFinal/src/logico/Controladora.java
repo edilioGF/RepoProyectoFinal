@@ -61,6 +61,7 @@ public class Controladora {
 		solicitud.setSatisfecha(true);
 		empleo.setSatisfecho(true);
 		empleo.setVacantes(empleo.getVacantes() - 1);
+		empleo.setEmpleado(solicitud.getSolicitante());
 		empleo.inactivarSolicitudes();
 	}
 

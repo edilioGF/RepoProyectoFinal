@@ -11,9 +11,9 @@ public class Test {
 		Empresa emp = new Empresa("001", "EM", "RD", "Software");
 
 		Empleo empleo = new Empleo("001", "Ingeniero", 5, "Gerente", 12500, 0, 12, false, "esp", 5, false, false, true,
-				false, false, "", "ISC", "");
+				false, false, "", "ISC", "", emp);
 		Empleo emp2 = new Empleo("002", "Plomero", 1, "Mano de obra", 30000, 0, 12, false, "esp", 3, false, false,
-				false, false, true, "", "", "plomero");
+				false, false, true, "", "", "plomero", emp);
 
 		Solicitud solicitud = new Solicitud("001", grad, "esp", false, false, 5);
 		Solicitud sol2 = new Solicitud("002", obr, "esp", false, false, 5);
@@ -37,6 +37,8 @@ public class Test {
 
 		System.out.println(empleo.getVacantes());
 		System.out.println(solicitud.isSatisfecha());
+		System.out.println(empleo.getEmpleado().getNombre() + " está trabajando para " + empleo.getEmpresa().getNombre()
+				+ ", como " + empleo.getDescripcion());
 		System.out.println(emp2.getVacantes());
 	}
 }
