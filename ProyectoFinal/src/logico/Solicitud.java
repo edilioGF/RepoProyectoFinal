@@ -15,7 +15,7 @@ public class Solicitud {
 	private boolean satisfecha;
 
 	public Solicitud(String codigo, Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
-			int experiencia, boolean activa, boolean satisfecha) {
+			int experiencia) {
 		super();
 		this.codigo = codigo;
 		this.fecha = (new Date()).toString();
@@ -24,8 +24,8 @@ public class Solicitud {
 		this.licencia = licencia;
 		this.mudarse = mudarse;
 		this.experiencia = experiencia;
-		this.activa = activa;
-		this.satisfecha = satisfecha;
+		this.activa = true;
+		this.satisfecha = false;
 	}
 
 	public boolean isSatisfecha() {

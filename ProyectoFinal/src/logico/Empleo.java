@@ -27,6 +27,8 @@ public class Empleo {
 	private String area;
 	private String habilidad;
 
+	private Solicitante empleado;
+
 	public Empleo(String codigo, String titulo, int vacantes, String cargo, float salario, int horaInicial,
 			int horaFinal, boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia,
 			boolean graduado, boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad) {
@@ -51,6 +53,15 @@ public class Empleo {
 		this.tituloTecnico = tituloTecnico;
 		this.area = area;
 		this.habilidad = habilidad;
+		this.empleado = null;
+	}
+
+	public Solicitante getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Solicitante empleado) {
+		this.empleado = empleado;
 	}
 
 	public void inactivarSolicitudes() {

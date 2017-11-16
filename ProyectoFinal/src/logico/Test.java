@@ -8,15 +8,15 @@ public class Test {
 
 		Graduado grad = new Graduado("001", "J", "G", "00", "M", "RD", "RD", false, "ISC");
 		Obrero obr = new Obrero("002", "Ed", "Gr", "00", "M", "RD", "RD", false, "plomero");
-		Empresa emp = new Empresa("001", "EM", "RD", "Soft");
+		Empresa emp = new Empresa("001", "EM", "RD", "Software");
 
 		Empleo empleo = new Empleo("001", "Ingeniero", 5, "Gerente", 12500, 0, 12, false, "esp", 5, false, false, true,
 				false, false, "", "ISC", "");
 		Empleo emp2 = new Empleo("002", "Plomero", 1, "Mano de obra", 30000, 0, 12, false, "esp", 3, false, false,
 				false, false, true, "", "", "plomero");
 
-		Solicitud solicitud = new Solicitud("001", grad, "esp", false, false, 5, true, false);
-		Solicitud sol2 = new Solicitud("002", obr, "esp", false, false, 5, true, false);
+		Solicitud solicitud = new Solicitud("001", grad, "esp", false, false, 5);
+		Solicitud sol2 = new Solicitud("002", obr, "esp", false, false, 5);
 
 		grad.getMisSolicitudes().add(solicitud);
 		obr.getMisSolicitudes().add(sol2);
