@@ -1,5 +1,7 @@
 package logico;
 
+import java.util.ArrayList;
+
 public class Graduado extends Solicitante {
 	private String areaEstudio;
 

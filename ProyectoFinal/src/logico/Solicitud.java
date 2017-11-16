@@ -1,37 +1,46 @@
 package logico;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Solicitud {
 	private String codigo;
 	private String fecha;
 	private Solicitante solicitante;
-	private ArrayList<String> idiomas;
-	private boolean remoto;
+	private String idioma;
 	private boolean licencia;
 	private boolean mudarse;
 	private int experiencia;
 	private boolean activa;
+	private boolean satisfecha;
+
+	public Solicitud(String codigo, Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
+			int experiencia, boolean activa, boolean satisfecha) {
+		super();
+		this.codigo = codigo;
+		this.fecha = (new Date()).toString();
+		this.solicitante = solicitante;
+		this.idioma = idioma;
+		this.licencia = licencia;
+		this.mudarse = mudarse;
+		this.experiencia = experiencia;
+		this.activa = activa;
+		this.satisfecha = satisfecha;
+	}
+
+	public boolean isSatisfecha() {
+		return satisfecha;
+	}
+
+	public void setSatisfecha(boolean satisfecha) {
+		this.satisfecha = satisfecha;
+	}
 
 	public boolean isActiva() {
 		return activa;
 	}
 
 	public void setActiva(boolean activa) {
-		this.activa = activa;
-	}
-
-	public Solicitud(String codigo, String fecha, Solicitante solicitante, ArrayList<String> idiomas, boolean remoto,
-			boolean licencia, boolean mudarse, int experiencia, boolean activa) {
-		super();
-		this.codigo = codigo;
-		this.fecha = fecha;
-		this.solicitante = solicitante;
-		this.idiomas = idiomas;
-		this.remoto = remoto;
-		this.licencia = licencia;
-		this.mudarse = mudarse;
-		this.experiencia = experiencia;
 		this.activa = activa;
 	}
 
@@ -59,20 +68,12 @@ public class Solicitud {
 		this.solicitante = solicitante;
 	}
 
-	public ArrayList<String> getIdiomas() {
-		return idiomas;
+	public String getIdioma() {
+		return idioma;
 	}
 
-	public void setIdiomas(ArrayList<String> idiomas) {
-		this.idiomas = idiomas;
-	}
-
-	public boolean isRemoto() {
-		return remoto;
-	}
-
-	public void setRemoto(boolean remoto) {
-		this.remoto = remoto;
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
 	}
 
 	public boolean isLicencia() {

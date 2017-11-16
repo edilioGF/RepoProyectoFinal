@@ -1,6 +1,7 @@
 package logico;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Empleo {
 	private String codigo;
@@ -13,31 +14,97 @@ public class Empleo {
 	private int horaFinal;
 	private boolean satisfecho;
 	private ArrayList<Solicitud> misSolicitudes;
-	private ArrayList<String> idiomas;
+	private String idioma;
 	private int experiencia;
 	private boolean remoto;
 	private boolean licencia;
-	private String profesion;
 
-	public Empleo(String codigo, String titulo, String fecha, int vacantes, String cargo, float salario,
-			int horaInicial, int horaFinal, boolean satisfecho, ArrayList<Solicitud> misSolicitudes,
-			ArrayList<String> idiomas, int experiencia, boolean remoto, boolean licencia, String profesion) {
+	private boolean graduado;
+	private boolean tecnico;
+	private boolean obrero;
+
+	private String tituloTecnico;
+	private String area;
+	private String habilidad;
+
+	public Empleo(String codigo, String titulo, int vacantes, String cargo, float salario, int horaInicial,
+			int horaFinal, boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia,
+			boolean graduado, boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
-		this.fecha = fecha;
+		this.fecha = (new Date()).toString();
 		this.vacantes = vacantes;
 		this.cargo = cargo;
 		this.salario = salario;
 		this.horaInicial = horaInicial;
 		this.horaFinal = horaFinal;
 		this.satisfecho = satisfecho;
-		this.misSolicitudes = misSolicitudes;
-		this.idiomas = idiomas;
+		this.misSolicitudes = new ArrayList<>();
+		this.idioma = idioma;
 		this.experiencia = experiencia;
 		this.remoto = remoto;
 		this.licencia = licencia;
-		this.profesion = profesion;
+		this.graduado = graduado;
+		this.tecnico = tecnico;
+		this.obrero = obrero;
+		this.tituloTecnico = tituloTecnico;
+		this.area = area;
+		this.habilidad = habilidad;
+	}
+
+	public void inactivarSolicitudes() {
+		for (Solicitud solicitud : misSolicitudes) {
+			solicitud.setActiva(false);
+		}
+	}
+
+	public String getTituloTecnico() {
+		return tituloTecnico;
+	}
+
+	public void setTituloTecnico(String tituloTecnico) {
+		this.tituloTecnico = tituloTecnico;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getHabilidad() {
+		return habilidad;
+	}
+
+	public void setHabilidad(String habilidad) {
+		this.habilidad = habilidad;
+	}
+
+	public boolean isGraduado() {
+		return graduado;
+	}
+
+	public void setGraduado(boolean graduado) {
+		this.graduado = graduado;
+	}
+
+	public boolean isTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(boolean tecnico) {
+		this.tecnico = tecnico;
+	}
+
+	public boolean isObrero() {
+		return obrero;
+	}
+
+	public void setObrero(boolean obrero) {
+		this.obrero = obrero;
 	}
 
 	public String getCodigo() {
@@ -120,12 +187,12 @@ public class Empleo {
 		this.misSolicitudes = misSolicitudes;
 	}
 
-	public ArrayList<String> getIdiomas() {
-		return idiomas;
+	public String getIdioma() {
+		return idioma;
 	}
 
-	public void setIdiomas(ArrayList<String> idiomas) {
-		this.idiomas = idiomas;
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
 	}
 
 	public int getExperiencia() {
@@ -150,13 +217,5 @@ public class Empleo {
 
 	public void setLicencia(boolean licencia) {
 		this.licencia = licencia;
-	}
-
-	public String getProfesion() {
-		return profesion;
-	}
-
-	public void setProfesion(String profesion) {
-		this.profesion = profesion;
 	}
 }

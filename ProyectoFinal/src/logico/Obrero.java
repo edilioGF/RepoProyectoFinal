@@ -3,19 +3,20 @@ package logico;
 import java.util.ArrayList;
 
 public class Obrero extends Solicitante {
-	private ArrayList<String> habilidades;
+	private String habilidad;
 
 	public Obrero(String cedula, String nombre, String apellidos, String nacimiento, String genero, String paisOrigen,
-			String paisResidencia, boolean trabajo, ArrayList<String> habilidades) {
+			String paisResidencia, boolean trabajo, String habilidad) {
 		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, trabajo);
-		this.habilidades = habilidades;
+		this.habilidad = habilidad;
 	}
 
-	public ArrayList<String> getHabilidades() {
-		return habilidades;
+	public String getHabilidad() {
+		return habilidad;
 	}
 
-	public void setHabilidades(ArrayList<String> habilidades) {
-		this.habilidades = habilidades;
+	public void setHabilidad(String habilidad) {
+		this.habilidad = habilidad;
 	}
+
 }

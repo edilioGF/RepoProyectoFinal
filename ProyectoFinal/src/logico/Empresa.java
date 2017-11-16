@@ -9,13 +9,13 @@ public class Empresa {
 	private String tipo;
 	private ArrayList<Empleo> misEmpleos;
 
-	public Empresa(String codigo, String nombre, String ubicacion, String tipo, ArrayList<Empleo> misEmpleos) {
+	public Empresa(String codigo, String nombre, String ubicacion, String tipo) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.tipo = tipo;
-		this.misEmpleos = misEmpleos;
+		this.misEmpleos = new ArrayList<>();
 	}
 
 	public String getCodigo() {

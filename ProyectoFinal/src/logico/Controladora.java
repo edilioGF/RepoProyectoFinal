@@ -16,6 +16,53 @@ public class Controladora {
 		this.misEmpleos = new ArrayList<>();
 	}
 
+	// Se busca empresa por empresa
+	// Se obtienen las ofertas / empleos
+	// Se obtienen las solicitudes
+	// Se comparan
+	// Se marca el solicitante como trabajo = true, solicitud como satisfecha e
+	// inactiva y se marcan
+	// las otras solicitudes de ese solicitante como inactivas
+
+	public void match() {
+		for (Empleo empleo : misEmpleos) {
+			for (Solicitud solicitud : empleo.getMisSolicitudes()) {
+				if (empleo.getVacantes() > 0 && solicitud.isActiva()) {
+					if (empleo.getExperiencia() <= solicitud.getExperiencia()) {
+						if ((empleo.isRemoto() && solicitud.isMudarse()) || !empleo.isRemoto()) {
+							if (empleo.isLicencia() && solicitud.isLicencia() || !empleo.isLicencia()) {
+								if (empleo.isGraduado() && solicitud.getSolicitante() instanceof Graduado) {
+									if (empleo.getArea().equalsIgnoreCase(
+											((Graduado) solicitud.getSolicitante()).getAreaEstudio())) {
+										evaluarSolicitud(solicitud, empleo);
+									}
+								} else if (empleo.isTecnico() && solicitud.getSolicitante() instanceof Tecnico) {
+
+									if (empleo.getTitulo()
+											.equalsIgnoreCase(((Tecnico) solicitud.getSolicitante()).getTitulo())) {
+										evaluarSolicitud(solicitud, empleo);
+									}
+								} else {
+									if (empleo.getHabilidad()
+											.equalsIgnoreCase(((Obrero) solicitud.getSolicitante()).getHabilidad())) {
+										evaluarSolicitud(solicitud, empleo);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void evaluarSolicitud(Solicitud solicitud, Empleo empleo) {
+		solicitud.getSolicitante().setTrabajo(true);
+		solicitud.setSatisfecha(true);
+		empleo.setVacantes(empleo.getVacantes() - 1);
+		empleo.inactivarSolicitudes();
+	}
+
 	public void addSolicitante(Solicitante soli) {
 		misSolicitantes.add(soli);
 	}
@@ -32,12 +79,12 @@ public class Controladora {
 		misSolicitudes.add(sol);
 	}
 
-	public Solicitante buscarSolicitante(String cedula){
+	public Solicitante buscarSolicitante(String cedula) {
 		Solicitante solicitante = null;
 		boolean find = false;
 		int i = 0;
-		while(!find && i < misSolicitantes.size()){
-			if(misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)){
+		while (!find && i < misSolicitantes.size()) {
+			if (misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)) {
 				solicitante = misSolicitantes.get(i);
 				find = true;
 			}
@@ -45,13 +92,13 @@ public class Controladora {
 		}
 		return solicitante;
 	}
-	
-	public Empresa buscarEmpresa(String codigo){
+
+	public Empresa buscarEmpresa(String codigo) {
 		Empresa empresa = null;
 		boolean find = false;
 		int i = 0;
-		while(!find && i < misEmpresas.size()){
-			if(misEmpresas.get(i).getCodigo().equalsIgnoreCase(codigo)){
+		while (!find && i < misEmpresas.size()) {
+			if (misEmpresas.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				empresa = misEmpresas.get(i);
 				find = true;
 			}
@@ -59,13 +106,13 @@ public class Controladora {
 		}
 		return empresa;
 	}
-	
-	public Solicitud buscarSolicitud(String codigo){
+
+	public Solicitud buscarSolicitud(String codigo) {
 		Solicitud solicitud = null;
 		boolean find = false;
 		int i = 0;
-		while(!find && i < misSolicitudes.size()){
-			if(misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)){
+		while (!find && i < misSolicitudes.size()) {
+			if (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				solicitud = misSolicitudes.get(i);
 				find = true;
 			}
@@ -73,13 +120,13 @@ public class Controladora {
 		}
 		return solicitud;
 	}
-	
-	public Empleo buscarEmpleo(String codigo){
+
+	public Empleo buscarEmpleo(String codigo) {
 		Empleo empleo = null;
 		boolean find = false;
 		int i = 0;
-		while(!find && i < misEmpleos.size()){
-			if(misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)){
+		while (!find && i < misEmpleos.size()) {
+			if (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				empleo = misEmpleos.get(i);
 				find = true;
 			}
@@ -87,8 +134,7 @@ public class Controladora {
 		}
 		return empleo;
 	}
-	
-	
+
 	public ArrayList<Solicitante> getMisSolicitantes() {
 		return misSolicitantes;
 	}
