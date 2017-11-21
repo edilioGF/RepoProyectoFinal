@@ -6,8 +6,8 @@ public class Test {
 		// TODO Auto-generated method stub
 		Controladora control = new Controladora();
 
-		Graduado grad = new Graduado("001", "J", "G", "00", "M", "RD", "RD", false, "ISC");
-		Obrero obr = new Obrero("002", "Ed", "Gr", "00", "M", "RD", "RD", false, "plomero");
+		Graduado grad = new Graduado("001", "J", "G", "00", "M", "RD", "RD", "ISC");
+		Obrero obr = new Obrero("002", "Ed", "Gr", "00", "M", "RD", "RD", "Plomero");
 		Empresa emp = new Empresa("001", "EM", "RD", "Software");
 
 		Empleo empleo = new Empleo("001", "Ingeniero", 5, "Gerente", 12500, 0, 12, false, "esp", 5, false, false, true,

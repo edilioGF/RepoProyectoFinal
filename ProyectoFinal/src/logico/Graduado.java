@@ -6,8 +6,8 @@ public class Graduado extends Solicitante {
 	private String areaEstudio;
 
 	public Graduado(String cedula, String nombre, String apellidos, String nacimiento, String genero, String paisOrigen,
-			String paisResidencia, boolean trabajo, String areaEstudio) {
-		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, trabajo);
+			String paisResidencia, String areaEstudio) {
+		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia);
 		this.areaEstudio = areaEstudio;
 	}
 

@@ -14,7 +14,7 @@ public abstract class Solicitante {
 	protected ArrayList<Solicitud> misSolicitudes;
 
 	public Solicitante(String cedula, String nombre, String apellidos, String nacimiento, String genero,
-			String paisOrigen, String paisResidencia, boolean trabajo) {
+			String paisOrigen, String paisResidencia) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -23,7 +23,7 @@ public abstract class Solicitante {
 		this.genero = genero;
 		this.paisOrigen = paisOrigen;
 		this.paisResidencia = paisResidencia;
-		this.trabajo = trabajo;
+		this.trabajo = false;
 		this.misSolicitudes = new ArrayList<>();
 	}
 

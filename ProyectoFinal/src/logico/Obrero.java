@@ -6,8 +6,8 @@ public class Obrero extends Solicitante {
 	private String habilidad;
 
 	public Obrero(String cedula, String nombre, String apellidos, String nacimiento, String genero, String paisOrigen,
-			String paisResidencia, boolean trabajo, String habilidad) {
-		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, trabajo);
+			String paisResidencia, String habilidad) {
+		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia);
 		this.habilidad = habilidad;
 	}
 
