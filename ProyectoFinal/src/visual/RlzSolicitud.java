@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RlzSolicitud extends JDialog {
 
@@ -156,6 +158,11 @@ public class RlzSolicitud extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
