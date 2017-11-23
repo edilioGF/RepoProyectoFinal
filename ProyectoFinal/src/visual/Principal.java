@@ -66,7 +66,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmEmpleo = new JMenuItem("Empleo\r\n");
 		mntmEmpleo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				RegEmpleo re = new RegEmpleo();
+				re.setModal(true);
+				re.setVisible(true);
 			}
 		});
 		mnRegistrar.add(mntmEmpleo);
