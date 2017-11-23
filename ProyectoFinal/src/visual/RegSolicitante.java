@@ -35,18 +35,13 @@ public class RegSolicitante extends JDialog {
 	private JComboBox cbxPaisOrigen;
 	private JDateChooser dateChooser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RegSolicitante dialog = new RegSolicitante();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private JPanel pnlObrero;
+	private JPanel pnlTecnico;
+	private JPanel pnlGraduado;
+
+	private JRadioButton rdbtnGraduado;
+	private JRadioButton rdbtnTecnico;
+	private JRadioButton rdbtnObrero;
 
 	/**
 	 * Create the dialog.
@@ -55,6 +50,7 @@ public class RegSolicitante extends JDialog {
 		setTitle("Registro de Solicitante");
 		setResizable(false);
 		setBounds(100, 100, 390, 540);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -134,31 +130,76 @@ public class RegSolicitante extends JDialog {
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 
-		JRadioButton rdbtnGraduado = new JRadioButton("Graduado");
+		rdbtnGraduado = new JRadioButton("Graduado");
+		rdbtnGraduado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				loadPanel(true, false, false);
+			}
+		});
 		rdbtnGraduado.setBounds(9, 23, 109, 23);
 		panel_1.add(rdbtnGraduado);
 
-		JRadioButton rdbtnTcnico = new JRadioButton("T\u00E9cnico");
-		rdbtnTcnico.setBounds(127, 23, 109, 23);
-		panel_1.add(rdbtnTcnico);
+		rdbtnTecnico = new JRadioButton("T\u00E9cnico");
+		rdbtnTecnico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadPanel(false, true, false);
+			}
+		});
+		rdbtnTecnico.setBounds(127, 23, 109, 23);
+		panel_1.add(rdbtnTecnico);
 
-		JRadioButton rdbtnObrero = new JRadioButton("Obrero");
+		rdbtnObrero = new JRadioButton("Obrero");
+		rdbtnObrero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadPanel(false, false, true);
+			}
+		});
 		rdbtnObrero.setBounds(245, 23, 109, 23);
 		panel_1.add(rdbtnObrero);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 388, 364, 70);
-		contentPanel.add(panel_2);
-		panel_2.setLayout(null);
+		pnlGraduado = new JPanel();
+		pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlGraduado.setBounds(10, 388, 364, 70);
+		contentPanel.add(pnlGraduado);
+		pnlGraduado.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("\u00C1rea de Estudio:");
 		lblNewLabel.setBounds(10, 28, 120, 14);
-		panel_2.add(lblNewLabel);
+		pnlGraduado.add(lblNewLabel);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(124, 23, 230, 23);
-		panel_2.add(comboBox);
+		JComboBox cbxAreaEstudio = new JComboBox();
+		cbxAreaEstudio.setBounds(124, 24, 230, 23);
+		pnlGraduado.add(cbxAreaEstudio);
+
+		pnlTecnico = new JPanel();
+		pnlTecnico.setLayout(null);
+		pnlTecnico.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "T\u00E9cnico",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlTecnico.setBounds(10, 388, 364, 70);
+		contentPanel.add(pnlTecnico);
+
+		JLabel lblTtulo = new JLabel("T\u00EDtulo:");
+		lblTtulo.setBounds(10, 28, 75, 14);
+		pnlTecnico.add(lblTtulo);
+
+		JComboBox cbxTitulo = new JComboBox();
+		cbxTitulo.setBounds(124, 24, 230, 23);
+		pnlTecnico.add(cbxTitulo);
+
+		pnlObrero = new JPanel();
+		pnlObrero.setLayout(null);
+		pnlObrero.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Obrero", TitledBorder.LEADING,
+				TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlObrero.setBounds(10, 388, 364, 70);
+		contentPanel.add(pnlObrero);
+
+		JLabel lblHabilidad = new JLabel("Habilidad:");
+		lblHabilidad.setBounds(10, 28, 75, 14);
+		pnlObrero.add(lblHabilidad);
+
+		JComboBox cbxHabilidad = new JComboBox();
+		cbxHabilidad.setBounds(124, 24, 230, 23);
+		pnlObrero.add(cbxHabilidad);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -188,6 +229,7 @@ public class RegSolicitante extends JDialog {
 		}
 
 		loadCountries();
+		loadPanel(true, false, false);
 	}
 
 	private void loadCountries() {
@@ -202,5 +244,15 @@ public class RegSolicitante extends JDialog {
 			cbxPaisOrigen.addItem(obj.getDisplayCountry());
 			cbxPaisResidencia.addItem(obj.getDisplayCountry());
 		}
+	}
+
+	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {
+		rdbtnGraduado.setSelected(graduado);
+		rdbtnTecnico.setSelected(tecnico);
+		rdbtnObrero.setSelected(obrero);
+
+		pnlGraduado.setVisible(graduado);
+		pnlTecnico.setVisible(tecnico);
+		pnlObrero.setVisible(obrero);
 	}
 }
