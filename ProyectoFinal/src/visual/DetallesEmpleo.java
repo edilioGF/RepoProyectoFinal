@@ -23,6 +23,7 @@ public class DetallesEmpleo extends JDialog {
 		setTitle("Detalles de Empleo");
 		setType(Type.UTILITY);
 		setBounds(100, 100, 307, 361);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
