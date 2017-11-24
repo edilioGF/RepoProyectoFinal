@@ -9,7 +9,14 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Controladora;
+import logico.Empleo;
+import logico.Solicitante;
+import logico.Solicitud;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
@@ -28,11 +35,18 @@ public class RlzSolicitud extends JDialog {
 	private JTextField txtCedula;
 	private JTextField txtNombre;
 	private JTextField txtApellido;
+	private JComboBox cbxIdioma;
+	private JSpinner spnExp;
+	private JCheckBox cbLicenc;
+	private JCheckBox cbMudarse;
+	private Solicitud solicitud;
+	private Solicitante solicitante;
+
 
 	/**
 	 * Create the dialog.
 	 */
-	public RlzSolicitud() {
+	public RlzSolicitud( Empleo empleo) {
 		setResizable(false);
 		setModal(true);
 		setTitle("Realizar Solicitud");
@@ -81,15 +95,15 @@ public class RlzSolicitud extends JDialog {
 		panel.add(txtFecha);
 		txtFecha.setColumns(10);
 
-		JComboBox cbxIdioma = new JComboBox();
+		cbxIdioma = new JComboBox();
 		cbxIdioma.setBounds(10, 90, 151, 23);
 		panel.add(cbxIdioma);
 
-		JSpinner spnExp = new JSpinner();
+		spnExp = new JSpinner();
 		spnExp.setBounds(195, 90, 105, 23);
 		panel.add(spnExp);
 
-		JCheckBox cbLicenc = new JCheckBox("");
+		cbLicenc = new JCheckBox("");
 		cbLicenc.setBounds(141, 136, 20, 23);
 		panel.add(cbLicenc);
 
@@ -97,7 +111,7 @@ public class RlzSolicitud extends JDialog {
 		lblDisposicinAMudarse.setBounds(10, 170, 135, 14);
 		panel.add(lblDisposicinAMudarse);
 
-		JCheckBox cbMudarse = new JCheckBox("");
+		cbMudarse = new JCheckBox("");
 		cbMudarse.setBounds(141, 166, 20, 23);
 		panel.add(cbMudarse);
 		
@@ -122,6 +136,14 @@ public class RlzSolicitud extends JDialog {
 		txtCedula.setColumns(10);
 
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cedula = txtCedula.getText();
+				solicitante = Controladora.getInstance().buscarSolicitante(cedula);
+				txtNombre.setText(solicitante.getNombre());
+				txtApellido.setText(solicitante.getApellidos());
+			}
+		});
 		btnBuscar.setBounds(229, 39, 114, 25);
 		panel_1.add(btnBuscar);
 
@@ -151,6 +173,25 @@ public class RlzSolicitud extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Terminar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if(solicitante == null){
+							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
+						}
+						else{
+						String codigo = txtCodigo.getText();
+						String idioma = cbxIdioma.getSelectedItem().toString();
+						boolean licencia = cbLicenc.isSelected();
+						boolean mudarse = cbMudarse.isSelected();
+						int experiencia = Integer.valueOf(spnExp.getValue().toString());
+				
+						
+						solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
+						empleo.getMisSolicitudes().add(solicitud);
+						Controladora.getInstance().getMisSolicitudes().add(solicitud);
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

@@ -29,12 +29,23 @@ import javax.swing.JRadioButton;
 public class RegEmpleo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtCodigo;
+	private JTextField txtFecha;
+	private JTextField txtTitulo;
+	private JTextField textCodigoEmp;
+	private JTextField txtNombreEmp;
+	private JTextField txtUbicacionEmp;
+	private JTextArea txtDescripcion;
+	private JSpinner spnVacantes;
+	private JSpinner spnExp;
+	private JSpinner spnSalario;
+	private JSpinner spnHoraInicial;
+	private JSpinner spnHoraFinal;
+	private JComboBox cbxIdioma;
+	private JCheckBox cbRemoto;
+	private JCheckBox cbLicencia;
+	private JRadioButton rdbtnGraduado;
+	private JRadioButton rdbtnTecnico;
 
 	/**
 	 * Create the dialog.
@@ -59,69 +70,69 @@ public class RegEmpleo extends JDialog {
 		lblCdigo.setBounds(10, 20, 100, 14);
 		panel.add(lblCdigo);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(10, 40, 164, 23);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
+		txtCodigo.setBounds(10, 40, 164, 23);
+		panel.add(txtCodigo);
+		txtCodigo.setColumns(10);
 		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setBounds(200, 20, 100, 14);
 		panel.add(lblFecha);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(200, 40, 164, 23);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtFecha = new JTextField();
+		txtFecha.setEditable(false);
+		txtFecha.setBounds(200, 40, 164, 23);
+		panel.add(txtFecha);
+		txtFecha.setColumns(10);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo:");
 		lblTtulo.setBounds(10, 70, 100, 14);
 		panel.add(lblTtulo);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(10, 90, 354, 23);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		txtTitulo = new JTextField();
+		txtTitulo.setBounds(10, 90, 354, 23);
+		panel.add(txtTitulo);
+		txtTitulo.setColumns(10);
 		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
 		lblDescripcin.setBounds(10, 120, 100, 14);
 		panel.add(lblDescripcin);
 		
-		JTextArea txtrEstoEsUna = new JTextArea();
-		txtrEstoEsUna.setTabSize(5);
-		txtrEstoEsUna.setWrapStyleWord(true);
-		txtrEstoEsUna.setLineWrap(true);
-		txtrEstoEsUna.setRows(3);
-		txtrEstoEsUna.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtrEstoEsUna.setBounds(10, 140, 354, 46);
-		panel.add(txtrEstoEsUna);
+		txtDescripcion = new JTextArea();
+		txtDescripcion.setTabSize(5);
+		txtDescripcion.setWrapStyleWord(true);
+		txtDescripcion.setLineWrap(true);
+		txtDescripcion.setRows(3);
+		txtDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txtDescripcion.setBounds(10, 140, 354, 46);
+		panel.add(txtDescripcion);
 		
 		JLabel lblVacantes = new JLabel("Vacantes:");
 		lblVacantes.setBounds(10, 193, 100, 14);
 		panel.add(lblVacantes);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spinner.setBounds(10, 213, 70, 23);
-		panel.add(spinner);
+		spnVacantes = new JSpinner();
+		spnVacantes.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spnVacantes.setBounds(10, 213, 70, 23);
+		panel.add(spnVacantes);
 		
 		JLabel lblExperiencia = new JLabel("Experiencia:");
 		lblExperiencia.setBounds(100, 193, 100, 14);
 		panel.add(lblExperiencia);
 		
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
-		spinner_1.setBounds(100, 213, 70, 23);
-		panel.add(spinner_1);
+		spnExp = new JSpinner();
+		spnExp.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
+		spnExp.setBounds(100, 213, 70, 23);
+		panel.add(spnExp);
 		
 		JLabel lblSalario = new JLabel("Salario:");
 		lblSalario.setBounds(225, 193, 100, 14);
 		panel.add(lblSalario);
 		
-		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(254, 213, 110, 23);
-		panel.add(spinner_2);
+		spnSalario = new JSpinner();
+		spnSalario.setBounds(254, 213, 110, 23);
+		panel.add(spnSalario);
 		
 		JLabel lblRds = new JLabel("RD$");
 		lblRds.setBounds(225, 217, 46, 14);
@@ -135,19 +146,19 @@ public class RegEmpleo extends JDialog {
 		lblHoraFinal.setBounds(100, 243, 100, 14);
 		panel.add(lblHoraFinal);
 		
-		JSpinner spinner_3 = new JSpinner();
-		spinner_3.setBounds(10, 260, 70, 23);
-		panel.add(spinner_3);
+		spnHoraInicial = new JSpinner();
+		spnHoraInicial.setBounds(10, 260, 70, 23);
+		panel.add(spnHoraInicial);
 		
-		JSpinner spinner_4 = new JSpinner();
-		spinner_4.setBounds(100, 260, 70, 23);
-		panel.add(spinner_4);
+		spnHoraFinal = new JSpinner();
+		spnHoraFinal.setBounds(100, 260, 70, 23);
+		panel.add(spnHoraFinal);
 		
 		JLabel lblIdioma = new JLabel("Idioma:");
 		lblIdioma.setBounds(225, 243, 100, 14);
 		panel.add(lblIdioma);
 		
-		JComboBox cbxIdioma = new JComboBox();
+		cbxIdioma = new JComboBox();
 		cbxIdioma.setBounds(225, 260, 139, 23);
 		panel.add(cbxIdioma);
 		
@@ -159,17 +170,17 @@ public class RegEmpleo extends JDialog {
 		lblRemoto.setBounds(10, 293, 70, 14);
 		panel.add(lblRemoto);
 		
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setBounds(100, 289, 20, 23);
-		panel.add(checkBox);
+		cbRemoto = new JCheckBox("");
+		cbRemoto.setBounds(100, 289, 20, 23);
+		panel.add(cbRemoto);
 		
 		JLabel lblLicencia = new JLabel("Licencia:");
 		lblLicencia.setBounds(10, 317, 70, 14);
 		panel.add(lblLicencia);
 		
-		JCheckBox checkBox_1 = new JCheckBox("");
-		checkBox_1.setBounds(100, 313, 20, 23);
-		panel.add(checkBox_1);
+		cbLicencia = new JCheckBox("");
+		cbLicencia.setBounds(100, 313, 20, 23);
+		panel.add(cbLicencia);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Formaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -177,13 +188,13 @@ public class RegEmpleo extends JDialog {
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JRadioButton rdbtnGraduado = new JRadioButton("Graduado");
+		rdbtnGraduado = new JRadioButton("Graduado");
 		rdbtnGraduado.setBounds(6, 20, 109, 23);
 		panel_1.add(rdbtnGraduado);
 		
-		JRadioButton rdbtnTcnico = new JRadioButton("T\u00E9cnico");
-		rdbtnTcnico.setBounds(6, 50, 109, 23);
-		panel_1.add(rdbtnTcnico);
+		rdbtnTecnico = new JRadioButton("T\u00E9cnico");
+		rdbtnTecnico.setBounds(6, 50, 109, 23);
+		panel_1.add(rdbtnTecnico);
 		
 		JRadioButton rdbtnObrero = new JRadioButton("Obrero");
 		rdbtnObrero.setBounds(6, 80, 109, 23);
@@ -241,10 +252,10 @@ public class RegEmpleo extends JDialog {
 		lblNewLabel.setBounds(10, 20, 100, 14);
 		panel_2.add(lblNewLabel);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(83, 20, 182, 23);
-		panel_2.add(textField_3);
-		textField_3.setColumns(10);
+		textCodigoEmp = new JTextField();
+		textCodigoEmp.setBounds(83, 20, 182, 23);
+		panel_2.add(textCodigoEmp);
+		textCodigoEmp.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(275, 16, 89, 23);
@@ -254,21 +265,21 @@ public class RegEmpleo extends JDialog {
 		lblNombre.setBounds(10, 50, 100, 14);
 		panel_2.add(lblNombre);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setBounds(83, 50, 281, 23);
-		panel_2.add(textField_4);
-		textField_4.setColumns(10);
+		txtNombreEmp = new JTextField();
+		txtNombreEmp.setEditable(false);
+		txtNombreEmp.setBounds(83, 50, 281, 23);
+		panel_2.add(txtNombreEmp);
+		txtNombreEmp.setColumns(10);
 		
 		JLabel lblUbicacin = new JLabel("Ubicaci\u00F3n:");
 		lblUbicacin.setBounds(10, 80, 100, 14);
 		panel_2.add(lblUbicacin);
 		
-		textField_5 = new JTextField();
-		textField_5.setEditable(false);
-		textField_5.setColumns(10);
-		textField_5.setBounds(83, 80, 281, 23);
-		panel_2.add(textField_5);
+		txtUbicacionEmp = new JTextField();
+		txtUbicacionEmp.setEditable(false);
+		txtUbicacionEmp.setColumns(10);
+		txtUbicacionEmp.setBounds(83, 80, 281, 23);
+		panel_2.add(txtUbicacionEmp);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

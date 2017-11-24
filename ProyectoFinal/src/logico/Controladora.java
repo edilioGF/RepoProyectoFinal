@@ -7,6 +7,7 @@ public class Controladora {
 	private ArrayList<Empresa> misEmpresas;
 	private ArrayList<Solicitud> misSolicitudes;
 	private ArrayList<Empleo> misEmpleos;
+	private static Controladora controladora;
 
 	public Controladora() {
 		super();
@@ -14,6 +15,13 @@ public class Controladora {
 		this.misEmpresas = new ArrayList<>();
 		this.misSolicitudes = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
+	}
+	
+	public static Controladora getInstance(){
+		if(controladora == null){
+			controladora = new Controladora();
+		}
+		return controladora;
 	}
 
 	// Se busca empresa por empresa

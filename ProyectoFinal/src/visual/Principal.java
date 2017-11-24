@@ -119,9 +119,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
 		mntmSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RlzSolicitud rzs = new RlzSolicitud();
-				rzs.setModal(true);
-				rzs.setVisible(true);
+				//RlzSolicitud rzs = new RlzSolicitud();
+				//rzs.setModal(true);
+				//rzs.setVisible(true);
 			}
 		});
 		mnRealizar.add(mntmSolicitud);

@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JSpinnerDateEditor;
 
+import logico.Controladora;
 import logico.Graduado;
 import logico.Obrero;
 import logico.Solicitante;
@@ -39,6 +40,9 @@ public class RegSolicitante extends JDialog {
 	private JComboBox cbxPaisResidencia;
 	private JComboBox cbxPaisOrigen;
 	private JComboBox cbxGenero;
+	private JComboBox cbxAreaEstudio;
+	private JComboBox cbxTitulo;
+	private JComboBox cbxHabilidad;
 	private JDateChooser dateChooser;
 	private Solicitante solicitante;
 
@@ -174,7 +178,7 @@ public class RegSolicitante extends JDialog {
 		lblNewLabel.setBounds(10, 28, 120, 14);
 		pnlGraduado.add(lblNewLabel);
 
-		JComboBox cbxAreaEstudio = new JComboBox();
+		cbxAreaEstudio = new JComboBox();
 		cbxAreaEstudio.setBounds(124, 24, 230, 23);
 		pnlGraduado.add(cbxAreaEstudio);
 
@@ -189,7 +193,7 @@ public class RegSolicitante extends JDialog {
 		lblTtulo.setBounds(10, 28, 75, 14);
 		pnlTecnico.add(lblTtulo);
 
-		JComboBox cbxTitulo = new JComboBox();
+	    cbxTitulo = new JComboBox();
 		cbxTitulo.setBounds(124, 24, 230, 23);
 		pnlTecnico.add(cbxTitulo);
 
@@ -204,7 +208,7 @@ public class RegSolicitante extends JDialog {
 		lblHabilidad.setBounds(10, 28, 75, 14);
 		pnlObrero.add(lblHabilidad);
 
-		JComboBox cbxHabilidad = new JComboBox();
+		cbxHabilidad = new JComboBox();
 		cbxHabilidad.setBounds(124, 24, 230, 23);
 		pnlObrero.add(cbxHabilidad);
 		{
@@ -242,6 +246,8 @@ public class RegSolicitante extends JDialog {
 	                        	String habilidad = cbxHabilidad.getSelectedItem().toString();
 	                        	solicitante = new Obrero(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, habilidad);
 	                        }
+	                        
+	                        Controladora.getInstance().getMisSolicitantes().add(solicitante);
 						    
 						}
 					}
