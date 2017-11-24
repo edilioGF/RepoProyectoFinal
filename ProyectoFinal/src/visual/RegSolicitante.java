@@ -193,7 +193,7 @@ public class RegSolicitante extends JDialog {
 		lblTtulo.setBounds(10, 28, 75, 14);
 		pnlTecnico.add(lblTtulo);
 
-	    cbxTitulo = new JComboBox();
+		cbxTitulo = new JComboBox();
 		cbxTitulo.setBounds(124, 24, 230, 23);
 		pnlTecnico.add(cbxTitulo);
 
@@ -222,8 +222,7 @@ public class RegSolicitante extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						if (dateChooser.getDate() == null) {
 							JOptionPane.showMessageDialog(null, "La fecha de nacimiento no es válida");
-						}
-						else{
+						} else {
 							String cedula = txtCedula.getText();
 							String nombre = txtNombre.getText();
 							String apellidos = txtApellidos.getText();
@@ -231,24 +230,27 @@ public class RegSolicitante extends JDialog {
 							String paisOrigen = cbxPaisOrigen.getSelectedItem().toString();
 							String paisResidencia = cbxPaisResidencia.getSelectedItem().toString();
 							String nacimiento = dateChooser.getDateFormatString();
-							
-	                        if(rdbtnGraduado.isSelected()){
-	                          String areaEstudio = cbxAreaEstudio.getSelectedItem().toString(); 
-							  solicitante = new Graduado(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, areaEstudio);
-	                        }
-	                        
-	                        if(rdbtnTecnico.isSelected()){
-	                        	String titulo = cbxTitulo.getSelectedItem().toString();
-	                        	solicitante = new Tecnico(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, titulo);
-	                        }
-	                        
-	                        if(rdbtnObrero.isSelected()){
-	                        	String habilidad = cbxHabilidad.getSelectedItem().toString();
-	                        	solicitante = new Obrero(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, habilidad);
-	                        }
-	                        
-	                        Controladora.getInstance().getMisSolicitantes().add(solicitante);
-						    
+
+							if (rdbtnGraduado.isSelected()) {
+								String areaEstudio = cbxAreaEstudio.getSelectedItem().toString();
+								solicitante = new Graduado(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
+										paisResidencia, areaEstudio);
+							}
+
+							if (rdbtnTecnico.isSelected()) {
+								String titulo = cbxTitulo.getSelectedItem().toString();
+								solicitante = new Tecnico(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
+										paisResidencia, titulo);
+							}
+
+							if (rdbtnObrero.isSelected()) {
+								String habilidad = cbxHabilidad.getSelectedItem().toString();
+								solicitante = new Obrero(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
+										paisResidencia, habilidad);
+							}
+
+							Controladora.getInstance().getMisSolicitantes().add(solicitante);
+
 						}
 					}
 				});
@@ -268,6 +270,7 @@ public class RegSolicitante extends JDialog {
 
 		loadCountries();
 		loadPanel(true, false, false);
+		load();
 	}
 
 	private void loadCountries() {
@@ -284,6 +287,24 @@ public class RegSolicitante extends JDialog {
 		}
 	}
 
+	private void load() {
+		cbxAreaEstudio.addItem("<Seleccione>");
+		cbxTitulo.addItem("<Seleccione>");
+		cbxHabilidad.addItem("<Seleccione>");
+
+		for (String area : Controladora.getMisAreasDeEstudio()) {
+			cbxAreaEstudio.addItem(area);
+		}
+
+		for (String titulo : Controladora.getMisTitulos()) {
+			cbxTitulo.addItem(titulo);
+		}
+
+		for (String habilidad : Controladora.getMisHabilidades()) {
+			cbxHabilidad.addItem(habilidad);
+		}
+	}
+
 	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {
 		rdbtnGraduado.setSelected(graduado);
 		rdbtnTecnico.setSelected(tecnico);
@@ -293,15 +314,15 @@ public class RegSolicitante extends JDialog {
 		pnlTecnico.setVisible(tecnico);
 		pnlObrero.setVisible(obrero);
 	}
-	
-	private void clean(){
+
+	private void clean() {
 		txtCedula.setText("");
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		cbxGenero.setSelectedIndex(0);
 		cbxPaisOrigen.setSelectedIndex(0);
 		cbxPaisResidencia.setSelectedIndex(0);
-		loadPanel(true,false,false);
-		
+		loadPanel(true, false, false);
+
 	}
 }

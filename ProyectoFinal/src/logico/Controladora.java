@@ -7,6 +7,21 @@ public class Controladora {
 	private ArrayList<Empresa> misEmpresas;
 	private ArrayList<Solicitud> misSolicitudes;
 	private ArrayList<Empleo> misEmpleos;
+
+	private static String[] misTiposDeEmpresa = { "Constructora", "Ferretería", "Hospital o Clínica", "Software",
+			"Restaurante" };
+	private static String[] misIdiomas = { "Español", "Inglés", "Francés", "Alemán", "Portugués" };
+
+	private static String[] misAreasDeEstudio = { "Administración de Empresa", "Administración Hotelera", "Economía",
+			"Gestión Financiera", "Mercadotecnia", "Arquitectura", "Derecho", "Educación", "Psicología",
+			"Ingeniería Civil", "Electromecánica", "Electrónica", "Industrial", "Mecatrónica", "Sistemas y Computación",
+			"Telemática", "Enfermería", "Estomatología", "Medicina" };
+
+	private static String[] misTitulos = { "Contabilidad", "Informática", "Mecánica Industrial", "Electrónica",
+			"Electricidad" };
+	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
+			"Plomería" };
+
 	private static Controladora controladora;
 
 	public Controladora() {
@@ -16,9 +31,9 @@ public class Controladora {
 		this.misSolicitudes = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
 	}
-	
-	public static Controladora getInstance(){
-		if(controladora == null){
+
+	public static Controladora getInstance() {
+		if (controladora == null) {
 			controladora = new Controladora();
 		}
 		return controladora;
@@ -175,6 +190,46 @@ public class Controladora {
 
 	public void setMisEmpleos(ArrayList<Empleo> misEmpleos) {
 		this.misEmpleos = misEmpleos;
+	}
+
+	public static String[] getMisAreasDeEstudio() {
+		return misAreasDeEstudio;
+	}
+
+	public static void setMisAreasDeEstudio(String[] misAreasDeEstudio) {
+		Controladora.misAreasDeEstudio = misAreasDeEstudio;
+	}
+
+	public static String[] getMisTitulos() {
+		return misTitulos;
+	}
+
+	public static void setMisTitulos(String[] misTitulos) {
+		Controladora.misTitulos = misTitulos;
+	}
+
+	public static String[] getMisHabilidades() {
+		return misHabilidades;
+	}
+
+	public static void setMisHabilidades(String[] misHabilidades) {
+		Controladora.misHabilidades = misHabilidades;
+	}
+
+	public static String[] getMisTiposDeEmpresa() {
+		return misTiposDeEmpresa;
+	}
+
+	public static void setMisTiposDeEmpresa(String[] misTiposDeEmpresa) {
+		Controladora.misTiposDeEmpresa = misTiposDeEmpresa;
+	}
+
+	public static String[] getMisIdiomas() {
+		return misIdiomas;
+	}
+
+	public static void setMisIdiomas(String[] misIdiomas) {
+		Controladora.misIdiomas = misIdiomas;
 	}
 
 }

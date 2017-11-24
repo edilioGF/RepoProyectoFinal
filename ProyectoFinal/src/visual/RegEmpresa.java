@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.awt.event.ActionEvent;
 
 public class RegEmpresa extends JDialog {
@@ -26,9 +27,9 @@ public class RegEmpresa extends JDialog {
 	private JTextField txtNombre;
 	private JComboBox cbxUbicacion;
 	private JComboBox cbxTipo;
-	
+
 	public RegEmpresa() {
-		setType(Type.UTILITY);
+		setResizable(false);
 		setTitle("Registro de Empresa");
 		setBounds(100, 100, 307, 309);
 		setLocationRelativeTo(null);
@@ -40,42 +41,42 @@ public class RegEmpresa extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(
 				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 271, 215);
+		panel.setBounds(10, 11, 271, 225);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 24, 46, 14);
+		lblCdigo.setBounds(10, 20, 46, 14);
 		panel.add(lblCdigo);
 
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(10, 40, 110, 20);
+		txtCodigo.setBounds(10, 40, 125, 20);
 		panel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 69, 61, 14);
+		lblNombre.setBounds(10, 70, 61, 14);
 		panel.add(lblNombre);
 
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(10, 85, 239, 23);
+		txtNombre.setBounds(10, 90, 251, 23);
 		panel.add(txtNombre);
 
 		JLabel lblUbicacin = new JLabel("Ubicaci\u00F3n:");
-		lblUbicacin.setBounds(10, 114, 61, 14);
+		lblUbicacin.setBounds(10, 120, 61, 14);
 		panel.add(lblUbicacin);
 
 		cbxUbicacion = new JComboBox();
-		cbxUbicacion.setBounds(10, 130, 239, 23);
+		cbxUbicacion.setBounds(10, 140, 251, 23);
 		panel.add(cbxUbicacion);
 
 		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(10, 159, 46, 14);
+		lblTipo.setBounds(10, 170, 46, 14);
 		panel.add(lblTipo);
 
-	    cbxTipo = new JComboBox();
-		cbxTipo.setBounds(10, 175, 239, 23);
+		cbxTipo = new JComboBox();
+		cbxTipo.setBounds(10, 190, 251, 23);
 		panel.add(cbxTipo);
 		{
 			JPanel buttonPane = new JPanel();
@@ -89,7 +90,7 @@ public class RegEmpresa extends JDialog {
 						String nombre = txtNombre.getText();
 						String ubicacion = cbxUbicacion.getSelectedItem().toString();
 						String tipo = cbxTipo.getSelectedItem().toString();
-						Empresa empresa = new Empresa(codigo , nombre , ubicacion , tipo);
+						Empresa empresa = new Empresa(codigo, nombre, ubicacion, tipo);
 						Controladora.getInstance().addEmpresa(empresa);
 						clean();
 					}
@@ -109,13 +110,33 @@ public class RegEmpresa extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+
+		load();
 	}
+
+	private void load() {
+		String[] locales = Locale.getISOCountries();
+
+		cbxUbicacion.addItem("<Seleccione>");
+
+		for (String countryCode : locales) {
+			Locale obj = new Locale("", countryCode);
+
+			cbxUbicacion.addItem(obj.getDisplayCountry());
+		}
+
+		cbxTipo.addItem("<Seleccione>");
+		for (String tipo : Controladora.getMisTiposDeEmpresa()) {
+			cbxTipo.addItem(tipo);
+		}
+	}
+
 	private void clean() {
 		txtNombre.setText("");
 		txtCodigo.setText("");
 		cbxUbicacion.setSelectedIndex(-1);
 		cbxTipo.setSelectedIndex(-1);
 		;
-		
+
 	}
 }
