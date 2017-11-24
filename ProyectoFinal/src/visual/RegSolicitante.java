@@ -14,6 +14,11 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JSpinnerDateEditor;
 
+import logico.Graduado;
+import logico.Obrero;
+import logico.Solicitante;
+import logico.Tecnico;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
@@ -33,7 +38,9 @@ public class RegSolicitante extends JDialog {
 	private JTextField txtApellidos;
 	private JComboBox cbxPaisResidencia;
 	private JComboBox cbxPaisOrigen;
+	private JComboBox cbxGenero;
 	private JDateChooser dateChooser;
+	private Solicitante solicitante;
 
 	private JPanel pnlObrero;
 	private JPanel pnlTecnico;
@@ -98,7 +105,7 @@ public class RegSolicitante extends JDialog {
 		lblGnero.setBounds(200, 170, 135, 14);
 		panel.add(lblGnero);
 
-		JComboBox cbxGenero = new JComboBox();
+		cbxGenero = new JComboBox();
 		cbxGenero.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>", "Masculino", "Femenino" }));
 		cbxGenero.setBounds(200, 190, 154, 23);
 		panel.add(cbxGenero);
@@ -212,6 +219,31 @@ public class RegSolicitante extends JDialog {
 						if (dateChooser.getDate() == null) {
 							JOptionPane.showMessageDialog(null, "La fecha de nacimiento no es válida");
 						}
+						else{
+							String cedula = txtCedula.getText();
+							String nombre = txtNombre.getText();
+							String apellidos = txtApellidos.getText();
+							String genero = cbxGenero.getSelectedItem().toString();
+							String paisOrigen = cbxPaisOrigen.getSelectedItem().toString();
+							String paisResidencia = cbxPaisResidencia.getSelectedItem().toString();
+							String nacimiento = dateChooser.getDateFormatString();
+							
+	                        if(rdbtnGraduado.isSelected()){
+	                          String areaEstudio = cbxAreaEstudio.getSelectedItem().toString(); 
+							  solicitante = new Graduado(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, areaEstudio);
+	                        }
+	                        
+	                        if(rdbtnTecnico.isSelected()){
+	                        	String titulo = cbxTitulo.getSelectedItem().toString();
+	                        	solicitante = new Tecnico(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, titulo);
+	                        }
+	                        
+	                        if(rdbtnObrero.isSelected()){
+	                        	String habilidad = cbxHabilidad.getSelectedItem().toString();
+	                        	solicitante = new Obrero(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia, habilidad);
+	                        }
+						    
+						}
 					}
 				});
 				buttonPane.add(btnSiguiente);
@@ -254,5 +286,16 @@ public class RegSolicitante extends JDialog {
 		pnlGraduado.setVisible(graduado);
 		pnlTecnico.setVisible(tecnico);
 		pnlObrero.setVisible(obrero);
+	}
+	
+	private void clean(){
+		txtCedula.setText("");
+		txtNombre.setText("");
+		txtApellidos.setText("");
+		cbxGenero.setSelectedIndex(0);
+		cbxPaisOrigen.setSelectedIndex(0);
+		cbxPaisResidencia.setSelectedIndex(0);
+		loadPanel(true,false,false);
+		
 	}
 }
