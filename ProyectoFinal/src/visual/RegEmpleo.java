@@ -10,7 +10,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+
+import logico.Controladora;
+import logico.Empleo;
+import logico.Empresa;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -46,6 +52,12 @@ public class RegEmpleo extends JDialog {
 	private JCheckBox cbLicencia;
 	private JRadioButton rdbtnGraduado;
 	private JRadioButton rdbtnTecnico;
+	private JRadioButton rdbtnObrero;
+	private JComboBox cbxHabilidad;
+	private JComboBox cbxTitulo;
+	private JComboBox cbxAreaEstudio;
+	private Empresa empresa;
+	private Empleo empleo;
 
 	/**
 	 * Create the dialog.
@@ -196,7 +208,7 @@ public class RegEmpleo extends JDialog {
 		rdbtnTecnico.setBounds(6, 50, 109, 23);
 		panel_1.add(rdbtnTecnico);
 		
-		JRadioButton rdbtnObrero = new JRadioButton("Obrero");
+		rdbtnObrero = new JRadioButton("Obrero");
 		rdbtnObrero.setBounds(6, 80, 109, 23);
 		panel_1.add(rdbtnObrero);
 		
@@ -210,7 +222,7 @@ public class RegEmpleo extends JDialog {
 		lblHabilidad.setBounds(10, 30, 100, 14);
 		pnlObrero.add(lblHabilidad);
 		
-		JComboBox cbxHabilidad = new JComboBox();
+		cbxHabilidad = new JComboBox();
 		cbxHabilidad.setBounds(10, 50, 219, 23);
 		pnlObrero.add(cbxHabilidad);
 		
@@ -224,7 +236,7 @@ public class RegEmpleo extends JDialog {
 		lblTtulo_1.setBounds(10, 30, 100, 14);
 		pnlTecnico.add(lblTtulo_1);
 		
-		JComboBox cbxTitulo = new JComboBox();
+		cbxTitulo = new JComboBox();
 		cbxTitulo.setBounds(10, 50, 219, 23);
 		pnlTecnico.add(cbxTitulo);
 		
@@ -238,7 +250,7 @@ public class RegEmpleo extends JDialog {
 		lblreaDeEstudio.setBounds(10, 30, 100, 14);
 		pnlGraduado.add(lblreaDeEstudio);
 		
-		JComboBox cbxAreaEstudio = new JComboBox();
+		cbxAreaEstudio = new JComboBox();
 		cbxAreaEstudio.setBounds(10, 50, 219, 23);
 		pnlGraduado.add(cbxAreaEstudio);
 		
@@ -258,6 +270,14 @@ public class RegEmpleo extends JDialog {
 		textCodigoEmp.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String codigoEmp = textCodigoEmp.getText();
+				empresa = Controladora.getInstance().buscarEmpresa(codigoEmp);
+				txtNombreEmp.setText(empresa.getNombre());
+				txtUbicacionEmp.setText(empresa.getUbicacion());
+			}
+		});
 		btnBuscar.setBounds(275, 16, 89, 23);
 		panel_2.add(btnBuscar);
 		
@@ -286,6 +306,44 @@ public class RegEmpleo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Terminar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(empresa == null){
+						  JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");	
+						}
+						else{
+							String codigo = txtCodigo.getText();
+							String titulo = txtTitulo.getText();
+							int vacantes = Integer.valueOf(spnVacantes.getValue().toString());
+							String descripcion = txtDescripcion.getText();
+							int salario = Integer.valueOf(spnSalario.getValue().toString());
+							int horaInicial = Integer.valueOf(spnHoraInicial.getValue().toString());
+							int horaFinal = Integer.valueOf(spnHoraFinal.getValue().toString());
+							String idioma = cbxIdioma.getSelectedItem().toString();
+							int experiencia = Integer.valueOf(spnExp.getValue().toString());
+							boolean remoto = cbRemoto.isSelected();
+							boolean licencia = cbLicencia.isSelected();
+							boolean graduado = rdbtnGraduado.isSelected();
+							boolean tecnico = rdbtnTecnico.isSelected();
+							boolean obrero = rdbtnObrero.isSelected();
+							
+							if(graduado){
+							String area = cbxAreaEstudio.getSelectedItem().toString();
+							empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial, horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,"", area,"", empresa);
+							}
+							
+							if(tecnico){
+								String tituloTecnico = cbxTitulo.getSelectedItem().toString();
+								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial, horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, tituloTecnico, "", "", empresa);
+							}
+							
+							if(obrero){
+								String habilidad = cbxHabilidad.getSelectedItem().toString();
+								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial, horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "", "", habilidad, empresa);
+							}
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
