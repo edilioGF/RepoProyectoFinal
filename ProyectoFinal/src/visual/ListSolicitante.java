@@ -7,9 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logico.Controladora;
+import logico.Empresa;
+import logico.Solicitante;
+
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -17,13 +25,15 @@ public class ListSolicitante extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private Object[] fila;
+	private DefaultTableModel model;
 
 	/**
 	 * Create the dialog.
 	 */
 	public ListSolicitante() {
 		setTitle("Listado de Solicitantes");
-		setBounds(100, 100, 686, 428);
+		setBounds(100, 100, 685, 428);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -40,6 +50,10 @@ public class ListSolicitante extends JDialog {
 				{
 					table = new JTable();
 					scrollPane.setViewportView(table);
+					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					String[] columns = { "Cédula", "Nombre", "Fecha de nacimiento", "Reside","Género" };
+					model = new DefaultTableModel();
+					model.setColumnIdentifiers(columns);
 				}
 			}
 		}
@@ -57,7 +71,26 @@ public class ListSolicitante extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+			
 		}
-	}
+		loadTable();
+}
+	
+	private void loadTable() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
 
+		for (Solicitante solicitante : Controladora.getInstance().getMisSolicitantes()) {
+			
+				fila[0] = solicitante.getCedula();
+				fila[1] = solicitante.getNombre();
+				fila[2] = solicitante.getNacimiento();
+				fila[3] = solicitante.getPaisResidencia();
+				fila[4] = solicitante.getGenero();
+
+				model.addRow(fila);
+			}
+
+			table.setModel(model);
+		}
 }
