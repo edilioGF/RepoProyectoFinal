@@ -31,6 +31,7 @@ import javax.swing.JCheckBox;
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JRadioButton;
+import javax.swing.border.EtchedBorder;
 
 public class RegEmpleo extends JDialog {
 
@@ -302,7 +303,7 @@ public class RegEmpleo extends JDialog {
 				txtUbicacionEmp.setText(empresa.getUbicacion());
 			}
 		});
-		btnBuscar.setBounds(275, 16, 89, 23);
+		btnBuscar.setBounds(275, 20, 89, 23);
 		panel_2.add(btnBuscar);
 
 		JLabel lblNombre = new JLabel("Nombre:");
@@ -326,6 +327,7 @@ public class RegEmpleo extends JDialog {
 		panel_2.add(txtUbicacionEmp);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

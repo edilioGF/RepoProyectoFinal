@@ -31,7 +31,7 @@ public class RegEmpresa extends JDialog {
 	public RegEmpresa() {
 		setResizable(false);
 		setTitle("Registro de Empresa");
-		setBounds(100, 100, 307, 309);
+		setBounds(100, 100, 307, 325);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,7 +41,7 @@ public class RegEmpresa extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(
 				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 281, 225);
+		panel.setBounds(10, 11, 281, 241);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
