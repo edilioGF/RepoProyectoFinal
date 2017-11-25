@@ -44,7 +44,7 @@ public class ListEmpresa extends JDialog {
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 49, 678, 350);
+		panel.setBounds(12, 49, 672, 324);
 		contentPanel.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
@@ -55,7 +55,7 @@ public class ListEmpresa extends JDialog {
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "CÃ³digo", "Nombre", "UbicaciÃ³n", "Tipo" };
+		String[] columns = { "Código", "Nombre", "Ubicación", "Tipo" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 
@@ -72,7 +72,7 @@ public class ListEmpresa extends JDialog {
 			}
 		});
 		cbxTipo.setModel(new DefaultComboBoxModel(new String[] { "<Todos>" }));
-		cbxTipo.setBounds(80, 17, 250, 23);
+		cbxTipo.setBounds(72, 18, 250, 23);
 		contentPanel.add(cbxTipo);
 		{
 			JPanel buttonPane = new JPanel();

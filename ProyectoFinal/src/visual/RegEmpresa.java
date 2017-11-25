@@ -41,7 +41,7 @@ public class RegEmpresa extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(
 				new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 271, 225);
+		panel.setBounds(10, 11, 281, 225);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
@@ -50,7 +50,7 @@ public class RegEmpresa extends JDialog {
 		panel.add(lblCdigo);
 
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(10, 40, 125, 20);
+		txtCodigo.setBounds(10, 40, 130, 20);
 		panel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
@@ -60,7 +60,7 @@ public class RegEmpresa extends JDialog {
 
 		txtNombre = new JTextField();
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(10, 90, 251, 23);
+		txtNombre.setBounds(10, 90, 261, 23);
 		panel.add(txtNombre);
 
 		JLabel lblUbicacin = new JLabel("Ubicaci\u00F3n:");
@@ -68,7 +68,7 @@ public class RegEmpresa extends JDialog {
 		panel.add(lblUbicacin);
 
 		cbxUbicacion = new JComboBox();
-		cbxUbicacion.setBounds(10, 140, 251, 23);
+		cbxUbicacion.setBounds(10, 140, 261, 23);
 		panel.add(cbxUbicacion);
 
 		JLabel lblTipo = new JLabel("Tipo:");
@@ -76,7 +76,7 @@ public class RegEmpresa extends JDialog {
 		panel.add(lblTipo);
 
 		cbxTipo = new JComboBox();
-		cbxTipo.setBounds(10, 190, 251, 23);
+		cbxTipo.setBounds(10, 190, 261, 23);
 		panel.add(cbxTipo);
 		{
 			JPanel buttonPane = new JPanel();
