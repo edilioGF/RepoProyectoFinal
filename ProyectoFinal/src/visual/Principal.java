@@ -119,9 +119,9 @@ public class Principal extends JFrame {
 		JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
 		mntmSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//RlzSolicitud rzs = new RlzSolicitud();
-				//rzs.setModal(true);
-				//rzs.setVisible(true);
+				RlzSolicitud rzs = new RlzSolicitud(null);
+				rzs.setModal(true);
+				rzs.setVisible(true);
 			}
 		});
 		mnRealizar.add(mntmSolicitud);
@@ -133,9 +133,20 @@ public class Principal extends JFrame {
 		mntmEmpleos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListEmpleo le = new ListEmpleo();
+				le.setModal(true);
 				le.setVisible(true);
 			}
 		});
+
+		JMenuItem mntmEmpresas = new JMenuItem("Empresas");
+		mntmEmpresas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListEmpresa le = new ListEmpresa();
+				le.setModal(true);
+				le.setVisible(true);
+			}
+		});
+		mnListado.add(mntmEmpresas);
 		mnListado.add(mntmEmpleos);
 
 		JMenuItem mntmSolicitantes = new JMenuItem("Solicitantes");
@@ -178,17 +189,18 @@ public class Principal extends JFrame {
 		pnlBarras = new JPanel();
 		pnlBarras.setBounds(680, 58, 490, 238);
 		panel_1.add(pnlBarras);
-		
+
 		JPanel pnlTotal = new JPanel();
-		pnlTotal.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Total", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlTotal.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Total", TitledBorder.CENTER,
+				TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pnlTotal.setBounds(275, 318, 300, 240);
 		panel_1.add(pnlTotal);
 		pnlTotal.setLayout(null);
-		
+
 		JLabel lblSolicitantes = new JLabel("Solicitantes:");
 		lblSolicitantes.setBounds(50, 36, 100, 14);
 		pnlTotal.add(lblSolicitantes);
-		
+
 		textField = new JTextField();
 		textField.setForeground(Color.BLUE);
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -197,11 +209,11 @@ public class Principal extends JFrame {
 		textField.setBounds(150, 32, 86, 23);
 		pnlTotal.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblSolicitudes = new JLabel("Solicitudes:");
 		lblSolicitudes.setBounds(50, 86, 100, 14);
 		pnlTotal.add(lblSolicitudes);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setForeground(Color.BLUE);
 		textField_1.setText("0");
@@ -210,11 +222,11 @@ public class Principal extends JFrame {
 		textField_1.setColumns(10);
 		textField_1.setBounds(150, 82, 86, 23);
 		pnlTotal.add(textField_1);
-		
+
 		JLabel lblEmpresas = new JLabel("Empresas:");
 		lblEmpresas.setBounds(50, 136, 100, 14);
 		pnlTotal.add(lblEmpresas);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setForeground(Color.BLUE);
 		textField_2.setText("0");
@@ -223,11 +235,11 @@ public class Principal extends JFrame {
 		textField_2.setColumns(10);
 		textField_2.setBounds(150, 132, 86, 23);
 		pnlTotal.add(textField_2);
-		
+
 		JLabel lblEmpleos = new JLabel("Empleos:");
 		lblEmpleos.setBounds(50, 186, 100, 14);
 		pnlTotal.add(lblEmpleos);
-		
+
 		textField_3 = new JTextField();
 		textField_3.setForeground(Color.BLUE);
 		textField_3.setText("0");
@@ -236,25 +248,26 @@ public class Principal extends JFrame {
 		textField_3.setColumns(10);
 		textField_3.setBounds(150, 182, 86, 23);
 		pnlTotal.add(textField_3);
-		
+
 		JPanel pnlAreasPopulares = new JPanel();
 		pnlAreasPopulares.setLayout(null);
-		pnlAreasPopulares.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00C1reas Populares", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlAreasPopulares.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00C1reas Populares",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pnlAreasPopulares.setBounds(775, 318, 300, 240);
 		panel_1.add(pnlAreasPopulares);
-		
+
 		JLabel lblSolicitudes_1 = new JLabel("Solicitudes:");
 		lblSolicitudes_1.setBounds(150, 22, 100, 14);
 		pnlAreasPopulares.add(lblSolicitudes_1);
-		
+
 		JLabel lblreas = new JLabel("\u00C1reas:");
 		lblreas.setBounds(25, 22, 100, 14);
 		pnlAreasPopulares.add(lblreas);
-		
+
 		JLabel lblrea = new JLabel("\u00C1rea1");
 		lblrea.setBounds(25, 58, 100, 14);
 		pnlAreasPopulares.add(lblrea);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setText("0");
@@ -263,11 +276,11 @@ public class Principal extends JFrame {
 		textField_4.setBounds(150, 54, 86, 23);
 		pnlAreasPopulares.add(textField_4);
 		textField_4.setColumns(10);
-		
+
 		JLabel lblrea_1 = new JLabel("\u00C1rea2");
 		lblrea_1.setBounds(25, 94, 100, 14);
 		pnlAreasPopulares.add(lblrea_1);
-		
+
 		textField_5 = new JTextField();
 		textField_5.setText("0");
 		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
@@ -276,11 +289,11 @@ public class Principal extends JFrame {
 		textField_5.setColumns(10);
 		textField_5.setBounds(150, 90, 86, 23);
 		pnlAreasPopulares.add(textField_5);
-		
+
 		JLabel lblrea_2 = new JLabel("\u00C1rea3");
 		lblrea_2.setBounds(25, 130, 100, 14);
 		pnlAreasPopulares.add(lblrea_2);
-		
+
 		textField_6 = new JTextField();
 		textField_6.setText("0");
 		textField_6.setHorizontalAlignment(SwingConstants.CENTER);
@@ -289,11 +302,11 @@ public class Principal extends JFrame {
 		textField_6.setColumns(10);
 		textField_6.setBounds(150, 126, 86, 23);
 		pnlAreasPopulares.add(textField_6);
-		
+
 		JLabel lblrea_3 = new JLabel("\u00C1rea4");
 		lblrea_3.setBounds(25, 166, 100, 14);
 		pnlAreasPopulares.add(lblrea_3);
-		
+
 		textField_7 = new JTextField();
 		textField_7.setText("0");
 		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
@@ -302,11 +315,11 @@ public class Principal extends JFrame {
 		textField_7.setColumns(10);
 		textField_7.setBounds(150, 162, 86, 23);
 		pnlAreasPopulares.add(textField_7);
-		
+
 		JLabel lblrea_4 = new JLabel("\u00C1rea5");
 		lblrea_4.setBounds(25, 202, 100, 14);
 		pnlAreasPopulares.add(lblrea_4);
-		
+
 		textField_8 = new JTextField();
 		textField_8.setText("0");
 		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -339,7 +352,7 @@ public class Principal extends JFrame {
 
 		pastel.setBackgroundPaint(new Color(0, 0, 0, 0));
 
-		JFreeChart barras = ChartFactory.createBarChart("Matching", "Días", "Matches", dataBarras,
+		JFreeChart barras = ChartFactory.createBarChart("Matching", "Dï¿½as", "Matches", dataBarras,
 				PlotOrientation.VERTICAL, false, true, false);
 
 		barras.setBackgroundPaint(new Color(0, 0, 0, 0));
