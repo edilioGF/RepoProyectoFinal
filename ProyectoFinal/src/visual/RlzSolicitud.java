@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
+import javax.swing.DefaultComboBoxModel;
 
 public class RlzSolicitud extends JDialog {
 
@@ -42,11 +43,10 @@ public class RlzSolicitud extends JDialog {
 	private Solicitud solicitud;
 	private Solicitante solicitante;
 
-
 	/**
 	 * Create the dialog.
 	 */
-	public RlzSolicitud( Empleo empleo) {
+	public RlzSolicitud(Empleo empleo) {
 		setResizable(false);
 		setModal(true);
 		setTitle("Realizar Solicitud");
@@ -85,6 +85,7 @@ public class RlzSolicitud extends JDialog {
 		panel.add(lblLicenciaParaConducir);
 
 		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
 		txtCodigo.setBounds(10, 40, 151, 23);
 		panel.add(txtCodigo);
 		txtCodigo.setColumns(10);
@@ -96,6 +97,7 @@ public class RlzSolicitud extends JDialog {
 		txtFecha.setColumns(10);
 
 		cbxIdioma = new JComboBox();
+		cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
 		cbxIdioma.setBounds(10, 90, 151, 23);
 		panel.add(cbxIdioma);
 
@@ -104,7 +106,7 @@ public class RlzSolicitud extends JDialog {
 		panel.add(spnExp);
 
 		cbLicenc = new JCheckBox("");
-		cbLicenc.setBounds(141, 136, 20, 23);
+		cbLicenc.setBounds(169, 136, 20, 23);
 		panel.add(cbLicenc);
 
 		JLabel lblDisposicinAMudarse = new JLabel("Disposici\u00F3n a mudarse");
@@ -112,9 +114,9 @@ public class RlzSolicitud extends JDialog {
 		panel.add(lblDisposicinAMudarse);
 
 		cbMudarse = new JCheckBox("");
-		cbMudarse.setBounds(141, 166, 20, 23);
+		cbMudarse.setBounds(169, 166, 20, 23);
 		panel.add(cbMudarse);
-		
+
 		JLabel lblAos = new JLabel("A\u00F1os");
 		lblAos.setBounds(304, 95, 42, 14);
 		panel.add(lblAos);
@@ -175,20 +177,18 @@ public class RlzSolicitud extends JDialog {
 				JButton okButton = new JButton("Terminar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if(solicitante == null){
+						if (solicitante == null) {
 							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
-						}
-						else{
-						String codigo = txtCodigo.getText();
-						String idioma = cbxIdioma.getSelectedItem().toString();
-						boolean licencia = cbLicenc.isSelected();
-						boolean mudarse = cbMudarse.isSelected();
-						int experiencia = Integer.valueOf(spnExp.getValue().toString());
-				
-						
-						solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
-						empleo.getMisSolicitudes().add(solicitud);
-						Controladora.getInstance().getMisSolicitudes().add(solicitud);
+						} else {
+							String codigo = txtCodigo.getText();
+							String idioma = cbxIdioma.getSelectedItem().toString();
+							boolean licencia = cbLicenc.isSelected();
+							boolean mudarse = cbMudarse.isSelected();
+							int experiencia = Integer.valueOf(spnExp.getValue().toString());
+
+							solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
+							empleo.getMisSolicitudes().add(solicitud);
+							Controladora.getInstance().getMisSolicitudes().add(solicitud);
 						}
 					}
 				});
@@ -207,12 +207,13 @@ public class RlzSolicitud extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
+
 		load();
 	}
-	
-	private void load()
-	{
+
+	private void load() {
+		txtCodigo.setText("SOLI-" + (Controladora.getInstance().getMisSolicitudes().size() + 1));
+
 		Date date = new Date();
 		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 		txtFecha.setText(str);

@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
@@ -288,11 +289,11 @@ public class RegEmpleo extends JDialog {
 		panel_2.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("C\u00F3digo:");
-		lblNewLabel.setBounds(10, 20, 100, 14);
+		lblNewLabel.setBounds(10, 30, 100, 14);
 		panel_2.add(lblNewLabel);
 
 		txtCodigoEmp = new JTextField();
-		txtCodigoEmp.setBounds(83, 20, 182, 23);
+		txtCodigoEmp.setBounds(83, 26, 182, 23);
 		panel_2.add(txtCodigoEmp);
 		txtCodigoEmp.setColumns(10);
 
@@ -305,27 +306,27 @@ public class RegEmpleo extends JDialog {
 				txtUbicacionEmp.setText(empresa.getUbicacion());
 			}
 		});
-		btnBuscar.setBounds(275, 20, 89, 23);
+		btnBuscar.setBounds(275, 26, 89, 23);
 		panel_2.add(btnBuscar);
 
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 50, 100, 14);
+		lblNombre.setBounds(10, 60, 100, 14);
 		panel_2.add(lblNombre);
 
 		txtNombreEmp = new JTextField();
 		txtNombreEmp.setEditable(false);
-		txtNombreEmp.setBounds(83, 50, 281, 23);
+		txtNombreEmp.setBounds(83, 56, 281, 23);
 		panel_2.add(txtNombreEmp);
 		txtNombreEmp.setColumns(10);
 
 		JLabel lblUbicacin = new JLabel("Ubicaci\u00F3n:");
-		lblUbicacin.setBounds(10, 80, 100, 14);
+		lblUbicacin.setBounds(10, 90, 100, 14);
 		panel_2.add(lblUbicacin);
 
 		txtUbicacionEmp = new JTextField();
 		txtUbicacionEmp.setEditable(false);
 		txtUbicacionEmp.setColumns(10);
-		txtUbicacionEmp.setBounds(83, 80, 281, 23);
+		txtUbicacionEmp.setBounds(83, 86, 281, 23);
 		panel_2.add(txtUbicacionEmp);
 		{
 			JPanel buttonPane = new JPanel();
@@ -422,10 +423,12 @@ public class RegEmpleo extends JDialog {
 	}
 
 	private void load() {
-		cbxAreaEstudio.addItem("<Seleccione>");
-		cbxTitulo.addItem("<Seleccione>");
-		cbxHabilidad.addItem("<Seleccione>");
-		cbxIdioma.addItem("<Seleccione>");
+
+		txtCodigo.setText("EMPL-" + (Controladora.getInstance().getMisEmpleos().size() + 1));
+
+		Date date = new Date();
+		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+		txtFecha.setText(str);
 
 		for (String area : Controladora.getMisAreasDeEstudio()) {
 			cbxAreaEstudio.addItem(area);

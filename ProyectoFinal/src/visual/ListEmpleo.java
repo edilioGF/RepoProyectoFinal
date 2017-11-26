@@ -29,52 +29,42 @@ public class ListEmpleo extends JDialog {
 	private JTable table;
 	private Object[] fila;
 	private DefaultTableModel model;
-	private JComboBox cbxAreas;
-
 
 	/**
 	 * Create the dialog.
 	 */
 	public ListEmpleo() {
 		setTitle("Listado de Empleos");
-		setBounds(100, 100, 584, 407);
+		setBounds(100, 100, 700, 450);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 57, 548, 267);
+		panel.setBounds(10, 45, 664, 322);
 		contentPanel.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane);
-		
+
 		table = new JTable();
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Código", "Título", "Vacantes", "Salario" , "Nombre Empresa" };
+		String[] columns = { "Código", "Título", "Vacantes", "Salario", "Nombre Empresa" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
-		
-		JLabel lblArea = new JLabel("\u00C1rea:");
-		lblArea.setBounds(10, 21, 46, 14);
-		contentPanel.add(lblArea);
-		
-		cbxAreas = new JComboBox();
-		cbxAreas.setModel(new DefaultComboBoxModel(new String[] {"<Todas>"}));
-		cbxAreas.setBounds(55, 17, 287, 23);
-		contentPanel.add(cbxAreas);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnNewButton_1 = new JButton("Solicitar");
+				btnNewButton_1.setEnabled(false);
 				btnNewButton_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 					}
@@ -83,6 +73,7 @@ public class ListEmpleo extends JDialog {
 			}
 			{
 				JButton btnNewButton = new JButton("Detalles");
+				btnNewButton.setEnabled(false);
 				buttonPane.add(btnNewButton);
 			}
 			{
@@ -97,12 +88,10 @@ public class ListEmpleo extends JDialog {
 			}
 		}
 		load();
-		loadTable(cbxAreas.getSelectedItem().toString());
 	}
+
 	private void load() {
-		for (String area : Controladora.getMisTiposDeEmpresa()) {
-			cbxAreas.addItem(area);
-		}
+
 	}
 
 	private void loadTable(String tipo) {

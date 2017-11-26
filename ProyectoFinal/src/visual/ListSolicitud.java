@@ -29,7 +29,7 @@ public class ListSolicitud extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(10, 60, 664, 307);
+			panel.setBounds(10, 60, 674, 317);
 			contentPanel.add(panel);
 			panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 			{
