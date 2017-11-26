@@ -39,7 +39,7 @@ public class RegEmpleo extends JDialog {
 	private JTextField txtCodigo;
 	private JTextField txtFecha;
 	private JTextField txtTitulo;
-	private JTextField textCodigoEmp;
+	private JTextField txtCodigoEmp;
 	private JTextField txtNombreEmp;
 	private JTextField txtUbicacionEmp;
 	private JTextArea txtDescripcion;
@@ -64,10 +64,12 @@ public class RegEmpleo extends JDialog {
 	private JPanel pnlTecnico;
 	private JPanel pnlObrero;
 
+	private JButton btnBuscar;
+
 	/**
 	 * Create the dialog.
 	 */
-	public RegEmpleo() {
+	public RegEmpleo(Empresa emp) {
 		setTitle("Registro de Empleo");
 		setResizable(false);
 		setBounds(100, 100, 400, 700);
@@ -289,15 +291,15 @@ public class RegEmpleo extends JDialog {
 		lblNewLabel.setBounds(10, 20, 100, 14);
 		panel_2.add(lblNewLabel);
 
-		textCodigoEmp = new JTextField();
-		textCodigoEmp.setBounds(83, 20, 182, 23);
-		panel_2.add(textCodigoEmp);
-		textCodigoEmp.setColumns(10);
+		txtCodigoEmp = new JTextField();
+		txtCodigoEmp.setBounds(83, 20, 182, 23);
+		panel_2.add(txtCodigoEmp);
+		txtCodigoEmp.setColumns(10);
 
-		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String codigoEmp = textCodigoEmp.getText();
+				String codigoEmp = txtCodigoEmp.getText();
 				empresa = Controladora.getInstance().buscarEmpresa(codigoEmp);
 				txtNombreEmp.setText(empresa.getNombre());
 				txtUbicacionEmp.setText(empresa.getUbicacion());
@@ -334,7 +336,7 @@ public class RegEmpleo extends JDialog {
 				JButton okButton = new JButton("Terminar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (empresa == null) {
+						if (empresa == null && emp == null) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");
 						} else {
 							String codigo = txtCodigo.getText();
@@ -372,6 +374,22 @@ public class RegEmpleo extends JDialog {
 										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
 										obrero, "", "", habilidad, empresa);
 							}
+
+							if (emp != null) {
+								empleo.setEmpresa(emp);
+								Controladora.getInstance().addEmpresa(emp);
+							}
+							Controladora.getInstance().addEmpleo(empleo);
+
+							JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+
+							if (emp != null) {
+								dispose();
+								RegEmpresa re = new RegEmpresa();
+								re.setModal(true);
+								re.setVisible(true);
+							}
 						}
 					}
 				});
@@ -393,6 +411,14 @@ public class RegEmpleo extends JDialog {
 
 		load();
 		loadPanel(true, false, false);
+
+		if (emp != null) {
+			btnBuscar.setVisible(false);
+			txtCodigoEmp.setEditable(false);
+			txtCodigoEmp.setText(emp.getCodigo());
+			txtNombreEmp.setText(emp.getNombre());
+			txtUbicacionEmp.setText(emp.getUbicacion());
+		}
 	}
 
 	private void load() {

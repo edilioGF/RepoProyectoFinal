@@ -111,7 +111,7 @@ public class ListEmpleo extends JDialog {
 		fila = new Object[model.getColumnCount()];
 
 		for (Empleo empleo : Controladora.getInstance().getMisEmpleos()) {
-			if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(empleo.getArea())) {
+			if (tipo.equalsIgnoreCase("<Todas>") || tipo.equalsIgnoreCase(empleo.getArea())) {
 				fila[0] = empleo.getCodigo();
 				fila[1] = empleo.getTitulo();
 				fila[2] = empleo.getVacantes();

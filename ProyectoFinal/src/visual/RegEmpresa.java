@@ -14,6 +14,7 @@ import logico.Controladora;
 import logico.Empresa;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -86,13 +87,26 @@ public class RegEmpresa extends JDialog {
 				JButton okButton = new JButton("Siguiente");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if (cbxUbicacion.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una ubicación", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxTipo.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+
 						String codigo = txtCodigo.getText();
 						String nombre = txtNombre.getText();
 						String ubicacion = cbxUbicacion.getSelectedItem().toString();
 						String tipo = cbxTipo.getSelectedItem().toString();
 						Empresa empresa = new Empresa(codigo, nombre, ubicacion, tipo);
-						Controladora.getInstance().addEmpresa(empresa);
-						clean();
+						dispose();
+						RegEmpleo re = new RegEmpleo(empresa);
+						re.setModal(true);
+						re.setVisible(true);
 					}
 				});
 				okButton.setActionCommand("OK");
