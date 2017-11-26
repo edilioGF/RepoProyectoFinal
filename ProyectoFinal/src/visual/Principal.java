@@ -42,8 +42,8 @@ public class Principal extends JFrame {
 
 	private static JPanel pnlPastel;
 	private static JPanel pnlBarras;
-	private JTextField textField;
-	private JTextField textField_1;
+	private static JTextField txtSolicitantes;
+	private static JTextField txtSolicitudes;
 	private static JTextField txtEmpresas;
 	private static JTextField txtEmpleos;
 	private JTextField textField_4;
@@ -136,7 +136,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmEmpleos = new JMenuItem("Empleos");
 		mntmEmpleos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Solicitante solicitante = null;
+				// Solicitante solicitante = null;
 				ListEmpleo le = new ListEmpleo(null);
 				le.setModal(true);
 				le.setVisible(true);
@@ -217,27 +217,27 @@ public class Principal extends JFrame {
 		lblSolicitantes.setBounds(50, 36, 100, 14);
 		pnlTotal.add(lblSolicitantes);
 
-		textField = new JTextField();
-		textField.setForeground(Color.BLUE);
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setText("0");
-		textField.setEditable(false);
-		textField.setBounds(150, 32, 86, 23);
-		pnlTotal.add(textField);
-		textField.setColumns(10);
+		txtSolicitantes = new JTextField();
+		txtSolicitantes.setForeground(Color.BLUE);
+		txtSolicitantes.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSolicitantes.setText("0");
+		txtSolicitantes.setEditable(false);
+		txtSolicitantes.setBounds(150, 32, 86, 23);
+		pnlTotal.add(txtSolicitantes);
+		txtSolicitantes.setColumns(10);
 
 		JLabel lblSolicitudes = new JLabel("Solicitudes:");
 		lblSolicitudes.setBounds(50, 86, 100, 14);
 		pnlTotal.add(lblSolicitudes);
 
-		textField_1 = new JTextField();
-		textField_1.setForeground(Color.BLUE);
-		textField_1.setText("0");
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(150, 82, 86, 23);
-		pnlTotal.add(textField_1);
+		txtSolicitudes = new JTextField();
+		txtSolicitudes.setForeground(Color.BLUE);
+		txtSolicitudes.setText("0");
+		txtSolicitudes.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSolicitudes.setEditable(false);
+		txtSolicitudes.setColumns(10);
+		txtSolicitudes.setBounds(150, 82, 86, 23);
+		pnlTotal.add(txtSolicitudes);
 
 		JLabel lblEmpresas = new JLabel("Empresas:");
 		lblEmpresas.setBounds(50, 136, 100, 14);
@@ -350,8 +350,12 @@ public class Principal extends JFrame {
 	}
 
 	public static void loadStats() {
-		// TODO Auto-generated method stub
+		pnlPastel.removeAll();
+		pnlBarras.removeAll();
 
+		// TODO Auto-generated method stub
+		txtSolicitantes.setText(String.format("%d", Controladora.getInstance().getMisSolicitantes().size()));
+		txtSolicitudes.setText(String.format("%d", Controladora.getInstance().getMisSolicitudes().size()));
 		txtEmpresas.setText(String.format("%d", Controladora.getInstance().getMisEmpresas().size()));
 		txtEmpleos.setText(String.format("%d", Controladora.getInstance().getMisEmpleos().size()));
 

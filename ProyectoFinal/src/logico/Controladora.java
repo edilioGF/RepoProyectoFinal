@@ -21,7 +21,7 @@ public class Controladora {
 			"Electricidad" };
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
 			"Plomería" };
-	private static String[] misFormaciones = {"Graduado" , "Técnico" , "Obrero"};
+	private static String[] misFormaciones = { "Graduado", "Técnico", "Obrero" };
 
 	private static Controladora controladora;
 
@@ -173,7 +173,6 @@ public class Controladora {
 				arr[1]++;
 			}
 		}
-
 		return arr;
 	}
 
