@@ -252,6 +252,10 @@ public class RegSolicitante extends JDialog {
 							Controladora.getInstance().getMisSolicitantes().add(solicitante);
 
 						}
+						dispose();
+						ListEmpleo empleo = new ListEmpleo();
+						empleo.setVisible(true);
+						
 					}
 				});
 				buttonPane.add(btnSiguiente);
