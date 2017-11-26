@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListEmpleo extends JDialog {
 
@@ -29,13 +31,17 @@ public class ListEmpleo extends JDialog {
 	private JTable table;
 	private Object[] fila;
 	private DefaultTableModel model;
+	private JButton btnSolicitar;
+	private JButton btnDetalles;
+	private String codigo;
+	private Empleo empleo;
 
 	/**
 	 * Create the dialog.
 	 */
 	public ListEmpleo() {
 		setTitle("Listado de Empleos");
-		setBounds(100, 100, 700, 450);
+		setBounds(100, 100, 700, 454);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,6 +57,17 @@ public class ListEmpleo extends JDialog {
 		panel.add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				btnDetalles.setEnabled(true);
+				btnSolicitar.setEnabled(true);
+				
+				int index = table.getSelectedRow();
+				codigo = (String) table.getModel().getValueAt(index, 0);
+				empleo = Controladora.getInstance().buscarEmpleo(codigo);
+			}
+		});
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -58,23 +75,40 @@ public class ListEmpleo extends JDialog {
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
+		
+		JLabel lblreas = new JLabel("\u00C1reas:");
+		lblreas.setBounds(28, 20, 90, 14);
+		contentPanel.add(lblreas);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(102, 14, 28, 20);
+		contentPanel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnNewButton_1 = new JButton("Solicitar");
-				btnNewButton_1.setEnabled(false);
-				btnNewButton_1.addActionListener(new ActionListener() {
+				btnSolicitar = new JButton("Solicitar");
+				btnSolicitar.setEnabled(false);
+				btnSolicitar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 					}
 				});
-				buttonPane.add(btnNewButton_1);
+				buttonPane.add(btnSolicitar);
+				
 			}
 			{
-				JButton btnNewButton = new JButton("Detalles");
-				btnNewButton.setEnabled(false);
-				buttonPane.add(btnNewButton);
+				btnDetalles = new JButton("Detalles");
+				btnDetalles.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						DetallesEmpleo dtEmp = new DetallesEmpleo(empleo);
+						setModal(false);
+						dtEmp.setModal(true);
+						dtEmp.setVisible(true);
+					}
+				});
+				btnDetalles.setEnabled(false);
+				buttonPane.add(btnDetalles);
 			}
 			{
 				JButton cancelButton = new JButton("Cerrar");
@@ -87,20 +121,16 @@ public class ListEmpleo extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		load();
+		loadTable();
 	}
 
-	private void load() {
-
-	}
-
-	private void loadTable(String tipo) {
+	private void loadTable() {
 		// TODO Auto-generated method stub
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 
 		for (Empleo empleo : Controladora.getInstance().getMisEmpleos()) {
-			if (tipo.equalsIgnoreCase("<Todas>") || tipo.equalsIgnoreCase(empleo.getArea())) {
+			//if (tipo.equalsIgnoreCase("<Todas>") || tipo.equalsIgnoreCase(empleo.getArea())) {
 				fila[0] = empleo.getCodigo();
 				fila[1] = empleo.getTitulo();
 				fila[2] = empleo.getVacantes();
@@ -108,7 +138,7 @@ public class ListEmpleo extends JDialog {
 				fila[4] = empleo.getEmpresa().getNombre();
 
 				model.addRow(fila);
-			}
+			//}
 		}
 
 		table.setModel(model);
