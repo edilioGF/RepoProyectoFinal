@@ -160,6 +160,22 @@ public class Controladora {
 		return empleo;
 	}
 
+	public int[] contarHombresMujeres() {
+		// 0 -> Mujeres
+		// 1 -> Hombres
+		int arr[] = { 0, 0 };
+
+		for (Solicitante sol : misSolicitantes) {
+			if (sol.getGenero().equalsIgnoreCase("femenino")) {
+				arr[0]++;
+			} else {
+				arr[1]++;
+			}
+		}
+
+		return arr;
+	}
+
 	public ArrayList<Solicitante> getMisSolicitantes() {
 		return misSolicitantes;
 	}
