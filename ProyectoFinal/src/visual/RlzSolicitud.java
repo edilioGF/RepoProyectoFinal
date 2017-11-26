@@ -194,7 +194,9 @@ public class RlzSolicitud extends JDialog {
 							} else {
 								solicitud = new Solicitud(codigo, solicitante2, idioma, licencia, mudarse, experiencia);
 								empleo.getMisSolicitudes().add(solicitud);
-								Controladora.getInstance().getMisSolicitantes().add(solicitante2);
+								if (Controladora.getInstance().buscarSolicitante(solicitante2.getCedula()) == null) {
+									Controladora.getInstance().getMisSolicitantes().add(solicitante2);
+								}
 								Controladora.getInstance().getMisSolicitudes().add(solicitud);
 							}
 							JOptionPane.showMessageDialog(null, "La solicitud se ha realizado satisfactorimente");
