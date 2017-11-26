@@ -18,6 +18,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import hilo.Stats;
+import logico.Controladora;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -36,12 +39,12 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private Dimension dim;
 
-	private JPanel pnlPastel;
-	private JPanel pnlBarras;
+	private static JPanel pnlPastel;
+	private static JPanel pnlBarras;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private static JTextField txtEmpresas;
+	private static JTextField txtEmpleos;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
@@ -238,27 +241,27 @@ public class Principal extends JFrame {
 		lblEmpresas.setBounds(50, 136, 100, 14);
 		pnlTotal.add(lblEmpresas);
 
-		textField_2 = new JTextField();
-		textField_2.setForeground(Color.BLUE);
-		textField_2.setText("0");
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(150, 132, 86, 23);
-		pnlTotal.add(textField_2);
+		txtEmpresas = new JTextField();
+		txtEmpresas.setForeground(Color.BLUE);
+		txtEmpresas.setText("0");
+		txtEmpresas.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEmpresas.setEditable(false);
+		txtEmpresas.setColumns(10);
+		txtEmpresas.setBounds(150, 132, 86, 23);
+		pnlTotal.add(txtEmpresas);
 
 		JLabel lblEmpleos = new JLabel("Empleos:");
 		lblEmpleos.setBounds(50, 186, 100, 14);
 		pnlTotal.add(lblEmpleos);
 
-		textField_3 = new JTextField();
-		textField_3.setForeground(Color.BLUE);
-		textField_3.setText("0");
-		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(150, 182, 86, 23);
-		pnlTotal.add(textField_3);
+		txtEmpleos = new JTextField();
+		txtEmpleos.setForeground(Color.BLUE);
+		txtEmpleos.setText("0");
+		txtEmpleos.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEmpleos.setEditable(false);
+		txtEmpleos.setColumns(10);
+		txtEmpleos.setBounds(150, 182, 86, 23);
+		pnlTotal.add(txtEmpleos);
 
 		JPanel pnlAreasPopulares = new JPanel();
 		pnlAreasPopulares.setLayout(null);
@@ -340,15 +343,20 @@ public class Principal extends JFrame {
 		textField_8.setBounds(150, 198, 86, 23);
 		pnlAreasPopulares.add(textField_8);
 
-		loadGraphs();
+		Stats hS = new Stats();
+		hS.start();
 	}
 
-	private void loadGraphs() {
+	public static void loadStats() {
 		// TODO Auto-generated method stub
+
+		txtEmpresas.setText(String.format("%d", Controladora.getInstance().getMisEmpresas().size()));
+		txtEmpleos.setText(String.format("%d", Controladora.getInstance().getMisEmpleos().size()));
+
 		// create a dataset...
 		DefaultPieDataset dataPastel = new DefaultPieDataset();
-		dataPastel.setValue("Mujeres", 40);
-		dataPastel.setValue("Hombres", 60);
+		dataPastel.setValue("Mujeres", Controladora.getInstance().contarHombresMujeres()[0]);
+		dataPastel.setValue("Hombres", Controladora.getInstance().contarHombresMujeres()[1]);
 
 		DefaultCategoryDataset dataBarras = new DefaultCategoryDataset();
 		dataBarras.setValue(8, "Matches", "23/11/2017");
