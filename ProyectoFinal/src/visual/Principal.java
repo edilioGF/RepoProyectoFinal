@@ -20,6 +20,7 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import hilo.Stats;
 import logico.Controladora;
+import logico.Solicitante;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -122,7 +123,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
 		mntmSolicitud.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListEmpleo le = new ListEmpleo();
+				ListEmpleo le = new ListEmpleo(null);
 				le.setModal(true);
 				le.setVisible(true);
 			}
@@ -135,7 +136,8 @@ public class Principal extends JFrame {
 		JMenuItem mntmEmpleos = new JMenuItem("Empleos");
 		mntmEmpleos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListEmpleo le = new ListEmpleo();
+				//Solicitante solicitante = null;
+				ListEmpleo le = new ListEmpleo(null);
 				le.setModal(true);
 				le.setVisible(true);
 			}

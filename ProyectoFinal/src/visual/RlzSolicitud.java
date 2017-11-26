@@ -46,7 +46,7 @@ public class RlzSolicitud extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RlzSolicitud(Empleo empleo) {
+	public RlzSolicitud(Empleo empleo, Solicitante solicitante2) {
 		setResizable(false);
 		setModal(true);
 		setTitle("Realizar Solicitud");
@@ -177,18 +177,26 @@ public class RlzSolicitud extends JDialog {
 				JButton okButton = new JButton("Terminar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if (solicitante == null) {
+						if (solicitante == null && solicitante2 == null) {
 							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
+							
 						} else {
 							String codigo = txtCodigo.getText();
 							String idioma = cbxIdioma.getSelectedItem().toString();
 							boolean licencia = cbLicenc.isSelected();
 							boolean mudarse = cbMudarse.isSelected();
 							int experiencia = Integer.valueOf(spnExp.getValue().toString());
-
+							if(solicitante2 == null){
 							solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
 							empleo.getMisSolicitudes().add(solicitud);
 							Controladora.getInstance().getMisSolicitudes().add(solicitud);
+							
+							} else {
+								solicitud = new Solicitud(codigo, solicitante2, idioma, licencia, mudarse, experiencia);
+								empleo.getMisSolicitudes().add(solicitud);
+								Controladora.getInstance().getMisSolicitudes().add(solicitud);
+							}
+							JOptionPane.showMessageDialog(null, "La solicitud se ha realizado satisfactorimente");
 						}
 					}
 				});
@@ -207,8 +215,17 @@ public class RlzSolicitud extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-
 		load();
+		
+		if(solicitante2 != null){
+			btnBuscar.setEnabled(false);
+			txtCedula.setText(solicitante2.getCedula());
+			txtCedula.setEditable(false);
+			txtNombre.setText(solicitante2.getNombre());
+			txtNombre.setEditable(false);
+			txtApellido.setText(solicitante2.getApellidos());
+			txtApellido.setEditable(false);
+		}
 	}
 
 	private void load() {

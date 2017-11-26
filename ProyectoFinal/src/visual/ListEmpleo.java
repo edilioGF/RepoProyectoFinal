@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import logico.Controladora;
 import logico.Empleo;
 import logico.Empresa;
+import logico.Solicitante;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -39,7 +40,7 @@ public class ListEmpleo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListEmpleo() {
+	public ListEmpleo(Solicitante solicitante) {
 		setTitle("Listado de Empleos");
 		setBounds(100, 100, 700, 454);
 		setLocationRelativeTo(null);
@@ -92,6 +93,10 @@ public class ListEmpleo extends JDialog {
 				btnSolicitar.setEnabled(false);
 				btnSolicitar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+					  RlzSolicitud rlzs = new RlzSolicitud(empleo,solicitante);
+					  setModal(false);
+					  rlzs.setVisible(true);
+					  rlzs.setModal(true);
 					}
 				});
 				buttonPane.add(btnSolicitar);

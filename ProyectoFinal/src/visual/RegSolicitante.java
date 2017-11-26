@@ -253,7 +253,7 @@ public class RegSolicitante extends JDialog {
 
 						}
 						dispose();
-						ListEmpleo empleo = new ListEmpleo();
+						ListEmpleo empleo = new ListEmpleo(solicitante);
 						empleo.setVisible(true);
 						
 					}
