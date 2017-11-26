@@ -21,6 +21,7 @@ public class Controladora {
 			"Electricidad" };
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
 			"Plomería" };
+	private static String[] misFormaciones = {"Graduado" , "Técnico" , "Obrero"};
 
 	private static Controladora controladora;
 
@@ -248,4 +249,11 @@ public class Controladora {
 		Controladora.misIdiomas = misIdiomas;
 	}
 
+	public static String[] getMisFormaciones() {
+		return misFormaciones;
+	}
+
+	public static void setMisFormaciones(String[] misFormaciones) {
+		Controladora.misFormaciones = misFormaciones;
+	}
 }
