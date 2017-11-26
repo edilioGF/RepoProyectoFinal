@@ -249,13 +249,13 @@ public class RegSolicitante extends JDialog {
 										paisResidencia, habilidad);
 							}
 
-							Controladora.getInstance().getMisSolicitantes().add(solicitante);
+							// Controladora.getInstance().getMisSolicitantes().add(solicitante);
 
 						}
 						dispose();
 						ListEmpleo empleo = new ListEmpleo(solicitante);
 						empleo.setVisible(true);
-						
+
 					}
 				});
 				buttonPane.add(btnSiguiente);

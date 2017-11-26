@@ -377,7 +377,7 @@ public class Principal extends JFrame {
 
 		pastel.setBackgroundPaint(new Color(0, 0, 0, 0));
 
-		JFreeChart barras = ChartFactory.createBarChart("Matching", "Dï¿½as", "Matches", dataBarras,
+		JFreeChart barras = ChartFactory.createBarChart("Matching", "Días", "Matches", dataBarras,
 				PlotOrientation.VERTICAL, false, true, false);
 
 		barras.setBackgroundPaint(new Color(0, 0, 0, 0));

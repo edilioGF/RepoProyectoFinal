@@ -97,7 +97,7 @@ public class RlzSolicitud extends JDialog {
 		txtFecha.setColumns(10);
 
 		cbxIdioma = new JComboBox();
-		cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+		cbxIdioma.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
 		cbxIdioma.setBounds(10, 90, 151, 23);
 		panel.add(cbxIdioma);
 
@@ -179,21 +179,22 @@ public class RlzSolicitud extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						if (solicitante == null && solicitante2 == null) {
 							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
-							
+
 						} else {
 							String codigo = txtCodigo.getText();
 							String idioma = cbxIdioma.getSelectedItem().toString();
 							boolean licencia = cbLicenc.isSelected();
 							boolean mudarse = cbMudarse.isSelected();
 							int experiencia = Integer.valueOf(spnExp.getValue().toString());
-							if(solicitante2 == null){
-							solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
-							empleo.getMisSolicitudes().add(solicitud);
-							Controladora.getInstance().getMisSolicitudes().add(solicitud);
-							
+							if (solicitante2 == null) {
+								solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
+								empleo.getMisSolicitudes().add(solicitud);
+								Controladora.getInstance().getMisSolicitudes().add(solicitud);
+
 							} else {
 								solicitud = new Solicitud(codigo, solicitante2, idioma, licencia, mudarse, experiencia);
 								empleo.getMisSolicitudes().add(solicitud);
+								Controladora.getInstance().getMisSolicitantes().add(solicitante2);
 								Controladora.getInstance().getMisSolicitudes().add(solicitud);
 							}
 							JOptionPane.showMessageDialog(null, "La solicitud se ha realizado satisfactorimente");
@@ -216,8 +217,8 @@ public class RlzSolicitud extends JDialog {
 			}
 		}
 		load();
-		
-		if(solicitante2 != null){
+
+		if (solicitante2 != null) {
 			btnBuscar.setEnabled(false);
 			txtCedula.setText(solicitante2.getCedula());
 			txtCedula.setEditable(false);
