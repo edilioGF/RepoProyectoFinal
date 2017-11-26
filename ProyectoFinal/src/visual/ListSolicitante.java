@@ -31,7 +31,7 @@ public class ListSolicitante extends JDialog {
 	private JTable table;
 	private Object[] fila;
 	private DefaultTableModel model;
-	private JTextField textField;
+	private JTextField txtCedula;
 	private JComboBox cbxFormacion;
 
 	/**
@@ -71,12 +71,28 @@ public class ListSolicitante extends JDialog {
 					lblCedula.setBounds(383, 22, 55, 14);
 					contentPanel.add(lblCedula);
 					
-					textField = new JTextField();
-					textField.setBounds(448, 19, 114, 23);
-					contentPanel.add(textField);
-					textField.setColumns(10);
+					txtCedula = new JTextField();
+					txtCedula.setBounds(448, 19, 114, 23);
+					contentPanel.add(txtCedula);
+					txtCedula.setColumns(10);
 					
 					JButton btnBuscar = new JButton("Buscar");
+					btnBuscar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							String cedula = txtCedula.getText();
+							if(Controladora.getInstance().buscarSolicitante(cedula) != null){
+								Solicitante solicitante = Controladora.getInstance().buscarSolicitante(cedula);
+								fila[0] = solicitante.getCedula();
+								fila[1] = solicitante.getNombre();
+								fila[2] = solicitante.getNacimiento();
+								fila[3] = solicitante.getPaisResidencia();
+								fila[4] = solicitante.getGenero();
+
+								model.addRow(fila);
+								table.setModel(model);
+							}
+						}
+					});
 					btnBuscar.setBounds(571, 18, 89, 23);
 					contentPanel.add(btnBuscar);
 					String[] columns = { "Cédula", "Nombre", "Fecha de nacimiento", "Reside","Género" };
