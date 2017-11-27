@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import logico.Controladora;
+
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JRadioButton;
@@ -180,6 +183,7 @@ public class RlzPerfil extends JDialog {
 			}
 		}
 		loadPanel(true,false,false);
+		load();
 	}
 	
 	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {
@@ -190,5 +194,20 @@ public class RlzPerfil extends JDialog {
 		pnlGraduado.setVisible(graduado);
 		pnlTecnico.setVisible(tecnico);
 		pnlObrero.setVisible(obrero);
+	}
+	
+	private void load() {
+
+		for (String area : Controladora.getMisAreasDeEstudio()) {
+			cbxAestudio.addItem(area);
+		}
+
+		for (String titulo : Controladora.getMisTitulos()) {
+			cbxTitulo.addItem(titulo);
+		}
+
+		for (String habilidad : Controladora.getMisHabilidades()) {
+			cbxHabilidad.addItem(habilidad);
+		}
 	}
 }
