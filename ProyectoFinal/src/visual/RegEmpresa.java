@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 public class RegEmpresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
+	private JTextField txtRnc;
 	private JTextField txtNombre;
 	private JComboBox cbxUbicacion;
 	private JComboBox cbxTipo;
@@ -46,14 +46,14 @@ public class RegEmpresa extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblCdigo = new JLabel("C\u00F3digo:");
+		JLabel lblCdigo = new JLabel("RNC:");
 		lblCdigo.setBounds(10, 20, 46, 14);
 		panel.add(lblCdigo);
 
-		txtCodigo = new JTextField();
-		txtCodigo.setBounds(10, 40, 130, 20);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
+		txtRnc = new JTextField();
+		txtRnc.setBounds(10, 40, 130, 20);
+		panel.add(txtRnc);
+		txtRnc.setColumns(10);
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(10, 70, 61, 14);
@@ -98,7 +98,7 @@ public class RegEmpresa extends JDialog {
 							return;
 						}
 
-						String codigo = txtCodigo.getText();
+						String codigo = txtRnc.getText();
 						String nombre = txtNombre.getText();
 						String ubicacion = cbxUbicacion.getSelectedItem().toString();
 						String tipo = cbxTipo.getSelectedItem().toString();
@@ -147,7 +147,7 @@ public class RegEmpresa extends JDialog {
 
 	private void clean() {
 		txtNombre.setText("");
-		txtCodigo.setText("");
+		txtRnc.setText("");
 		cbxUbicacion.setSelectedIndex(-1);
 		cbxTipo.setSelectedIndex(-1);
 		;

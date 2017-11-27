@@ -128,7 +128,7 @@ public class Controladora {
 		boolean find = false;
 		int i = 0;
 		while (!find && i < misEmpresas.size()) {
-			if (misEmpresas.get(i).getCodigo().equalsIgnoreCase(codigo)) {
+			if (misEmpresas.get(i).getRnc().equalsIgnoreCase(codigo)) {
 				empresa = misEmpresas.get(i);
 				find = true;
 			}

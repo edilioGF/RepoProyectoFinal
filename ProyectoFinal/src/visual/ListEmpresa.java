@@ -55,7 +55,7 @@ public class ListEmpresa extends JDialog {
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Código", "Nombre", "Ubicación", "Tipo" };
+		String[] columns = { "RNC", "Nombre", "Ubicación", "Tipo" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 
@@ -106,7 +106,7 @@ public class ListEmpresa extends JDialog {
 
 		for (Empresa empresa : Controladora.getInstance().getMisEmpresas()) {
 			if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(empresa.getTipo())) {
-				fila[0] = empresa.getCodigo();
+				fila[0] = empresa.getRnc();
 				fila[1] = empresa.getNombre();
 				fila[2] = empresa.getUbicacion();
 				fila[3] = empresa.getTipo();
