@@ -405,7 +405,7 @@ public class RegEmpleo extends JDialog {
 		if (emp != null) {
 			btnBuscar.setVisible(false);
 			txtCodigoEmp.setEditable(false);
-			txtCodigoEmp.setText(emp.getCodigo());
+			txtCodigoEmp.setText(emp.getRnc());
 			txtNombreEmp.setText(emp.getNombre());
 			txtUbicacionEmp.setText(emp.getUbicacion());
 		}
