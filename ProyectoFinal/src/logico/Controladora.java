@@ -3,15 +3,13 @@ package logico;
 import java.util.ArrayList;
 
 public class Controladora {
-	//private ArrayList<Solicitante> misSolicitantes;
+	// private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Empresa> misEmpresas;
-	//private ArrayList<Solicitud> misSolicitudes;
+	// private ArrayList<Solicitud> misSolicitudes;
 	private ArrayList<Empleo> misEmpleos;
 
-	private static String[] misTiposDeEmpresa = { "Constructora", "Ferretería", "Hospital o Clínica", "Software",
-			"Restaurante" };
-	private static String[] misIdiomas = { "Español", "Inglés", "Francés", "Alemán", "Portugués" };
-
+	private static String[] misTiposDeEmpresa = { "Turismo", "Salud", "Eduación", "Software", "Alimentación", "Público",
+			"Privado" };
 	private static String[] misAreasDeEstudio = { "Administración de Empresa", "Administración Hotelera", "Economía",
 			"Gestión Financiera", "Mercadotecnia", "Arquitectura", "Derecho", "Educación", "Psicología",
 			"Ingeniería Civil", "Electromecánica", "Electrónica", "Industrial", "Mecatrónica", "Sistemas y Computación",
@@ -27,9 +25,9 @@ public class Controladora {
 
 	public Controladora() {
 		super();
-		//this.misSolicitantes = new ArrayList<>();
+		// this.misSolicitantes = new ArrayList<>();
 		this.misEmpresas = new ArrayList<>();
-		//this.misSolicitudes = new ArrayList<>();
+		// this.misSolicitudes = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
 	}
 
@@ -49,38 +47,24 @@ public class Controladora {
 	// las otras solicitudes de ese solicitante como inactivas
 
 	/*
-	public void match() {
-		for (Empleo empleo : misEmpleos) {
-			for (Solicitud solicitud : empleo.getMisSolicitudes()) {
-				if (empleo.getVacantes() > 0 && solicitud.isActiva()) {
-					if (empleo.getExperiencia() <= solicitud.getExperiencia()) {
-						if ((empleo.isRemoto() && solicitud.isMudarse()) || !empleo.isRemoto()) {
-							if (empleo.isLicencia() && solicitud.isLicencia() || !empleo.isLicencia()) {
-								if (empleo.isGraduado() && solicitud.getSolicitante() instanceof Graduado) {
-									if (empleo.getArea().equalsIgnoreCase(
-											((Graduado) solicitud.getSolicitante()).getAreaEstudio())) {
-										evaluarSolicitud(solicitud, empleo);
-									}
-								} else if (empleo.isTecnico() && solicitud.getSolicitante() instanceof Tecnico) {
-
-									if (empleo.getTitulo()
-											.equalsIgnoreCase(((Tecnico) solicitud.getSolicitante()).getTitulo())) {
-										evaluarSolicitud(solicitud, empleo);
-									}
-								} else {
-									if (empleo.getHabilidad()
-											.equalsIgnoreCase(((Obrero) solicitud.getSolicitante()).getHabilidad())) {
-										evaluarSolicitud(solicitud, empleo);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	*/
+	 * public void match() { for (Empleo empleo : misEmpleos) { for (Solicitud
+	 * solicitud : empleo.getMisSolicitudes()) { if (empleo.getVacantes() > 0 &&
+	 * solicitud.isActiva()) { if (empleo.getExperiencia() <=
+	 * solicitud.getExperiencia()) { if ((empleo.isRemoto() &&
+	 * solicitud.isMudarse()) || !empleo.isRemoto()) { if (empleo.isLicencia()
+	 * && solicitud.isLicencia() || !empleo.isLicencia()) { if
+	 * (empleo.isGraduado() && solicitud.getSolicitante() instanceof Graduado) {
+	 * if (empleo.getArea().equalsIgnoreCase( ((Graduado)
+	 * solicitud.getSolicitante()).getAreaEstudio())) {
+	 * evaluarSolicitud(solicitud, empleo); } } else if (empleo.isTecnico() &&
+	 * solicitud.getSolicitante() instanceof Tecnico) {
+	 * 
+	 * if (empleo.getTitulo() .equalsIgnoreCase(((Tecnico)
+	 * solicitud.getSolicitante()).getTitulo())) { evaluarSolicitud(solicitud,
+	 * empleo); } } else { if (empleo.getHabilidad() .equalsIgnoreCase(((Obrero)
+	 * solicitud.getSolicitante()).getHabilidad())) {
+	 * evaluarSolicitud(solicitud, empleo); } } } } } } } } }
+	 */
 
 	private void evaluarSolicitud(Solicitud solicitud, Empleo empleo) {
 		solicitud.getSolicitante().setTrabajo(true);
@@ -88,11 +72,11 @@ public class Controladora {
 		empleo.setSatisfecho(true);
 		empleo.setVacantes(empleo.getVacantes() - 1);
 		empleo.setEmpleado(solicitud.getSolicitante());
-		//empleo.inactivarSolicitudes();
+		// empleo.inactivarSolicitudes();
 	}
 
 	public void addSolicitante(Solicitante soli) {
-		//misSolicitantes.add(soli);
+		// misSolicitantes.add(soli);
 	}
 
 	public void addEmpresa(Empresa emp) {
@@ -104,24 +88,17 @@ public class Controladora {
 	}
 
 	public void addSolicitud(Solicitud sol) {
-		//misSolicitudes.add(sol);
+		// misSolicitudes.add(sol);
 	}
 
 	/*
-	public Solicitante buscarSolicitante(String cedula) {
-		Solicitante solicitante = null;
-		boolean find = false;
-		int i = 0;
-		while (!find && i < misSolicitantes.size()) {
-			if (misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)) {
-				solicitante = misSolicitantes.get(i);
-				find = true;
-			}
-			i++;
-		}
-		return solicitante;
-	}
-	*/
+	 * public Solicitante buscarSolicitante(String cedula) { Solicitante
+	 * solicitante = null; boolean find = false; int i = 0; while (!find && i <
+	 * misSolicitantes.size()) { if
+	 * (misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)) {
+	 * solicitante = misSolicitantes.get(i); find = true; } i++; } return
+	 * solicitante; }
+	 */
 
 	public Empresa buscarEmpresa(String codigo) {
 		Empresa empresa = null;
@@ -138,63 +115,37 @@ public class Controladora {
 	}
 
 	/*
-	public Solicitud buscarSolicitud(String codigo) {
-		Solicitud solicitud = null;
-		boolean find = false;
-		int i = 0;
-		while (!find && i < misSolicitudes.size()) {
-			if (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) {
-				solicitud = misSolicitudes.get(i);
-				find = true;
-			}
-			i++;
-		}
-		return solicitud;
-	}
-	*/
+	 * public Solicitud buscarSolicitud(String codigo) { Solicitud solicitud =
+	 * null; boolean find = false; int i = 0; while (!find && i <
+	 * misSolicitudes.size()) { if
+	 * (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) { solicitud
+	 * = misSolicitudes.get(i); find = true; } i++; } return solicitud; }
+	 */
 
 	/*
-	public Empleo buscarEmpleo(String codigo) {
-		Empleo empleo = null;
-		boolean find = false;
-		int i = 0;
-		while (!find && i < misEmpleos.size()) {
-			if (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) {
-				empleo = misEmpleos.get(i);
-				find = true;
-			}
-			i++;
-		}
-		return empleo;
-	}
-	*/
-	
-	/*
-
-	public int[] contarHombresMujeres() {
-		// 0 -> Mujeres
-		// 1 -> Hombres
-		int arr[] = { 0, 0 };
-
-		for (Solicitante sol : misSolicitantes) {
-			if (sol.getGenero().equalsIgnoreCase("femenino")) {
-				arr[0]++;
-			} else {
-				arr[1]++;
-			}
-		}
-		return arr;
-	}*/
+	 * public Empleo buscarEmpleo(String codigo) { Empleo empleo = null; boolean
+	 * find = false; int i = 0; while (!find && i < misEmpleos.size()) { if
+	 * (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) { empleo =
+	 * misEmpleos.get(i); find = true; } i++; } return empleo; }
+	 */
 
 	/*
-	public ArrayList<Solicitante> getMisSolicitantes() {
-		return misSolicitantes;
-	}
-	
-	public void setMisSolicitantes(ArrayList<Solicitante> misSolicitantes) {
-		this.misSolicitantes = misSolicitantes;
-	}
-	*/
+	 * 
+	 * public int[] contarHombresMujeres() { // 0 -> Mujeres // 1 -> Hombres int
+	 * arr[] = { 0, 0 };
+	 * 
+	 * for (Solicitante sol : misSolicitantes) { if
+	 * (sol.getGenero().equalsIgnoreCase("femenino")) { arr[0]++; } else {
+	 * arr[1]++; } } return arr; }
+	 */
+
+	/*
+	 * public ArrayList<Solicitante> getMisSolicitantes() { return
+	 * misSolicitantes; }
+	 * 
+	 * public void setMisSolicitantes(ArrayList<Solicitante> misSolicitantes) {
+	 * this.misSolicitantes = misSolicitantes; }
+	 */
 
 	public ArrayList<Empresa> getMisEmpresas() {
 		return misEmpresas;
@@ -205,14 +156,12 @@ public class Controladora {
 	}
 
 	/*
-	public ArrayList<Solicitud> getMisSolicitudes() {
-		return misSolicitudes;
-	}
-
-	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
-		this.misSolicitudes = misSolicitudes;
-	}
-	*/
+	 * public ArrayList<Solicitud> getMisSolicitudes() { return misSolicitudes;
+	 * }
+	 * 
+	 * public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
+	 * this.misSolicitudes = misSolicitudes; }
+	 */
 
 	public ArrayList<Empleo> getMisEmpleos() {
 		return misEmpleos;
@@ -252,14 +201,6 @@ public class Controladora {
 
 	public static void setMisTiposDeEmpresa(String[] misTiposDeEmpresa) {
 		Controladora.misTiposDeEmpresa = misTiposDeEmpresa;
-	}
-
-	public static String[] getMisIdiomas() {
-		return misIdiomas;
-	}
-
-	public static void setMisIdiomas(String[] misIdiomas) {
-		Controladora.misIdiomas = misIdiomas;
 	}
 
 	public static String[] getMisFormaciones() {

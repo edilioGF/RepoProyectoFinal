@@ -25,6 +25,9 @@ import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.Locale;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.Calendar;
 import javax.swing.JComboBox;
 import javax.swing.SpinnerNumberModel;
@@ -92,7 +95,7 @@ public class RegEmpleo extends JDialog {
 
 		txtFecha = new JTextField();
 		txtFecha.setEditable(false);
-		txtFecha.setBounds(10, 40, 164, 23);
+		txtFecha.setBounds(10, 40, 177, 23);
 		panel.add(txtFecha);
 		txtFecha.setColumns(10);
 
@@ -277,7 +280,7 @@ public class RegEmpleo extends JDialog {
 		contentPanel.add(panel_2);
 		panel_2.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("C\u00F3digo:");
+		JLabel lblNewLabel = new JLabel("RNC:");
 		lblNewLabel.setBounds(10, 30, 100, 14);
 		panel_2.add(lblNewLabel);
 
@@ -429,8 +432,13 @@ public class RegEmpleo extends JDialog {
 			cbxHabilidad.addItem(habilidad);
 		}
 
-		for (String idioma : Controladora.getMisIdiomas()) {
-			cbxIdioma.addItem(idioma);
+		String[] languages = Locale.getISOLanguages();
+
+		for (String lang : languages) {
+			Locale loc = new Locale(lang);
+			String string = loc.getDisplayLanguage().substring(0, 1).toUpperCase()
+					+ loc.getDisplayLanguage().substring(1);
+			cbxIdioma.addItem(string);
 		}
 	}
 
