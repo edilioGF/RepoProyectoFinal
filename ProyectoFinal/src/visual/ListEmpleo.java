@@ -66,7 +66,7 @@ public class ListEmpleo extends JDialog {
 				
 				int index = table.getSelectedRow();
 				codigo = (String) table.getModel().getValueAt(index, 0);
-				empleo = Controladora.getInstance().buscarEmpleo(codigo);
+				//empleo = Controladora.getInstance().buscarEmpleo(codigo);
 			}
 		});
 		table.setDefaultEditor(Object.class, null);
@@ -136,7 +136,7 @@ public class ListEmpleo extends JDialog {
 
 		for (Empleo empleo : Controladora.getInstance().getMisEmpleos()) {
 			//if (tipo.equalsIgnoreCase("<Todas>") || tipo.equalsIgnoreCase(empleo.getArea())) {
-				fila[0] = empleo.getCodigo();
+				//fila[0] = empleo.getCodigo();
 				fila[1] = empleo.getTitulo();
 				fila[2] = empleo.getVacantes();
 				fila[3] = empleo.getSalario();

@@ -138,7 +138,7 @@ public class DetallesEmpleo extends JDialog {
 	}
 	
 	public void loadData(Empleo empleo){
-		textCodigo.setText(empleo.getCodigo());
+		//textCodigo.setText(empleo.getCodigo());
 		txtTitulo.setText(empleo.getTitulo());
 		txtaDescripcion.setText(empleo.getDescripcion());
 		txtHorario.setText(empleo.getHoraInicial()+"-"+empleo.getHoraFinal());

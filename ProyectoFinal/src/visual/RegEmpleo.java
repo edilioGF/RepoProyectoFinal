@@ -37,7 +37,6 @@ import javax.swing.border.EtchedBorder;
 public class RegEmpleo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
 	private JTextField txtFecha;
 	private JTextField txtTitulo;
 	private JTextField txtCodigoEmp;
@@ -87,23 +86,13 @@ public class RegEmpleo extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 20, 100, 14);
-		panel.add(lblCdigo);
-
-		txtCodigo = new JTextField();
-		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(10, 40, 164, 23);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
-
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(200, 20, 100, 14);
+		lblFecha.setBounds(10, 20, 100, 14);
 		panel.add(lblFecha);
 
 		txtFecha = new JTextField();
 		txtFecha.setEditable(false);
-		txtFecha.setBounds(200, 40, 164, 23);
+		txtFecha.setBounds(10, 40, 164, 23);
 		panel.add(txtFecha);
 		txtFecha.setColumns(10);
 
@@ -340,7 +329,7 @@ public class RegEmpleo extends JDialog {
 						if (empresa == null && emp == null) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");
 						} else {
-							String codigo = txtCodigo.getText();
+							// String codigo = txtCodigo.getText();
 							String titulo = txtTitulo.getText();
 							int vacantes = Integer.valueOf(spnVacantes.getValue().toString());
 							String descripcion = txtDescripcion.getText();
@@ -357,23 +346,23 @@ public class RegEmpleo extends JDialog {
 
 							if (graduado) {
 								String area = cbxAreaEstudio.getSelectedItem().toString();
-								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
-										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
-										obrero, "", area, "", empresa);
+								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "",
+										area, "", empresa);
 							}
 
 							if (tecnico) {
 								String tituloTecnico = cbxTitulo.getSelectedItem().toString();
-								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
-										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
-										obrero, tituloTecnico, "", "", empresa);
+								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,
+										tituloTecnico, "", "", empresa);
 							}
 
 							if (obrero) {
 								String habilidad = cbxHabilidad.getSelectedItem().toString();
-								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
-										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
-										obrero, "", "", habilidad, empresa);
+								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "", "",
+										habilidad, empresa);
 							}
 
 							if (emp != null) {
@@ -423,8 +412,6 @@ public class RegEmpleo extends JDialog {
 	}
 
 	private void load() {
-
-		txtCodigo.setText("EMPL-" + (Controladora.getInstance().getMisEmpleos().size() + 1));
 
 		Date date = new Date();
 		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);

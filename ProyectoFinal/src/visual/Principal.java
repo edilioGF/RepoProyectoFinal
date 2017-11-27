@@ -18,7 +18,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-import hilo.Stats;
 import logico.Controladora;
 import logico.Solicitante;
 
@@ -345,8 +344,8 @@ public class Principal extends JFrame {
 		textField_8.setBounds(150, 198, 86, 23);
 		pnlAreasPopulares.add(textField_8);
 
-		Stats hS = new Stats();
-		hS.start();
+		//Stats hS = new Stats();
+		//hS.start();
 	}
 
 	public static void loadStats() {
@@ -354,15 +353,15 @@ public class Principal extends JFrame {
 		pnlBarras.removeAll();
 
 		// TODO Auto-generated method stub
-		txtSolicitantes.setText(String.format("%d", Controladora.getInstance().getMisSolicitantes().size()));
-		txtSolicitudes.setText(String.format("%d", Controladora.getInstance().getMisSolicitudes().size()));
+		//txtSolicitantes.setText(String.format("%d", Controladora.getInstance().getMisSolicitantes().size()));
+		//txtSolicitudes.setText(String.format("%d", Controladora.getInstance().getMisSolicitudes().size()));
 		txtEmpresas.setText(String.format("%d", Controladora.getInstance().getMisEmpresas().size()));
 		txtEmpleos.setText(String.format("%d", Controladora.getInstance().getMisEmpleos().size()));
 
 		// create a dataset...
 		DefaultPieDataset dataPastel = new DefaultPieDataset();
-		dataPastel.setValue("Mujeres", Controladora.getInstance().contarHombresMujeres()[0]);
-		dataPastel.setValue("Hombres", Controladora.getInstance().contarHombresMujeres()[1]);
+		//dataPastel.setValue("Mujeres", Controladora.getInstance().contarHombresMujeres()[0]);
+		//dataPastel.setValue("Hombres", Controladora.getInstance().contarHombresMujeres()[1]);
 
 		DefaultCategoryDataset dataBarras = new DefaultCategoryDataset();
 		dataBarras.setValue(8, "Matches", "23/11/2017");

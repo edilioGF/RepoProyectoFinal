@@ -80,6 +80,7 @@ public class ListSolicitante extends JDialog {
 					btnBuscar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							String cedula = txtCedula.getText();
+							/*
 							if(Controladora.getInstance().buscarSolicitante(cedula) != null){
 								Solicitante solicitante = Controladora.getInstance().buscarSolicitante(cedula);
 								fila[0] = solicitante.getCedula();
@@ -91,6 +92,7 @@ public class ListSolicitante extends JDialog {
 								model.addRow(fila);
 								table.setModel(model);
 							}
+							*/
 						}
 					});
 					btnBuscar.setBounds(571, 18, 89, 23);
@@ -130,6 +132,7 @@ public class ListSolicitante extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 
+		/*
 		for (Solicitante solicitante : Controladora.getInstance().getMisSolicitantes()) {
 			if (formacion.equalsIgnoreCase("<Todos>") || formacion.equalsIgnoreCase(solicitante.getClass().getSimpleName())) {
 				fila[0] = solicitante.getCedula();
@@ -141,6 +144,7 @@ public class ListSolicitante extends JDialog {
 				model.addRow(fila);
 			}
 		}
+		*/
 
 			table.setModel(model);
 		}

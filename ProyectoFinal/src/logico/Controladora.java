@@ -3,9 +3,9 @@ package logico;
 import java.util.ArrayList;
 
 public class Controladora {
-	private ArrayList<Solicitante> misSolicitantes;
+	//private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Empresa> misEmpresas;
-	private ArrayList<Solicitud> misSolicitudes;
+	//private ArrayList<Solicitud> misSolicitudes;
 	private ArrayList<Empleo> misEmpleos;
 
 	private static String[] misTiposDeEmpresa = { "Constructora", "Ferretería", "Hospital o Clínica", "Software",
@@ -18,7 +18,7 @@ public class Controladora {
 			"Telemática", "Enfermería", "Estomatología", "Medicina" };
 
 	private static String[] misTitulos = { "Contabilidad", "Informática", "Mecánica Industrial", "Electrónica",
-			"Electricidad" };
+			"Electricidad", "Diseño Gráfico" };
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
 			"Plomería" };
 	private static String[] misFormaciones = { "Graduado", "Técnico", "Obrero" };
@@ -27,9 +27,9 @@ public class Controladora {
 
 	public Controladora() {
 		super();
-		this.misSolicitantes = new ArrayList<>();
+		//this.misSolicitantes = new ArrayList<>();
 		this.misEmpresas = new ArrayList<>();
-		this.misSolicitudes = new ArrayList<>();
+		//this.misSolicitudes = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
 	}
 
@@ -48,6 +48,7 @@ public class Controladora {
 	// inactiva y se marcan
 	// las otras solicitudes de ese solicitante como inactivas
 
+	/*
 	public void match() {
 		for (Empleo empleo : misEmpleos) {
 			for (Solicitud solicitud : empleo.getMisSolicitudes()) {
@@ -79,6 +80,7 @@ public class Controladora {
 			}
 		}
 	}
+	*/
 
 	private void evaluarSolicitud(Solicitud solicitud, Empleo empleo) {
 		solicitud.getSolicitante().setTrabajo(true);
@@ -86,11 +88,11 @@ public class Controladora {
 		empleo.setSatisfecho(true);
 		empleo.setVacantes(empleo.getVacantes() - 1);
 		empleo.setEmpleado(solicitud.getSolicitante());
-		empleo.inactivarSolicitudes();
+		//empleo.inactivarSolicitudes();
 	}
 
 	public void addSolicitante(Solicitante soli) {
-		misSolicitantes.add(soli);
+		//misSolicitantes.add(soli);
 	}
 
 	public void addEmpresa(Empresa emp) {
@@ -102,9 +104,10 @@ public class Controladora {
 	}
 
 	public void addSolicitud(Solicitud sol) {
-		misSolicitudes.add(sol);
+		//misSolicitudes.add(sol);
 	}
 
+	/*
 	public Solicitante buscarSolicitante(String cedula) {
 		Solicitante solicitante = null;
 		boolean find = false;
@@ -118,6 +121,7 @@ public class Controladora {
 		}
 		return solicitante;
 	}
+	*/
 
 	public Empresa buscarEmpresa(String codigo) {
 		Empresa empresa = null;
@@ -133,6 +137,7 @@ public class Controladora {
 		return empresa;
 	}
 
+	/*
 	public Solicitud buscarSolicitud(String codigo) {
 		Solicitud solicitud = null;
 		boolean find = false;
@@ -146,7 +151,9 @@ public class Controladora {
 		}
 		return solicitud;
 	}
+	*/
 
+	/*
 	public Empleo buscarEmpleo(String codigo) {
 		Empleo empleo = null;
 		boolean find = false;
@@ -160,6 +167,9 @@ public class Controladora {
 		}
 		return empleo;
 	}
+	*/
+	
+	/*
 
 	public int[] contarHombresMujeres() {
 		// 0 -> Mujeres
@@ -174,15 +184,17 @@ public class Controladora {
 			}
 		}
 		return arr;
-	}
+	}*/
 
+	/*
 	public ArrayList<Solicitante> getMisSolicitantes() {
 		return misSolicitantes;
 	}
-
+	
 	public void setMisSolicitantes(ArrayList<Solicitante> misSolicitantes) {
 		this.misSolicitantes = misSolicitantes;
 	}
+	*/
 
 	public ArrayList<Empresa> getMisEmpresas() {
 		return misEmpresas;
@@ -192,6 +204,7 @@ public class Controladora {
 		this.misEmpresas = misEmpresas;
 	}
 
+	/*
 	public ArrayList<Solicitud> getMisSolicitudes() {
 		return misSolicitudes;
 	}
@@ -199,6 +212,7 @@ public class Controladora {
 	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
 		this.misSolicitudes = misSolicitudes;
 	}
+	*/
 
 	public ArrayList<Empleo> getMisEmpleos() {
 		return misEmpleos;

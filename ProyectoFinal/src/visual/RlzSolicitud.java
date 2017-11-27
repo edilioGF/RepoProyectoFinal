@@ -141,7 +141,7 @@ public class RlzSolicitud extends JDialog {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String cedula = txtCedula.getText();
-				solicitante = Controladora.getInstance().buscarSolicitante(cedula);
+				//solicitante = Controladora.getInstance().buscarSolicitante(cedula);
 				txtNombre.setText(solicitante.getNombre());
 				txtApellido.setText(solicitante.getApellidos());
 			}
@@ -188,16 +188,17 @@ public class RlzSolicitud extends JDialog {
 							int experiencia = Integer.valueOf(spnExp.getValue().toString());
 							if (solicitante2 == null) {
 								solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
-								empleo.getMisSolicitudes().add(solicitud);
-								Controladora.getInstance().getMisSolicitudes().add(solicitud);
+								//empleo.getMisSolicitudes().add(solicitud);
+								//Controladora.getInstance().getMisSolicitudes().add(solicitud);
 
 							} else {
 								solicitud = new Solicitud(codigo, solicitante2, idioma, licencia, mudarse, experiencia);
-								empleo.getMisSolicitudes().add(solicitud);
+								/*empleo.getMisSolicitudes().add(solicitud);
 								if (Controladora.getInstance().buscarSolicitante(solicitante2.getCedula()) == null) {
 									Controladora.getInstance().getMisSolicitantes().add(solicitante2);
 								}
 								Controladora.getInstance().getMisSolicitudes().add(solicitud);
+								*/
 							}
 							JOptionPane.showMessageDialog(null, "La solicitud se ha realizado satisfactorimente");
 						}
@@ -232,7 +233,7 @@ public class RlzSolicitud extends JDialog {
 	}
 
 	private void load() {
-		txtCodigo.setText("SOLI-" + (Controladora.getInstance().getMisSolicitudes().size() + 1));
+		//txtCodigo.setText("SOLI-" + (Controladora.getInstance().getMisSolicitudes().size() + 1));
 
 		Date date = new Date();
 		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);

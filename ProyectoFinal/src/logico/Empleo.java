@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Empleo {
-	private String codigo;
 	private String titulo;
 	private String fecha;
 	private int vacantes;
@@ -13,7 +12,6 @@ public class Empleo {
 	private int horaInicial;
 	private int horaFinal;
 	private boolean satisfecho;
-	private ArrayList<Solicitud> misSolicitudes;
 	private String idioma;
 	private int experiencia;
 	private boolean remoto;
@@ -39,12 +37,10 @@ public class Empleo {
 
 	private Solicitante empleado;
 
-	public Empleo(String codigo, String titulo, int vacantes, String descripcion, float salario, int horaInicial,
-			int horaFinal, boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia,
-			boolean graduado, boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad,
-			Empresa empresa) {
+	public Empleo(String titulo, int vacantes, String descripcion, float salario, int horaInicial, int horaFinal,
+			boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia, boolean graduado,
+			boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad, Empresa empresa) {
 		super();
-		this.codigo = codigo;
 		this.titulo = titulo;
 		this.fecha = (new Date()).toString();
 		this.vacantes = vacantes;
@@ -53,7 +49,6 @@ public class Empleo {
 		this.horaInicial = horaInicial;
 		this.horaFinal = horaFinal;
 		this.satisfecho = satisfecho;
-		this.misSolicitudes = new ArrayList<>();
 		this.idioma = idioma;
 		this.experiencia = experiencia;
 		this.remoto = remoto;
@@ -82,12 +77,6 @@ public class Empleo {
 
 	public void setEmpleado(Solicitante empleado) {
 		this.empleado = empleado;
-	}
-
-	public void inactivarSolicitudes() {
-		for (Solicitud solicitud : misSolicitudes) {
-			solicitud.setActiva(false);
-		}
 	}
 
 	public String getTituloTecnico() {
@@ -136,14 +125,6 @@ public class Empleo {
 
 	public void setObrero(boolean obrero) {
 		this.obrero = obrero;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getTitulo() {
@@ -200,14 +181,6 @@ public class Empleo {
 
 	public void setSatisfecho(boolean satisfecho) {
 		this.satisfecho = satisfecho;
-	}
-
-	public ArrayList<Solicitud> getMisSolicitudes() {
-		return misSolicitudes;
-	}
-
-	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
-		this.misSolicitudes = misSolicitudes;
 	}
 
 	public String getIdioma() {
