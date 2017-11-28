@@ -1,13 +1,12 @@
 package logico;
 
-public class Tecnico extends Solicitante {
+public class Tecnico extends Solicitud {
 	private String titulo;
-
-	public Tecnico(String cedula, String nombre, String apellidos, String nacimiento, String genero, String paisOrigen,
-			String paisResidencia, String titulo) {
-		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia);
+	
+	public Tecnico(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia,String titulo) {
+		super(solicitante, idioma, licencia, mudarse, experiencia);
 		this.titulo = titulo;
-	}
+	}   
 
 	public String getTitulo() {
 		return titulo;

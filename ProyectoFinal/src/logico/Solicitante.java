@@ -2,7 +2,7 @@ package logico;
 
 import java.util.ArrayList;
 
-public abstract class Solicitante {
+public class Solicitante {
 	protected String cedula;
 	protected String nombre;
 	protected String apellidos;

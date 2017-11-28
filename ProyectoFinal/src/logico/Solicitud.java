@@ -3,8 +3,7 @@ package logico;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Solicitud {
-	private String codigo;
+public abstract class Solicitud {
 	private String fecha;
 	private Solicitante solicitante;
 	private String idioma;
@@ -14,10 +13,9 @@ public class Solicitud {
 	private boolean activa;
 	private boolean satisfecha;
 
-	public Solicitud(String codigo, Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
+	public Solicitud(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
 			int experiencia) {
 		super();
-		this.codigo = codigo;
 		this.fecha = (new Date()).toString();
 		this.solicitante = solicitante;
 		this.idioma = idioma;
@@ -42,14 +40,6 @@ public class Solicitud {
 
 	public void setActiva(boolean activa) {
 		this.activa = activa;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getFecha() {

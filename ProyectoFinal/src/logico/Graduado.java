@@ -2,14 +2,15 @@ package logico;
 
 import java.util.ArrayList;
 
-public class Graduado extends Solicitante {
+public class Graduado extends Solicitud {
 	private String areaEstudio;
-
-	public Graduado(String cedula, String nombre, String apellidos, String nacimiento, String genero, String paisOrigen,
-			String paisResidencia, String areaEstudio) {
-		super(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia);
+	
+	public Graduado(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia, String areaEstudio) {
+		super(solicitante, idioma, licencia, mudarse, experiencia);
 		this.areaEstudio = areaEstudio;
+		// TODO Auto-generated constructor stub
 	}
+
 
 	public String getAreaEstudio() {
 		return areaEstudio;
