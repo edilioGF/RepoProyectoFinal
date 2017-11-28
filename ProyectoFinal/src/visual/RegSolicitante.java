@@ -166,6 +166,8 @@ public class RegSolicitante extends JDialog {
 
 						}
 						dispose();
+						RegPerfil perfil = new RegPerfil();
+						perfil.setVisible(true);
 						// ListEmpleo empleo = new ListEmpleo(solicitante);
 						// empleo.setVisible(true);
 
