@@ -141,12 +141,15 @@ public class RegSolicitante extends JDialog {
 							String paisOrigen = cbxPaisOrigen.getSelectedItem().toString();
 							String paisResidencia = cbxPaisResidencia.getSelectedItem().toString();
 							String nacimiento = dateChooser.getDateFormatString();
-							solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia);
+							solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
+									paisResidencia);
 							dispose();
+
 							RegPerfil perfil = new RegPerfil(solicitante);
+							perfil.setModal(true);
 							perfil.setVisible(true);
 						}
-						
+
 					}
 				});
 				buttonPane.add(btnSiguiente);

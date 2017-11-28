@@ -1,5 +1,6 @@
 package logico;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,10 +14,13 @@ public abstract class Perfil {
 	private boolean activa;
 	private boolean satisfecha;
 
-	public Perfil(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
-			int experiencia) {
+	public Perfil(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia) {
 		super();
-		this.fecha = (new Date()).toString();
+
+		Date date = new Date();
+		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+
+		this.fecha = str;
 		this.solicitante = solicitante;
 		this.idioma = idioma;
 		this.licencia = licencia;

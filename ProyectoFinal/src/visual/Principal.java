@@ -168,7 +168,7 @@ public class Principal extends JFrame {
 		});
 		mnListado.add(mntmSolicitantes);
 
-		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
+		JMenuItem mntmSolicitudes = new JMenuItem("Perfiles");
 		mntmSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListPerfil ls = new ListPerfil();
@@ -230,7 +230,7 @@ public class Principal extends JFrame {
 		pnlTotal.add(txtSolicitantes);
 		txtSolicitantes.setColumns(10);
 
-		JLabel lblSolicitudes = new JLabel("Solicitudes:");
+		JLabel lblSolicitudes = new JLabel("Perfiles:");
 		lblSolicitudes.setBounds(50, 86, 100, 14);
 		pnlTotal.add(lblSolicitudes);
 

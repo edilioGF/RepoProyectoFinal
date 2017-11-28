@@ -28,7 +28,6 @@ public class ListPerfil extends JDialog {
 	private Object[] fila;
 	private DefaultTableModel model;
 
-
 	public ListPerfil() {
 		setResizable(false);
 		setTitle("Listado de Solicitudes");
@@ -51,7 +50,7 @@ public class ListPerfil extends JDialog {
 					table.setDefaultEditor(Object.class, null);
 					;
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					String[] columns = {"Código", "Fecha", "Cédula - Nombre" , "Licencia" , "Remoto"};
+					String[] columns = { "Código", "Fecha", "Cédula - Nombre", "Licencia", "Remoto" };
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
@@ -71,23 +70,26 @@ public class ListPerfil extends JDialog {
 			});
 			buttonPane.add(btnCerrar);
 		}
-		
+
 		loadTable();
 	}
+
 	private void loadTable() {
 		// TODO Auto-generated method stub
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 
 		for (Perfil perfil : Controladora.getInstance().getMisPerfiles()) {
-			//if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(solicitud.getTipo())) {
-				fila[0] = perfil.getFecha();
-				fila[1] = perfil.getSolicitante().getCedula()+ " - " + perfil.getSolicitante().getNombre()+ " " + perfil.getSolicitante().getApellidos() ;
-				fila[2] = perfil.isLicencia();
-				fila[3] = perfil.isMudarse();
+			// if (tipo.equalsIgnoreCase("<Todos>") ||
+			// tipo.equalsIgnoreCase(solicitud.getTipo())) {
+			fila[0] = perfil.getFecha();
+			fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre() + " "
+					+ perfil.getSolicitante().getApellidos();
+			fila[2] = perfil.isLicencia();
+			fila[3] = perfil.isMudarse();
 
-				model.addRow(fila);
-			//}
+			model.addRow(fila);
+			// }
 		}
 
 		table.setModel(model);

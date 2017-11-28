@@ -66,14 +66,14 @@ public class Controladora {
 	 * evaluarSolicitud(solicitud, empleo); } } } } } } } } }
 	 */
 
-	/*private void evaluarSolicitud(Perfil , Empleo empleo) {
-		solicitud.getSolicitante().setTrabajo(true);
-		solicitud.setSatisfecha(true);
-		empleo.setSatisfecho(true);
-		empleo.setVacantes(empleo.getVacantes() - 1);
-		empleo.setEmpleado(solicitud.getSolicitante());
-		// empleo.inactivarSolicitudes();
-	}*/
+	/*
+	 * private void evaluarSolicitud(Perfil , Empleo empleo) {
+	 * solicitud.getSolicitante().setTrabajo(true);
+	 * solicitud.setSatisfecha(true); empleo.setSatisfecho(true);
+	 * empleo.setVacantes(empleo.getVacantes() - 1);
+	 * empleo.setEmpleado(solicitud.getSolicitante()); //
+	 * empleo.inactivarSolicitudes(); }
+	 */
 
 	public void addSolicitante(Solicitante soli) {
 		misSolicitantes.add(soli);
@@ -86,8 +86,6 @@ public class Controladora {
 	public void addEmpleo(Empleo empl) {
 		misEmpleos.add(empl);
 	}
-
-	
 
 	public Solicitante buscarSolicitante(String cedula) {
 		Solicitante solicitante = null;
@@ -116,35 +114,20 @@ public class Controladora {
 		}
 		return empresa;
 	}
-  /*
-	public Perfil buscarPerfil(String codigo) {
-		Perfil solicitud = null;
-		boolean find = false;
-		int i = 0;
-		while (!find && i < misSolicitudes.size()) {
-			if (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) {
-				solicitud = misSolicitudes.get(i);
-				find = true;
-			}
-			i++;
-		}
-		return solicitud;
-	}
-	*/
-
-	public Empleo buscarEmpleo(String codigo) {
-		Empleo empleo = null;
-		boolean find = false;
-		int i = 0;
-		while (!find && i < misEmpleos.size()) {
-			if (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) {
-				empleo = misEmpleos.get(i);
-				find = true;
-			}
-			i++;
-		}
-		return empleo;
-	}
+	/*
+	 * public Perfil buscarPerfil(String codigo) { Perfil solicitud = null;
+	 * boolean find = false; int i = 0; while (!find && i <
+	 * misSolicitudes.size()) { if
+	 * (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) { solicitud
+	 * = misSolicitudes.get(i); find = true; } i++; } return solicitud; }
+	 */
+	/*
+	 * 
+	 * public Empleo buscarEmpleo(String codigo) { Empleo empleo = null; boolean
+	 * find = false; int i = 0; while (!find && i < misEmpleos.size()) { if
+	 * (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) { empleo =
+	 * misEmpleos.get(i); find = true; } i++; } return empleo; }
+	 */
 
 	/*
 	 * 
@@ -171,7 +154,6 @@ public class Controladora {
 	public void setMisEmpresas(ArrayList<Empresa> misEmpresas) {
 		this.misEmpresas = misEmpresas;
 	}
-
 
 	public ArrayList<Empleo> getMisEmpleos() {
 		return misEmpleos;

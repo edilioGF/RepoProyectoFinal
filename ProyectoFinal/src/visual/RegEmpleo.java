@@ -69,7 +69,6 @@ public class RegEmpleo extends JDialog {
 	private JPanel pnlObrero;
 
 	private JButton btnBuscar;
-	private JTextField txtCodigo;
 
 	/**
 	 * Create the dialog.
@@ -92,12 +91,12 @@ public class RegEmpleo extends JDialog {
 		panel.setLayout(null);
 
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(199, 20, 100, 14);
+		lblFecha.setBounds(10, 20, 100, 14);
 		panel.add(lblFecha);
 
 		txtFecha = new JTextField();
 		txtFecha.setEditable(false);
-		txtFecha.setBounds(199, 40, 165, 23);
+		txtFecha.setBounds(10, 40, 177, 23);
 		panel.add(txtFecha);
 		txtFecha.setColumns(10);
 
@@ -198,16 +197,6 @@ public class RegEmpleo extends JDialog {
 		cbLicencia.setBounds(100, 313, 20, 23);
 		panel.add(cbLicencia);
 
-		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 20, 46, 14);
-		panel.add(lblCdigo);
-
-		txtCodigo = new JTextField();
-		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(10, 40, 150, 23);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
-
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Formaci\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 367, 125, 120);
@@ -253,7 +242,7 @@ public class RegEmpleo extends JDialog {
 		pnlGraduado.add(lblreaDeEstudio);
 
 		cbxAreaEstudio = new JComboBox();
-		cbxAreaEstudio.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+		cbxAreaEstudio.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
 		cbxAreaEstudio.setBounds(10, 50, 219, 23);
 		pnlGraduado.add(cbxAreaEstudio);
 
@@ -346,7 +335,7 @@ public class RegEmpleo extends JDialog {
 						if (empresa == null && emp == null) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");
 						} else {
-							String codigo = txtCodigo.getText();
+							// String codigo = txtCodigo.getText();
 							String titulo = txtTitulo.getText();
 							int vacantes = Integer.valueOf(spnVacantes.getValue().toString());
 							String descripcion = txtDescripcion.getText();
@@ -363,23 +352,23 @@ public class RegEmpleo extends JDialog {
 
 							if (graduado) {
 								String area = cbxAreaEstudio.getSelectedItem().toString();
-								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
-										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
-										obrero, "", area, "", empresa);
+								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "",
+										area, "", empresa);
 							}
 
 							if (tecnico) {
 								String tituloTecnico = cbxTitulo.getSelectedItem().toString();
-								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
-										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
-										obrero, tituloTecnico, "", "", empresa);
+								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,
+										tituloTecnico, "", "", empresa);
 							}
 
 							if (obrero) {
 								String habilidad = cbxHabilidad.getSelectedItem().toString();
-								empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
-										horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
-										obrero, "", "", habilidad, empresa);
+								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "", "",
+										habilidad, empresa);
 							}
 
 							if (emp != null) {
@@ -430,10 +419,8 @@ public class RegEmpleo extends JDialog {
 
 	private void load() {
 
-		txtCodigo.setText("EMP - " + (Controladora.getInstance().getMisEmpleos().size() + 1));
-
 		Date date = new Date();
-		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
 		txtFecha.setText(str);
 
 		for (String area : Controladora.getMisAreasDeEstudio()) {
