@@ -17,7 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import logico.Controladora;
 import logico.Solicitante;
-import logico.Solicitud;
+import logico.Perfil;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -48,7 +48,7 @@ public class RegPerfil extends JDialog {
 	private JCheckBox cbLicencia;
 	private JPanel pnlGraduado;
 	private Solicitante soli;
-	private Solicitud solicitud;
+	private Perfil solicitud;
 
 	public RegPerfil(Solicitante solicitante) {
 		setTitle("Registrar Perfil");

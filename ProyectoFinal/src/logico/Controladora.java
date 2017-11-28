@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Controladora {
 	private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Empresa> misEmpresas;
-	private ArrayList<Solicitud> misSolicitudes;
+	private ArrayList<Perfil> misPerfiles;
 	private ArrayList<Empleo> misEmpleos;
 
 	private static String[] misTiposDeEmpresa = { "Turismo", "Salud", "Eduación", "Software", "Alimentación", "Público",
@@ -27,7 +27,7 @@ public class Controladora {
 		super();
 		this.misSolicitantes = new ArrayList<>();
 		this.misEmpresas = new ArrayList<>();
-		this.misSolicitudes = new ArrayList<>();
+		this.misPerfiles = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
 	}
 
@@ -66,14 +66,14 @@ public class Controladora {
 	 * evaluarSolicitud(solicitud, empleo); } } } } } } } } }
 	 */
 
-	private void evaluarSolicitud(Solicitud solicitud, Empleo empleo) {
+	/*private void evaluarSolicitud(Perfil , Empleo empleo) {
 		solicitud.getSolicitante().setTrabajo(true);
 		solicitud.setSatisfecha(true);
 		empleo.setSatisfecho(true);
 		empleo.setVacantes(empleo.getVacantes() - 1);
 		empleo.setEmpleado(solicitud.getSolicitante());
 		// empleo.inactivarSolicitudes();
-	}
+	}*/
 
 	public void addSolicitante(Solicitante soli) {
 		misSolicitantes.add(soli);
@@ -87,9 +87,7 @@ public class Controladora {
 		misEmpleos.add(empl);
 	}
 
-	public void addSolicitud(Solicitud sol) {
-		misSolicitudes.add(sol);
-	}
+	
 
 	public Solicitante buscarSolicitante(String cedula) {
 		Solicitante solicitante = null;
@@ -118,9 +116,9 @@ public class Controladora {
 		}
 		return empresa;
 	}
-
-	public Solicitud buscarSolicitud(String codigo) {
-		Solicitud solicitud = null;
+  /*
+	public Perfil buscarPerfil(String codigo) {
+		Perfil solicitud = null;
 		boolean find = false;
 		int i = 0;
 		while (!find && i < misSolicitudes.size()) {
@@ -132,6 +130,7 @@ public class Controladora {
 		}
 		return solicitud;
 	}
+	*/
 
 	public Empleo buscarEmpleo(String codigo) {
 		Empleo empleo = null;
@@ -173,13 +172,6 @@ public class Controladora {
 		this.misEmpresas = misEmpresas;
 	}
 
-	public ArrayList<Solicitud> getMisSolicitudes() {
-		return misSolicitudes;
-	}
-
-	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
-		this.misSolicitudes = misSolicitudes;
-	}
 
 	public ArrayList<Empleo> getMisEmpleos() {
 		return misEmpleos;
@@ -227,5 +219,13 @@ public class Controladora {
 
 	public static void setMisFormaciones(String[] misFormaciones) {
 		Controladora.misFormaciones = misFormaciones;
+	}
+
+	public ArrayList<Perfil> getMisPerfiles() {
+		return misPerfiles;
+	}
+
+	public void setMisPerfiles(ArrayList<Perfil> misPerfiles) {
+		this.misPerfiles = misPerfiles;
 	}
 }

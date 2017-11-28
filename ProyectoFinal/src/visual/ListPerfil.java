@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import logico.Controladora;
 import logico.Empresa;
-import logico.Solicitud;
+import logico.Perfil;
 
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
@@ -21,7 +21,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListSolicitud extends JDialog {
+public class ListPerfil extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -29,7 +29,7 @@ public class ListSolicitud extends JDialog {
 	private DefaultTableModel model;
 
 
-	public ListSolicitud() {
+	public ListPerfil() {
 		setResizable(false);
 		setTitle("Listado de Solicitudes");
 		setBounds(100, 100, 700, 450);
@@ -79,13 +79,13 @@ public class ListSolicitud extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 
-		for (Solicitud solicitud : Controladora.getInstance().getMisSolicitudes()) {
+		for (Perfil perfil : Controladora.getInstance().getMisPerfiles()) {
 			//if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(solicitud.getTipo())) {
-				fila[0] = solicitud.getCodigo();
-				fila[1] = solicitud.getFecha();
-				fila[2] = solicitud.getSolicitante().getCedula()+ " - " + solicitud.getSolicitante().getNombre()+ " " + solicitud.getSolicitante().getApellidos() ;
-				fila[3] = solicitud.isLicencia();
-				fila[4] = solicitud.isMudarse();
+				fila[0] = perfil.getCodigo();
+				fila[1] = perfil.getFecha();
+				fila[2] = perfil.getSolicitante().getCedula()+ " - " + perfil.getSolicitante().getNombre()+ " " + perfil.getSolicitante().getApellidos() ;
+				fila[3] = perfil.isLicencia();
+				fila[4] = perfil.isMudarse();
 
 				model.addRow(fila);
 			//}

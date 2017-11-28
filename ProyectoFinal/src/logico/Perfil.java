@@ -3,7 +3,7 @@ package logico;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Solicitud {
+public abstract class Perfil {
 	private String codigo;
 	private String fecha;
 	private Solicitante solicitante;
@@ -14,7 +14,7 @@ public abstract class Solicitud {
 	private boolean activa;
 	private boolean satisfecha;
 
-	public Solicitud( String codigo , Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
+	public Perfil( String codigo , Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
 			int experiencia) {
 		super();
 		this.codigo = codigo;

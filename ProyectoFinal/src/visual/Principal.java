@@ -171,7 +171,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
 		mntmSolicitudes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListSolicitud ls = new ListSolicitud();
+				ListPerfil ls = new ListPerfil();
 				ls.setModal(true);
 				ls.setVisible(true);
 			}

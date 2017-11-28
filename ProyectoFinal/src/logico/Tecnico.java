@@ -1,6 +1,6 @@
 package logico;
 
-public class Tecnico extends Solicitud {
+public class Tecnico extends Perfil {
 	private String titulo;
 	
 	public Tecnico(String codigo , Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia,String titulo) {

@@ -11,7 +11,7 @@ public class Solicitante {
 	protected String paisOrigen;
 	protected String paisResidencia;
 	protected boolean trabajo;
-	protected ArrayList<Solicitud> misSolicitudes;
+	protected ArrayList<Perfil> misPerfiles;
 
 	public Solicitante(String cedula, String nombre, String apellidos, String nacimiento, String genero,
 			String paisOrigen, String paisResidencia) {
@@ -24,16 +24,9 @@ public class Solicitante {
 		this.paisOrigen = paisOrigen;
 		this.paisResidencia = paisResidencia;
 		this.trabajo = false;
-		this.misSolicitudes = new ArrayList<>();
+		this.misPerfiles = new ArrayList<>();
 	}
 
-	public ArrayList<Solicitud> getMisSolicitudes() {
-		return misSolicitudes;
-	}
-
-	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
-		this.misSolicitudes = misSolicitudes;
-	}
 
 	public String getCedula() {
 		return cedula;
@@ -97,6 +90,16 @@ public class Solicitante {
 
 	public void setTrabajo(boolean trabajo) {
 		this.trabajo = trabajo;
+	}
+
+
+	public ArrayList<Perfil> getMisPerfiles() {
+		return misPerfiles;
+	}
+
+
+	public void setMisPerfiles(ArrayList<Perfil> misPerfiles) {
+		this.misPerfiles = misPerfiles;
 	}
 
 }

@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
 import logico.Controladora;
 import logico.Empleo;
 import logico.Solicitante;
-import logico.Solicitud;
+import logico.Perfil;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,7 +40,7 @@ public class RlzSolicitud extends JDialog {
 	private JSpinner spnExp;
 	private JCheckBox cbLicenc;
 	private JCheckBox cbMudarse;
-	private Solicitud solicitud;
+	private Perfil solicitud;
 	private Solicitante solicitante;
 
 	/**
