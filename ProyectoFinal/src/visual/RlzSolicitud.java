@@ -187,12 +187,12 @@ public class RlzSolicitud extends JDialog {
 							boolean mudarse = cbMudarse.isSelected();
 							int experiencia = Integer.valueOf(spnExp.getValue().toString());
 							if (solicitante2 == null) {
-								solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
+								//solicitud = new Solicitud(codigo, solicitante, idioma, licencia, mudarse, experiencia);
 								//empleo.getMisSolicitudes().add(solicitud);
 								//Controladora.getInstance().getMisSolicitudes().add(solicitud);
 
 							} else {
-								solicitud = new Solicitud(codigo, solicitante2, idioma, licencia, mudarse, experiencia);
+								//solicitud = new Solicitud(codigo, solicitante2, idioma, licencia, mudarse, experiencia);
 								/*empleo.getMisSolicitudes().add(solicitud);
 								if (Controladora.getInstance().buscarSolicitante(solicitante2.getCedula()) == null) {
 									Controladora.getInstance().getMisSolicitantes().add(solicitante2);
