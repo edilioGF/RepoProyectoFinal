@@ -148,6 +148,15 @@ public class Principal extends JFrame {
 			}
 		});
 		mnRegistrar.add(mntmPerfil);
+		
+		JMenu mnMatch = new JMenu("Match");
+		menuBar.add(mnMatch);
+		
+		JMenuItem mntmEjecutar = new JMenuItem("Ejecutar");
+		mnMatch.add(mntmEjecutar);
+		
+		JMenuItem mntmHistorial = new JMenuItem("Historial");
+		mnMatch.add(mntmHistorial);
 
 		JMenu mnListado = new JMenu("Listar");
 		menuBar.add(mnListado);
