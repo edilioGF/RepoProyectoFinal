@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Paint;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,11 +21,13 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import logico.Controladora;
 import logico.Solicitante;
+import sun.applet.Main;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JSeparator;
@@ -71,6 +74,10 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		URL url = Main.class.getResource("/icon.png");
+		ImageIcon icon = new ImageIcon(url);
+		setIconImage(icon.getImage());
+
 		setTitle("BOLSA DE EMPLEOS");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,6 +98,7 @@ public class Principal extends JFrame {
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegEmpresa re = new RegEmpresa();
+				re.setModal(true);
 				re.setVisible(true);
 			}
 		});
@@ -115,7 +123,7 @@ public class Principal extends JFrame {
 			}
 		});
 		mnRegistrar.add(mntmNewMenuItem_1);
-		
+
 		JMenuItem mntmPerfil = new JMenuItem("Solicitud");
 		mntmPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,10 +157,10 @@ public class Principal extends JFrame {
 		});
 		mnListado.add(mntmEmpresas);
 		mnListado.add(mntmEmpleos);
-		
+
 		JMenuItem mntmSolicitantes = new JMenuItem("Solicitantes");
 		mnListado.add(mntmSolicitantes);
-		
+
 		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
 		mnListado.add(mntmSolicitudes);
 		contentPane = new JPanel();
@@ -327,8 +335,8 @@ public class Principal extends JFrame {
 		textField_8.setBounds(150, 198, 86, 23);
 		pnlAreasPopulares.add(textField_8);
 
-		//Stats hS = new Stats();
-		//hS.start();
+		// Stats hS = new Stats();
+		// hS.start();
 	}
 
 	public static void loadStats() {
@@ -336,15 +344,19 @@ public class Principal extends JFrame {
 		pnlBarras.removeAll();
 
 		// TODO Auto-generated method stub
-		//txtSolicitantes.setText(String.format("%d", Controladora.getInstance().getMisSolicitantes().size()));
-		//txtSolicitudes.setText(String.format("%d", Controladora.getInstance().getMisSolicitudes().size()));
+		// txtSolicitantes.setText(String.format("%d",
+		// Controladora.getInstance().getMisSolicitantes().size()));
+		// txtSolicitudes.setText(String.format("%d",
+		// Controladora.getInstance().getMisSolicitudes().size()));
 		txtEmpresas.setText(String.format("%d", Controladora.getInstance().getMisEmpresas().size()));
 		txtEmpleos.setText(String.format("%d", Controladora.getInstance().getMisEmpleos().size()));
 
 		// create a dataset...
 		DefaultPieDataset dataPastel = new DefaultPieDataset();
-		//dataPastel.setValue("Mujeres", Controladora.getInstance().contarHombresMujeres()[0]);
-		//dataPastel.setValue("Hombres", Controladora.getInstance().contarHombresMujeres()[1]);
+		// dataPastel.setValue("Mujeres",
+		// Controladora.getInstance().contarHombresMujeres()[0]);
+		// dataPastel.setValue("Hombres",
+		// Controladora.getInstance().contarHombresMujeres()[1]);
 
 		DefaultCategoryDataset dataBarras = new DefaultCategoryDataset();
 		dataBarras.setValue(8, "Matches", "23/11/2017");

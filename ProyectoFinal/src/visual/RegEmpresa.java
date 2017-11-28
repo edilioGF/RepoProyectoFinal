@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
 
 public class RegEmpresa extends JDialog {
 
@@ -81,6 +82,7 @@ public class RegEmpresa extends JDialog {
 		panel.add(cbxTipo);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
