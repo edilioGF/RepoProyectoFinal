@@ -3,31 +3,31 @@ package logico;
 import java.util.ArrayList;
 
 public class Controladora {
-	// private ArrayList<Solicitante> misSolicitantes;
+	private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Empresa> misEmpresas;
-	// private ArrayList<Solicitud> misSolicitudes;
+	private ArrayList<Solicitud> misSolicitudes;
 	private ArrayList<Empleo> misEmpleos;
 
 	private static String[] misTiposDeEmpresa = { "Turismo", "Salud", "Eduación", "Software", "Alimentación", "Público",
-			"Privado" ,"Infra-Estructura" , "Negocio" , "Hidroelectrica" };
+			"Privado", "Infra-Estructura", "Negocio", "Hidroelectrica" };
 	private static String[] misAreasDeEstudio = { "Administración de Empresa", "Administración Hotelera", "Economía",
 			"Gestión Financiera", "Mercadotecnia", "Arquitectura", "Derecho", "Educación", "Psicología",
 			"Ingeniería Civil", "Electromecánica", "Electrónica", "Industrial", "Mecatrónica", "Sistemas y Computación",
-			"Telemática", "Enfermería", "Estomatología", "Medicina" , "Filosofía" };
+			"Telemática", "Enfermería", "Estomatología", "Medicina", "Filosofía" };
 
 	private static String[] misTitulos = { "Contabilidad", "Informática", "Mecánica Industrial", "Electrónica",
-			"Electricidad", "Diseño Gráfico" , "Telecomunicaciones"};
+			"Electricidad", "Diseño Gráfico", "Telecomunicaciones" };
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
-			"Plomería" , "Confeccionista" , "Pintura" , "Tapicería" };
+			"Plomería", "Confeccionista", "Pintura", "Tapicería" };
 	private static String[] misFormaciones = { "Graduado", "Técnico", "Obrero" };
 
 	private static Controladora controladora;
 
 	public Controladora() {
 		super();
-		// this.misSolicitantes = new ArrayList<>();
+		this.misSolicitantes = new ArrayList<>();
 		this.misEmpresas = new ArrayList<>();
-		// this.misSolicitudes = new ArrayList<>();
+		this.misSolicitudes = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
 	}
 
@@ -76,7 +76,7 @@ public class Controladora {
 	}
 
 	public void addSolicitante(Solicitante soli) {
-		// misSolicitantes.add(soli);
+		misSolicitantes.add(soli);
 	}
 
 	public void addEmpresa(Empresa emp) {
@@ -88,17 +88,22 @@ public class Controladora {
 	}
 
 	public void addSolicitud(Solicitud sol) {
-		// misSolicitudes.add(sol);
+		misSolicitudes.add(sol);
 	}
 
-	/*
-	 * public Solicitante buscarSolicitante(String cedula) { Solicitante
-	 * solicitante = null; boolean find = false; int i = 0; while (!find && i <
-	 * misSolicitantes.size()) { if
-	 * (misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)) {
-	 * solicitante = misSolicitantes.get(i); find = true; } i++; } return
-	 * solicitante; }
-	 */
+	public Solicitante buscarSolicitante(String cedula) {
+		Solicitante solicitante = null;
+		boolean find = false;
+		int i = 0;
+		while (!find && i < misSolicitantes.size()) {
+			if (misSolicitantes.get(i).getCedula().equalsIgnoreCase(cedula)) {
+				solicitante = misSolicitantes.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return solicitante;
+	}
 
 	public Empresa buscarEmpresa(String codigo) {
 		Empresa empresa = null;
@@ -114,20 +119,33 @@ public class Controladora {
 		return empresa;
 	}
 
-	/*
-	 * public Solicitud buscarSolicitud(String codigo) { Solicitud solicitud =
-	 * null; boolean find = false; int i = 0; while (!find && i <
-	 * misSolicitudes.size()) { if
-	 * (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) { solicitud
-	 * = misSolicitudes.get(i); find = true; } i++; } return solicitud; }
-	 */
+	public Solicitud buscarSolicitud(String codigo) {
+		Solicitud solicitud = null;
+		boolean find = false;
+		int i = 0;
+		while (!find && i < misSolicitudes.size()) {
+			if (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) {
+				solicitud = misSolicitudes.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return solicitud;
+	}
 
-	/*
-	 * public Empleo buscarEmpleo(String codigo) { Empleo empleo = null; boolean
-	 * find = false; int i = 0; while (!find && i < misEmpleos.size()) { if
-	 * (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) { empleo =
-	 * misEmpleos.get(i); find = true; } i++; } return empleo; }
-	 */
+	public Empleo buscarEmpleo(String codigo) {
+		Empleo empleo = null;
+		boolean find = false;
+		int i = 0;
+		while (!find && i < misEmpleos.size()) {
+			if (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) {
+				empleo = misEmpleos.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return empleo;
+	}
 
 	/*
 	 * 
@@ -139,13 +157,13 @@ public class Controladora {
 	 * arr[1]++; } } return arr; }
 	 */
 
-	/*
-	 * public ArrayList<Solicitante> getMisSolicitantes() { return
-	 * misSolicitantes; }
-	 * 
-	 * public void setMisSolicitantes(ArrayList<Solicitante> misSolicitantes) {
-	 * this.misSolicitantes = misSolicitantes; }
-	 */
+	public ArrayList<Solicitante> getMisSolicitantes() {
+		return misSolicitantes;
+	}
+
+	public void setMisSolicitantes(ArrayList<Solicitante> misSolicitantes) {
+		this.misSolicitantes = misSolicitantes;
+	}
 
 	public ArrayList<Empresa> getMisEmpresas() {
 		return misEmpresas;
@@ -155,13 +173,13 @@ public class Controladora {
 		this.misEmpresas = misEmpresas;
 	}
 
-	/*
-	 * public ArrayList<Solicitud> getMisSolicitudes() { return misSolicitudes;
-	 * }
-	 * 
-	 * public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
-	 * this.misSolicitudes = misSolicitudes; }
-	 */
+	public ArrayList<Solicitud> getMisSolicitudes() {
+		return misSolicitudes;
+	}
+
+	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
+		this.misSolicitudes = misSolicitudes;
+	}
 
 	public ArrayList<Empleo> getMisEmpleos() {
 		return misEmpleos;
