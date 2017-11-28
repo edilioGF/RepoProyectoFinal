@@ -7,9 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logico.Controladora;
+import logico.Empresa;
+import logico.Solicitud;
+
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -17,6 +25,9 @@ public class ListSolicitud extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private Object[] fila;
+	private DefaultTableModel model;
+
 
 	public ListSolicitud() {
 		setResizable(false);
@@ -37,6 +48,12 @@ public class ListSolicitud extends JDialog {
 				panel.add(scrollPane);
 				{
 					table = new JTable();
+					table.setDefaultEditor(Object.class, null);
+					;
+					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					String[] columns = {"Código", "Fecha", "Cédula - Nombre" , "Licencia" , "Remoto"};
+					model = new DefaultTableModel();
+					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
 				}
 			}
@@ -54,5 +71,26 @@ public class ListSolicitud extends JDialog {
 			});
 			buttonPane.add(btnCerrar);
 		}
+		
+		loadTable();
+	}
+	private void loadTable() {
+		// TODO Auto-generated method stub
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+
+		for (Solicitud solicitud : Controladora.getInstance().getMisSolicitudes()) {
+			//if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(solicitud.getTipo())) {
+				fila[0] = solicitud.getCodigo();
+				fila[1] = solicitud.getFecha();
+				fila[2] = solicitud.getSolicitante().getCedula();
+				fila[3] = solicitud.isLicencia();
+				fila[4] = solicitud.isMudarse();
+
+				model.addRow(fila);
+			//}
+		}
+
+		table.setModel(model);
 	}
 }
