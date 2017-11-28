@@ -71,7 +71,7 @@ public class ListEmpleo extends JDialog {
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Código", "Título", "Vacantes", "Salario", "Nombre Empresa" };
+		String[] columns = { "Título", "Vacantes", "Salario", "Nombre Empresa" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
@@ -123,10 +123,10 @@ public class ListEmpleo extends JDialog {
 			// if (tipo.equalsIgnoreCase("<Todas>") ||
 			// tipo.equalsIgnoreCase(empleo.getArea())) {
 			// fila[0] = empleo.getCodigo();
-			fila[1] = empleo.getTitulo();
-			fila[2] = empleo.getVacantes();
-			fila[3] = empleo.getSalario();
-			fila[4] = empleo.getEmpresa().getNombre();
+			fila[0] = empleo.getTitulo();
+			fila[1] = empleo.getVacantes();
+			fila[2] = empleo.getSalario();
+			fila[3] = empleo.getEmpresa().getNombre();
 
 			model.addRow(fila);
 			// }

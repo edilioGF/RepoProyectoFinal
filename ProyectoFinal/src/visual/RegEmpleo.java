@@ -36,6 +36,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.border.EtchedBorder;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegEmpleo extends JDialog {
 
@@ -172,6 +173,7 @@ public class RegEmpleo extends JDialog {
 		panel.add(lblIdioma);
 
 		cbxIdioma = new JComboBox();
+		cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
 		cbxIdioma.setBounds(225, 260, 139, 23);
 		panel.add(cbxIdioma);
 
