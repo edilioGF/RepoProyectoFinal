@@ -83,7 +83,7 @@ public class ListSolicitud extends JDialog {
 			//if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(solicitud.getTipo())) {
 				fila[0] = solicitud.getCodigo();
 				fila[1] = solicitud.getFecha();
-				fila[2] = solicitud.getSolicitante().getCedula() + solicitud.getSolicitante().getNombre() + solicitud.getSolicitante().getApellidos() ;
+				fila[2] = solicitud.getSolicitante().getCedula()+ " - " + solicitud.getSolicitante().getNombre()+ " " + solicitud.getSolicitante().getApellidos() ;
 				fila[3] = solicitud.isLicencia();
 				fila[4] = solicitud.isMudarse();
 
