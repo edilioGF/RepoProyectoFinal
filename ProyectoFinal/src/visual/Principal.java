@@ -42,17 +42,17 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private Dimension dim;
 
-	private static JPanel pnlPastel;
-	private static JPanel pnlBarras;
+	private static JPanel pnlPastelSolicitantes;
+	private static JPanel pnlPastelEmpleos;
 	private static JTextField txtSolicitantes;
 	private static JTextField txtSolicitudes;
 	private static JTextField txtEmpresas;
 	private static JTextField txtEmpleos;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
 
 	/**
 	 * Launch the application.
@@ -159,9 +159,23 @@ public class Principal extends JFrame {
 		mnListado.add(mntmEmpleos);
 
 		JMenuItem mntmSolicitantes = new JMenuItem("Solicitantes");
+		mntmSolicitantes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListSolicitante ls = new ListSolicitante();
+				ls.setModal(true);
+				ls.setVisible(true);
+			}
+		});
 		mnListado.add(mntmSolicitantes);
 
 		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
+		mntmSolicitudes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListSolicitud ls = new ListSolicitud();
+				ls.setModal(true);
+				ls.setVisible(true);
+			}
+		});
 		mnListado.add(mntmSolicitudes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -188,13 +202,13 @@ public class Principal extends JFrame {
 		panel_1.add(separator_1);
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 
-		pnlPastel = new JPanel();
-		pnlPastel.setBounds(170, 58, 490, 240);
-		panel_1.add(pnlPastel);
+		pnlPastelSolicitantes = new JPanel();
+		pnlPastelSolicitantes.setBounds(170, 58, 490, 240);
+		panel_1.add(pnlPastelSolicitantes);
 
-		pnlBarras = new JPanel();
-		pnlBarras.setBounds(680, 58, 490, 238);
-		panel_1.add(pnlBarras);
+		pnlPastelEmpleos = new JPanel();
+		pnlPastelEmpleos.setBounds(680, 58, 490, 238);
+		panel_1.add(pnlPastelEmpleos);
 
 		JPanel pnlTotal = new JPanel();
 		pnlTotal.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Total", TitledBorder.CENTER,
@@ -254,94 +268,86 @@ public class Principal extends JFrame {
 		txtEmpleos.setColumns(10);
 		txtEmpleos.setBounds(150, 182, 86, 23);
 		pnlTotal.add(txtEmpleos);
-
-		JPanel pnlAreasPopulares = new JPanel();
-		pnlAreasPopulares.setLayout(null);
-		pnlAreasPopulares.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00C1reas Populares",
-				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pnlAreasPopulares.setBounds(775, 318, 300, 240);
-		panel_1.add(pnlAreasPopulares);
-
-		JLabel lblSolicitudes_1 = new JLabel("Solicitudes:");
-		lblSolicitudes_1.setBounds(150, 22, 100, 14);
-		pnlAreasPopulares.add(lblSolicitudes_1);
-
-		JLabel lblreas = new JLabel("\u00C1reas:");
-		lblreas.setBounds(25, 22, 100, 14);
-		pnlAreasPopulares.add(lblreas);
-
-		JLabel lblrea = new JLabel("\u00C1rea1");
-		lblrea.setBounds(25, 58, 100, 14);
-		pnlAreasPopulares.add(lblrea);
-
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00C1reas Populares", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2.setBounds(765, 320, 300, 240);
+		panel_1.add(panel_2);
+		
+		JLabel lblArea = new JLabel("Area1:");
+		lblArea.setBounds(25, 28, 145, 14);
+		panel_2.add(lblArea);
+		
+		JLabel lblArea_1 = new JLabel("Area2:");
+		lblArea_1.setBounds(25, 70, 145, 14);
+		panel_2.add(lblArea_1);
+		
+		JLabel lblArea_2 = new JLabel("Area3:");
+		lblArea_2.setBounds(25, 112, 145, 14);
+		panel_2.add(lblArea_2);
+		
+		JLabel lblArea_3 = new JLabel("Area4:");
+		lblArea_3.setBounds(25, 154, 145, 14);
+		panel_2.add(lblArea_3);
+		
+		JLabel lblArea_4 = new JLabel("Area5:");
+		lblArea_4.setBounds(25, 196, 145, 14);
+		panel_2.add(lblArea_4);
+		
+		textField = new JTextField();
+		textField.setText("0");
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setForeground(Color.BLUE);
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(150, 24, 86, 23);
+		panel_2.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setText("0");
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_1.setForeground(Color.BLUE);
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		textField_1.setBounds(150, 66, 86, 23);
+		panel_2.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setText("0");
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_2.setForeground(Color.BLUE);
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBounds(150, 108, 86, 23);
+		panel_2.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setText("0");
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_3.setForeground(Color.BLUE);
+		textField_3.setEditable(false);
+		textField_3.setColumns(10);
+		textField_3.setBounds(150, 150, 86, 23);
+		panel_2.add(textField_3);
+		
 		textField_4 = new JTextField();
-		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setText("0");
+		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setForeground(Color.BLUE);
 		textField_4.setEditable(false);
-		textField_4.setBounds(150, 54, 86, 23);
-		pnlAreasPopulares.add(textField_4);
 		textField_4.setColumns(10);
-
-		JLabel lblrea_1 = new JLabel("\u00C1rea2");
-		lblrea_1.setBounds(25, 94, 100, 14);
-		pnlAreasPopulares.add(lblrea_1);
-
-		textField_5 = new JTextField();
-		textField_5.setText("0");
-		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_5.setForeground(Color.BLUE);
-		textField_5.setEditable(false);
-		textField_5.setColumns(10);
-		textField_5.setBounds(150, 90, 86, 23);
-		pnlAreasPopulares.add(textField_5);
-
-		JLabel lblrea_2 = new JLabel("\u00C1rea3");
-		lblrea_2.setBounds(25, 130, 100, 14);
-		pnlAreasPopulares.add(lblrea_2);
-
-		textField_6 = new JTextField();
-		textField_6.setText("0");
-		textField_6.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_6.setForeground(Color.BLUE);
-		textField_6.setEditable(false);
-		textField_6.setColumns(10);
-		textField_6.setBounds(150, 126, 86, 23);
-		pnlAreasPopulares.add(textField_6);
-
-		JLabel lblrea_3 = new JLabel("\u00C1rea4");
-		lblrea_3.setBounds(25, 166, 100, 14);
-		pnlAreasPopulares.add(lblrea_3);
-
-		textField_7 = new JTextField();
-		textField_7.setText("0");
-		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_7.setForeground(Color.BLUE);
-		textField_7.setEditable(false);
-		textField_7.setColumns(10);
-		textField_7.setBounds(150, 162, 86, 23);
-		pnlAreasPopulares.add(textField_7);
-
-		JLabel lblrea_4 = new JLabel("\u00C1rea5");
-		lblrea_4.setBounds(25, 202, 100, 14);
-		pnlAreasPopulares.add(lblrea_4);
-
-		textField_8 = new JTextField();
-		textField_8.setText("0");
-		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_8.setForeground(Color.BLUE);
-		textField_8.setEditable(false);
-		textField_8.setColumns(10);
-		textField_8.setBounds(150, 198, 86, 23);
-		pnlAreasPopulares.add(textField_8);
+		textField_4.setBounds(150, 192, 86, 23);
+		panel_2.add(textField_4);
 
 		// Stats hS = new Stats();
 		// hS.start();
+		loadStats();
 	}
 
 	public static void loadStats() {
-		pnlPastel.removeAll();
-		pnlBarras.removeAll();
+		//pnlPastel.removeAll();
+		//pnlBarras.removeAll();
 
 		// TODO Auto-generated method stub
 		// txtSolicitantes.setText(String.format("%d",
@@ -379,14 +385,14 @@ public class Principal extends JFrame {
 		ChartPanel chartPastel = new ChartPanel(pastel, 480, 230, 480, 230, 480, 230, true, true, true, true, true,
 				true);
 
-		ChartPanel chartBarras = new ChartPanel(barras, 480, 230, 480, 230, 480, 230, true, true, false, false, false,
-				true);
+		//ChartPanel chartBarras = new ChartPanel(barras, 480, 230, 480, 230, 480, 230, true, true, false, false, false,
+				//true);
 
-		pnlPastel.add(chartPastel, BorderLayout.CENTER);
-		pnlPastel.validate();
+		//pnlPastel.add(chartPastel, BorderLayout.CENTER);
+		//pnlPastel.validate();
 
-		pnlBarras.add(chartBarras, BorderLayout.CENTER);
-		pnlBarras.validate();
+		//pnlBarras.add(chartBarras, BorderLayout.CENTER);
+		//pnlBarras.validate();
 
 	}
 }
