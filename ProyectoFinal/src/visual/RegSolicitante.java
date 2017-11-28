@@ -141,36 +141,12 @@ public class RegSolicitante extends JDialog {
 							String paisOrigen = cbxPaisOrigen.getSelectedItem().toString();
 							String paisResidencia = cbxPaisResidencia.getSelectedItem().toString();
 							String nacimiento = dateChooser.getDateFormatString();
-							/*
-							 * if (rdbtnGraduado.isSelected()) { String
-							 * areaEstudio =
-							 * cbxAreaEstudio.getSelectedItem().toString();
-							 * solicitante = new Graduado(cedula, nombre,
-							 * apellidos, nacimiento, genero, paisOrigen,
-							 * paisResidencia, areaEstudio); }
-							 * 
-							 * if (rdbtnTecnico.isSelected()) { String titulo =
-							 * cbxTitulo.getSelectedItem().toString();
-							 * solicitante = new Tecnico(cedula, nombre,
-							 * apellidos, nacimiento, genero, paisOrigen,
-							 * paisResidencia, titulo); }
-							 * 
-							 * if (rdbtnObrero.isSelected()) { String habilidad
-							 * = cbxHabilidad.getSelectedItem().toString();
-							 * solicitante = new Obrero(cedula, nombre,
-							 * apellidos, nacimiento, genero, paisOrigen,
-							 * paisResidencia, habilidad); }
-							 */
-
-							// Controladora.getInstance().getMisSolicitantes().add(solicitante);
-
+							solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen, paisResidencia);
+							dispose();
+							RegPerfil perfil = new RegPerfil(solicitante);
+							perfil.setVisible(true);
 						}
-						dispose();
-						RegPerfil perfil = new RegPerfil();
-						perfil.setVisible(true);
-						// ListEmpleo empleo = new ListEmpleo(solicitante);
-						// empleo.setVisible(true);
-
+						
 					}
 				});
 				buttonPane.add(btnSiguiente);

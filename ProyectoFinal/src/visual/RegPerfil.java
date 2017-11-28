@@ -11,10 +11,13 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import logico.Controladora;
+import logico.Solicitante;
+import logico.Solicitud;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -44,8 +47,10 @@ public class RegPerfil extends JDialog {
 	private JCheckBox cbMudarse;
 	private JCheckBox cbLicencia;
 	private JPanel pnlGraduado;
+	private Solicitante soli;
+	private Solicitud solicitud;
 
-	public RegPerfil() {
+	public RegPerfil(Solicitante solicitante) {
 		setTitle("Registrar Perfil");
 		setModal(true);
 		setResizable(false);
@@ -72,15 +77,31 @@ public class RegPerfil extends JDialog {
 		panel.add(txtCedula);
 		txtCedula.setColumns(10);
 
-		JButton btnNewButton = new JButton("Buscar");
-		btnNewButton.setBounds(255, 20, 89, 25);
-		panel.add(btnNewButton);
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String cedula = txtCedula.getText();
+				soli = Controladora.getInstance().buscarSolicitante(cedula);
+				
+				if(soli == null){
+					JOptionPane.showMessageDialog(null, "No existe un solicitante con la cédula que ha ingresado", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					txtNombre.setText(soli.getNombre());
+					txtApellido.setText(soli.getApellidos());
+				}
+			}
+		});
+		btnBuscar.setBounds(255, 20, 89, 25);
+		panel.add(btnBuscar);
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(10, 65, 59, 14);
 		panel.add(lblNombre);
 
 		txtNombre = new JTextField();
+		txtNombre.setEditable(false);
 		txtNombre.setBounds(75, 61, 279, 23);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
@@ -90,6 +111,7 @@ public class RegPerfil extends JDialog {
 		panel.add(lblApelidos);
 
 		txtApellido = new JTextField();
+		txtApellido.setEditable(false);
 		txtApellido.setBounds(75, 101, 279, 23);
 		panel.add(txtApellido);
 		txtApellido.setColumns(10);
@@ -131,49 +153,49 @@ public class RegPerfil extends JDialog {
 		rdbtnObrero.setSelected(false);
 		rdbtnObrero.setBounds(249, 23, 90, 23);
 		panel_1.add(rdbtnObrero);
-								
-										pnlObrero = new JPanel();
-										pnlObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-										pnlObrero.setBounds(10, 405, 364, 70);
-										contentPanel.add(pnlObrero);
-										pnlObrero.setLayout(null);
-										
-												JLabel lblHabilidad = new JLabel("Habilidad:");
-												lblHabilidad.setBounds(10, 30, 73, 14);
-												pnlObrero.add(lblHabilidad);
-												
-														cbxHabilidad = new JComboBox();
-														cbxHabilidad.setBounds(144, 27, 210, 20);
-														pnlObrero.add(cbxHabilidad);
-						
-								pnlGraduado = new JPanel();
-								pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-								pnlGraduado.setBounds(10, 405, 364, 70);
-								contentPanel.add(pnlGraduado);
-								pnlGraduado.setLayout(null);
-								
-										JLabel lblNewLabel_1 = new JLabel("\u00C1rea de Estudio:");
-										lblNewLabel_1.setBounds(10, 30, 124, 14);
-										pnlGraduado.add(lblNewLabel_1);
-										
-												cbxAestudio = new JComboBox();
-												cbxAestudio.setBounds(144, 27, 210, 20);
-												pnlGraduado.add(cbxAestudio);
-				
-						pnlTecnico = new JPanel();
-						pnlTecnico
-								.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-						pnlTecnico.setBounds(10, 405, 364, 70);
-						contentPanel.add(pnlTecnico);
-						pnlTecnico.setLayout(null);
-						
-								JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
-								lblNewLabel.setBounds(10, 30, 54, 14);
-								pnlTecnico.add(lblNewLabel);
-								
-										cbxTitulo = new JComboBox();
-										cbxTitulo.setBounds(144, 27, 210, 20);
-										pnlTecnico.add(cbxTitulo);
+
+		pnlObrero = new JPanel();
+		pnlObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlObrero.setBounds(10, 405, 364, 70);
+		contentPanel.add(pnlObrero);
+		pnlObrero.setLayout(null);
+
+		JLabel lblHabilidad = new JLabel("Habilidad:");
+		lblHabilidad.setBounds(10, 30, 73, 14);
+		pnlObrero.add(lblHabilidad);
+
+		cbxHabilidad = new JComboBox();
+		cbxHabilidad.setBounds(144, 27, 210, 20);
+		pnlObrero.add(cbxHabilidad);
+
+		pnlGraduado = new JPanel();
+		pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlGraduado.setBounds(10, 405, 364, 70);
+		contentPanel.add(pnlGraduado);
+		pnlGraduado.setLayout(null);
+
+		JLabel lblNewLabel_1 = new JLabel("\u00C1rea de Estudio:");
+		lblNewLabel_1.setBounds(10, 30, 124, 14);
+		pnlGraduado.add(lblNewLabel_1);
+
+		cbxAestudio = new JComboBox();
+		cbxAestudio.setBounds(144, 27, 210, 20);
+		pnlGraduado.add(cbxAestudio);
+
+		pnlTecnico = new JPanel();
+		pnlTecnico
+				.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlTecnico.setBounds(10, 405, 364, 70);
+		contentPanel.add(pnlTecnico);
+		pnlTecnico.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
+		lblNewLabel.setBounds(10, 30, 54, 14);
+		pnlTecnico.add(lblNewLabel);
+
+		cbxTitulo = new JComboBox();
+		cbxTitulo.setBounds(144, 27, 210, 20);
+		pnlTecnico.add(cbxTitulo);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -195,7 +217,7 @@ public class RegPerfil extends JDialog {
 		panel_2.add(label_4);
 
 		cbxIdioma = new JComboBox();
-		cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+		cbxIdioma.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
 		cbxIdioma.setBounds(10, 46, 151, 23);
 		panel_2.add(cbxIdioma);
 
@@ -225,6 +247,12 @@ public class RegPerfil extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -242,6 +270,16 @@ public class RegPerfil extends JDialog {
 		}
 		loadPanel(true, false, false);
 		load();
+		
+		if(solicitante != null){
+			txtCedula.setText(solicitante.getCedula());
+			txtNombre.setText(solicitante.getNombre());
+			txtApellido.setText(solicitante.getApellidos());
+			
+			txtCedula.setEditable(false);
+			btnBuscar.setEnabled(false);
+		    
+		}
 	}
 
 	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {
@@ -276,5 +314,6 @@ public class RegPerfil extends JDialog {
 					+ loc.getDisplayLanguage().substring(1);
 			cbxIdioma.addItem(string);
 		}
+		
 	}
 }
