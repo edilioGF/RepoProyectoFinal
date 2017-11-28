@@ -9,16 +9,16 @@ public class Controladora {
 	private ArrayList<Empleo> misEmpleos;
 
 	private static String[] misTiposDeEmpresa = { "Turismo", "Salud", "Eduación", "Software", "Alimentación", "Público",
-			"Privado" };
+			"Privado" ,"Infra-Estructura" , "Negocio" , "Hidroelectrica" };
 	private static String[] misAreasDeEstudio = { "Administración de Empresa", "Administración Hotelera", "Economía",
 			"Gestión Financiera", "Mercadotecnia", "Arquitectura", "Derecho", "Educación", "Psicología",
 			"Ingeniería Civil", "Electromecánica", "Electrónica", "Industrial", "Mecatrónica", "Sistemas y Computación",
-			"Telemática", "Enfermería", "Estomatología", "Medicina" };
+			"Telemática", "Enfermería", "Estomatología", "Medicina" , "Filosofía" };
 
 	private static String[] misTitulos = { "Contabilidad", "Informática", "Mecánica Industrial", "Electrónica",
-			"Electricidad", "Diseño Gráfico" };
+			"Electricidad", "Diseño Gráfico" , "Telecomunicaciones"};
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
-			"Plomería" };
+			"Plomería" , "Confeccionista" , "Pintura" , "Tapicería" };
 	private static String[] misFormaciones = { "Graduado", "Técnico", "Obrero" };
 
 	private static Controladora controladora;
