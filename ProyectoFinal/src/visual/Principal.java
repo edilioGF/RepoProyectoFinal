@@ -47,6 +47,7 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private Dimension dim;
 
+	private static JPanel pnlPastelPerfiles;
 	private static JPanel pnlPastelSolicitantes;
 	private static JPanel pnlPastelEmpleos;
 	private static JTextField txtSolicitantes;
@@ -216,7 +217,7 @@ public class Principal extends JFrame {
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 
 		pnlPastelSolicitantes = new JPanel();
-		pnlPastelSolicitantes.setBounds(170, 58, 490, 240);
+		pnlPastelSolicitantes.setBounds(680, 320, 490, 240);
 		panel_1.add(pnlPastelSolicitantes);
 
 		pnlPastelEmpleos = new JPanel();
@@ -281,11 +282,16 @@ public class Principal extends JFrame {
 		txtEmpleos.setColumns(10);
 		txtEmpleos.setBounds(150, 182, 86, 23);
 		pnlTotal.add(txtEmpleos);
-		
+
+		pnlPastelPerfiles = new JPanel();
+		pnlPastelPerfiles.setBounds(170, 58, 489, 238);
+		panel_1.add(pnlPastelPerfiles);
+
 		loadStats();
 	}
 
 	public static void loadStats() {
+		pnlPastelPerfiles.removeAll();
 		pnlPastelSolicitantes.removeAll();
 		pnlPastelEmpleos.removeAll();
 
@@ -299,7 +305,8 @@ public class Principal extends JFrame {
 		dataPastelSolicitantes.setValue("Mujeres", Controladora.getInstance().contarHombresMujeres()[0]);
 		dataPastelSolicitantes.setValue("Hombres", Controladora.getInstance().contarHombresMujeres()[1]);
 		// create a chart...
-		JFreeChart pastelSolicitantes = ChartFactory.createPieChart("Solicitantes (Género)", dataPastelSolicitantes, true, // legend?
+		JFreeChart pastelSolicitantes = ChartFactory.createPieChart("Solicitantes (Género)", dataPastelSolicitantes,
+				true, // legend?
 				true, // tooltips?
 				false // URLs?
 		);
@@ -312,10 +319,24 @@ public class Principal extends JFrame {
 		dataPastelEmpleos.setValue("Técnicos", Controladora.getInstance().contarDemanda()[1]);
 		dataPastelEmpleos.setValue("Obreros", Controladora.getInstance().contarDemanda()[2]);
 
-		JFreeChart pastelEmpleos = ChartFactory.createPieChart("Empleos (Demanda)", dataPastelEmpleos, true, true, false);
+		JFreeChart pastelEmpleos = ChartFactory.createPieChart("Empleos (Demanda)", dataPastelEmpleos, true, true,
+				false);
 		pastelEmpleos.setBackgroundPaint(new Color(0, 0, 0, 0));
 		ChartPanel chartPastelEmpleos = new ChartPanel(pastelEmpleos, 480, 230, 480, 230, 480, 230, true, true, true,
 				true, true, true);
+
+		DefaultPieDataset dataPastelPerfiles = new DefaultPieDataset();
+		dataPastelPerfiles.setValue("Graduados", Controladora.getInstance().contarOferta()[0]);
+		dataPastelPerfiles.setValue("Técnicos", Controladora.getInstance().contarOferta()[1]);
+		dataPastelPerfiles.setValue("Obreros", Controladora.getInstance().contarOferta()[2]);
+		JFreeChart pastelPerfiles = ChartFactory.createPieChart("Perfiles (Oferta)", dataPastelPerfiles, true, true,
+				false);
+		pastelPerfiles.setBackgroundPaint(new Color(0, 0, 0, 0));
+		ChartPanel chartPastelPerfiles = new ChartPanel(pastelPerfiles, 480, 230, 480, 230, 480, 230, true, true, true,
+				true, true, true);
+
+		pnlPastelPerfiles.add(chartPastelPerfiles, BorderLayout.CENTER);
+		pnlPastelPerfiles.validate();
 
 		pnlPastelSolicitantes.add(chartPastelSolicitantes, BorderLayout.CENTER);
 		pnlPastelSolicitantes.validate();

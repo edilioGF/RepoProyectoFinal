@@ -228,6 +228,22 @@ public class Controladora {
 		return arr;
 	}
 
+	public int[] contarOferta() {
+		int arr[] = { 0, 0, 0 };
+
+		for (Perfil perfil : misPerfiles) {
+			if (perfil instanceof Graduado) {
+				arr[0]++;
+			} else if (perfil instanceof Tecnico) {
+				arr[1]++;
+			} else {
+				arr[2]++;
+			}
+		}
+
+		return arr;
+	}
+
 	public int[] contarDemanda() {
 		int arr[] = { 0, 0, 0 };
 
