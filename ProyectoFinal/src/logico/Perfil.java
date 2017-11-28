@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Perfil {
-	private String codigo;
 	private String fecha;
 	private Solicitante solicitante;
 	private String idioma;
@@ -14,10 +13,9 @@ public abstract class Perfil {
 	private boolean activa;
 	private boolean satisfecha;
 
-	public Perfil( String codigo , Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
+	public Perfil(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
 			int experiencia) {
 		super();
-		this.codigo = codigo;
 		this.fecha = (new Date()).toString();
 		this.solicitante = solicitante;
 		this.idioma = idioma;
@@ -90,14 +88,6 @@ public abstract class Perfil {
 
 	public void setExperiencia(int experiencia) {
 		this.experiencia = experiencia;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 }

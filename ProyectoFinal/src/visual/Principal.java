@@ -124,7 +124,7 @@ public class Principal extends JFrame {
 		});
 		mnRegistrar.add(mntmNewMenuItem_1);
 
-		JMenuItem mntmPerfil = new JMenuItem("Solicitud");
+		JMenuItem mntmPerfil = new JMenuItem("Perfil");
 		mntmPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegPerfil perfil = new RegPerfil(null);

@@ -81,11 +81,10 @@ public class ListPerfil extends JDialog {
 
 		for (Perfil perfil : Controladora.getInstance().getMisPerfiles()) {
 			//if (tipo.equalsIgnoreCase("<Todos>") || tipo.equalsIgnoreCase(solicitud.getTipo())) {
-				fila[0] = perfil.getCodigo();
-				fila[1] = perfil.getFecha();
-				fila[2] = perfil.getSolicitante().getCedula()+ " - " + perfil.getSolicitante().getNombre()+ " " + perfil.getSolicitante().getApellidos() ;
-				fila[3] = perfil.isLicencia();
-				fila[4] = perfil.isMudarse();
+				fila[0] = perfil.getFecha();
+				fila[1] = perfil.getSolicitante().getCedula()+ " - " + perfil.getSolicitante().getNombre()+ " " + perfil.getSolicitante().getApellidos() ;
+				fila[2] = perfil.isLicencia();
+				fila[3] = perfil.isMudarse();
 
 				model.addRow(fila);
 			//}

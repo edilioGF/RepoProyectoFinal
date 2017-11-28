@@ -16,7 +16,10 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import logico.Controladora;
+import logico.Graduado;
+import logico.Obrero;
 import logico.Solicitante;
+import logico.Tecnico;
 import logico.Perfil;
 
 import javax.swing.UIManager;
@@ -48,7 +51,7 @@ public class RegPerfil extends JDialog {
 	private JCheckBox cbLicencia;
 	private JPanel pnlGraduado;
 	private Solicitante soli;
-	private Perfil solicitud;
+	private Perfil perfil;
 
 	public RegPerfil(Solicitante solicitante) {
 		setTitle("Registrar Perfil");
@@ -249,7 +252,52 @@ public class RegPerfil extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						if (solicitante == null && soli == null) {
+							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
+
+						} else {
+							String idioma = cbxIdioma.getSelectedItem().toString();
+							boolean licencia = cbLicencia.isSelected();
+							boolean mudarse = cbMudarse.isSelected();
+							int experiencia = Integer.valueOf(spnExp.getValue().toString());
+					
+							if (soli == null) {
+								if(rdbtnGraduado.isSelected()){
+									String areaEstudio = cbxAestudio.getSelectedItem().toString();
+								    Graduado perfil = new Graduado(solicitante, idioma, licencia, mudarse, experiencia, areaEstudio);
+								}
+								if(rdbtnObrero.isSelected()){ 
+									String habilidad = cbxHabilidad.getSelectedItem().toString();
+									Obrero perfil = new Obrero(solicitante, idioma, licencia, mudarse, experiencia, habilidad);
+								}
+								if(rdbtnTecnico.isSelected()){
+									String titulo = cbxTitulo.getSelectedItem().toString();
+									Tecnico perfil = new Tecnico(solicitante, idioma, licencia, mudarse, experiencia, titulo);
+								}
+								solicitante.getMisPerfiles().add(perfil);
+								Controladora.getInstance().getMisSolicitantes().add(solicitante);
+								Controladora.getInstance().getMisPerfiles().add(perfil);
+
+							} else {
+								if(rdbtnGraduado.isSelected()){
+									String areaEstudio = cbxAestudio.getSelectedItem().toString();
+								    Graduado perfil = new Graduado(soli, idioma, licencia, mudarse, experiencia, areaEstudio);
+								}
+								if(rdbtnObrero.isSelected()){ 
+									String habilidad = cbxHabilidad.getSelectedItem().toString();
+									Obrero perfil = new Obrero(soli, idioma, licencia, mudarse, experiencia, habilidad);
+								}
+								if(rdbtnTecnico.isSelected()){
+									String titulo = cbxTitulo.getSelectedItem().toString();
+									Tecnico perfil = new Tecnico(soli, idioma, licencia, mudarse, experiencia, titulo);
+								}
+								soli.getMisPerfiles().add(perfil);
+								Controladora.getInstance().getMisSolicitantes().add(soli);
+								Controladora.getInstance().getMisPerfiles().add(perfil);
+							}
+							JOptionPane.showMessageDialog(null, "Su perfil se ha registrado satisfactorimente");
+							clear();
+						}
 						
 					}
 				});
@@ -315,5 +363,13 @@ public class RegPerfil extends JDialog {
 			cbxIdioma.addItem(string);
 		}
 		
+	}
+	
+	private void clear(){
+		cbxIdioma.setSelectedIndex(0);
+		spnExp.setValue(0);
+		cbLicencia.setSelected(false);
+		cbMudarse.setSelected(false);
+		loadPanel(true, false, false);
 	}
 }
