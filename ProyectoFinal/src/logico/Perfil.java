@@ -1,10 +1,11 @@
 package logico;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Perfil {
+public abstract class Perfil implements Serializable {
 	private String fecha;
 	private Solicitante solicitante;
 	private String idioma;

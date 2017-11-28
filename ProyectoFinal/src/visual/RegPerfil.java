@@ -274,6 +274,8 @@ public class RegPerfil extends JDialog {
 											habilidad);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
+									Controladora.getInstance().buscarSolicitante(solicitante.getCedula())
+											.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 								if (rdbtnTecnico.isSelected()) {
@@ -282,6 +284,8 @@ public class RegPerfil extends JDialog {
 											titulo);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
+									Controladora.getInstance().buscarSolicitante(solicitante.getCedula())
+											.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 
@@ -290,27 +294,41 @@ public class RegPerfil extends JDialog {
 									String areaEstudio = cbxAestudio.getSelectedItem().toString();
 									Graduado perfil = new Graduado(soli, idioma, licencia, mudarse, experiencia,
 											areaEstudio);
-									soli.getMisPerfiles().add(perfil);
-									Controladora.getInstance().getMisSolicitantes().add(soli);
+									// soli.getMisPerfiles().add(perfil);
+									// Controladora.getInstance().getMisSolicitantes().add(soli);
+									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
+											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 								if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
 									Obrero perfil = new Obrero(soli, idioma, licencia, mudarse, experiencia, habilidad);
-									soli.getMisPerfiles().add(perfil);
-									Controladora.getInstance().getMisSolicitantes().add(soli);
+									// soli.getMisPerfiles().add(perfil);
+									// Controladora.getInstance().getMisSolicitantes().add(soli);
+									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
+											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 								if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
 									Tecnico perfil = new Tecnico(soli, idioma, licencia, mudarse, experiencia, titulo);
-									soli.getMisPerfiles().add(perfil);
-									Controladora.getInstance().getMisSolicitantes().add(soli);
+									// soli.getMisPerfiles().add(perfil);
+									// Controladora.getInstance().getMisSolicitantes().add(soli);
+									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
+											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 							}
+							Principal.loadStats();
 							JOptionPane.showMessageDialog(null, "Su perfil se ha registrado satisfactorimente");
-							clear();
+							if (solicitante == null) {
+								clear();
+							} else {
+								dispose();
+								RegSolicitante rs = new RegSolicitante();
+								rs.setModal(true);
+								rs.setVisible(true);
+							}
 						}
 
 					}

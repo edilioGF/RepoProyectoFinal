@@ -1,9 +1,10 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Empleo {
+public class Empleo implements Serializable {
 	private String titulo;
 	private String fecha;
 	private int vacantes;

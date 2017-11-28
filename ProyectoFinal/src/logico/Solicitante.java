@@ -1,8 +1,9 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Solicitante {
+public class Solicitante implements Serializable {
 	protected String cedula;
 	protected String nombre;
 	protected String apellidos;
@@ -26,7 +27,6 @@ public class Solicitante {
 		this.trabajo = false;
 		this.misPerfiles = new ArrayList<>();
 	}
-
 
 	public String getCedula() {
 		return cedula;
@@ -92,11 +92,9 @@ public class Solicitante {
 		this.trabajo = trabajo;
 	}
 
-
 	public ArrayList<Perfil> getMisPerfiles() {
 		return misPerfiles;
 	}
-
 
 	public void setMisPerfiles(ArrayList<Perfil> misPerfiles) {
 		this.misPerfiles = misPerfiles;

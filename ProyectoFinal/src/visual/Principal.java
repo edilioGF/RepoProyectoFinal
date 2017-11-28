@@ -19,6 +19,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import javafx.scene.layout.Border;
 import logico.Controladora;
 import logico.Solicitante;
 import sun.applet.Main;
@@ -27,6 +28,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
@@ -34,6 +38,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -45,14 +50,9 @@ public class Principal extends JFrame {
 	private static JPanel pnlPastelSolicitantes;
 	private static JPanel pnlPastelEmpleos;
 	private static JTextField txtSolicitantes;
-	private static JTextField txtSolicitudes;
+	private static JTextField txtPerfiles;
 	private static JTextField txtEmpresas;
 	private static JTextField txtEmpleos;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -61,7 +61,21 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Controladora.getInstance().loadData();
 					Principal frame = new Principal();
+					frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+					frame.addWindowListener(new WindowAdapter() {
+						public void windowClosing(WindowEvent we) {
+							try {
+								Controladora.getInstance().saveData();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+							System.exit(0);
+						}
+					});
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -140,7 +154,6 @@ public class Principal extends JFrame {
 		JMenuItem mntmEmpleos = new JMenuItem("Empleos");
 		mntmEmpleos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Solicitante solicitante = null;
 				ListEmpleo le = new ListEmpleo(null);
 				le.setModal(true);
 				le.setVisible(true);
@@ -234,14 +247,14 @@ public class Principal extends JFrame {
 		lblSolicitudes.setBounds(50, 86, 100, 14);
 		pnlTotal.add(lblSolicitudes);
 
-		txtSolicitudes = new JTextField();
-		txtSolicitudes.setForeground(Color.BLUE);
-		txtSolicitudes.setText("0");
-		txtSolicitudes.setHorizontalAlignment(SwingConstants.CENTER);
-		txtSolicitudes.setEditable(false);
-		txtSolicitudes.setColumns(10);
-		txtSolicitudes.setBounds(150, 82, 86, 23);
-		pnlTotal.add(txtSolicitudes);
+		txtPerfiles = new JTextField();
+		txtPerfiles.setForeground(Color.BLUE);
+		txtPerfiles.setText("0");
+		txtPerfiles.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPerfiles.setEditable(false);
+		txtPerfiles.setColumns(10);
+		txtPerfiles.setBounds(150, 82, 86, 23);
+		pnlTotal.add(txtPerfiles);
 
 		JLabel lblEmpresas = new JLabel("Empresas:");
 		lblEmpresas.setBounds(50, 136, 100, 14);
@@ -269,130 +282,45 @@ public class Principal extends JFrame {
 		txtEmpleos.setBounds(150, 182, 86, 23);
 		pnlTotal.add(txtEmpleos);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u00C1reas Populares", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(765, 320, 300, 240);
-		panel_1.add(panel_2);
-		
-		JLabel lblArea = new JLabel("Area1:");
-		lblArea.setBounds(25, 28, 145, 14);
-		panel_2.add(lblArea);
-		
-		JLabel lblArea_1 = new JLabel("Area2:");
-		lblArea_1.setBounds(25, 70, 145, 14);
-		panel_2.add(lblArea_1);
-		
-		JLabel lblArea_2 = new JLabel("Area3:");
-		lblArea_2.setBounds(25, 112, 145, 14);
-		panel_2.add(lblArea_2);
-		
-		JLabel lblArea_3 = new JLabel("Area4:");
-		lblArea_3.setBounds(25, 154, 145, 14);
-		panel_2.add(lblArea_3);
-		
-		JLabel lblArea_4 = new JLabel("Area5:");
-		lblArea_4.setBounds(25, 196, 145, 14);
-		panel_2.add(lblArea_4);
-		
-		textField = new JTextField();
-		textField.setText("0");
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setForeground(Color.BLUE);
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(150, 24, 86, 23);
-		panel_2.add(textField);
-		
-		textField_1 = new JTextField();
-		textField_1.setText("0");
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setForeground(Color.BLUE);
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(150, 66, 86, 23);
-		panel_2.add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setText("0");
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setForeground(Color.BLUE);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(150, 108, 86, 23);
-		panel_2.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setText("0");
-		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_3.setForeground(Color.BLUE);
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBounds(150, 150, 86, 23);
-		panel_2.add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setText("0");
-		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_4.setForeground(Color.BLUE);
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
-		textField_4.setBounds(150, 192, 86, 23);
-		panel_2.add(textField_4);
-
-		// Stats hS = new Stats();
-		// hS.start();
 		loadStats();
 	}
 
 	public static void loadStats() {
-		//pnlPastel.removeAll();
-		//pnlBarras.removeAll();
+		pnlPastelSolicitantes.removeAll();
+		pnlPastelEmpleos.removeAll();
 
-		// TODO Auto-generated method stub
-		// txtSolicitantes.setText(String.format("%d",
-		// Controladora.getInstance().getMisSolicitantes().size()));
-		// txtSolicitudes.setText(String.format("%d",
-		// Controladora.getInstance().getMisSolicitudes().size()));
+		txtSolicitantes.setText(String.format("%d", Controladora.getInstance().getMisSolicitantes().size()));
+		txtPerfiles.setText(String.format("%d", Controladora.getInstance().getMisPerfiles().size()));
 		txtEmpresas.setText(String.format("%d", Controladora.getInstance().getMisEmpresas().size()));
 		txtEmpleos.setText(String.format("%d", Controladora.getInstance().getMisEmpleos().size()));
 
 		// create a dataset...
-		DefaultPieDataset dataPastel = new DefaultPieDataset();
-		// dataPastel.setValue("Mujeres",
-		// Controladora.getInstance().contarHombresMujeres()[0]);
-		// dataPastel.setValue("Hombres",
-		// Controladora.getInstance().contarHombresMujeres()[1]);
-
-		DefaultCategoryDataset dataBarras = new DefaultCategoryDataset();
-		dataBarras.setValue(8, "Matches", "23/11/2017");
-		dataBarras.setValue(2, "Matches", "24/11/2017");
-		dataBarras.setValue(5, "Matches", "25/11/2017");
-
+		DefaultPieDataset dataPastelSolicitantes = new DefaultPieDataset();
+		dataPastelSolicitantes.setValue("Mujeres", Controladora.getInstance().contarHombresMujeres()[0]);
+		dataPastelSolicitantes.setValue("Hombres", Controladora.getInstance().contarHombresMujeres()[1]);
 		// create a chart...
-		JFreeChart pastel = ChartFactory.createPieChart("Solicitantes", dataPastel, true, // legend?
+		JFreeChart pastelSolicitantes = ChartFactory.createPieChart("Solicitantes (Género)", dataPastelSolicitantes, true, // legend?
 				true, // tooltips?
 				false // URLs?
 		);
+		pastelSolicitantes.setBackgroundPaint(new Color(0, 0, 0, 0));
+		ChartPanel chartPastelSolicitantes = new ChartPanel(pastelSolicitantes, 480, 230, 480, 230, 480, 230, true,
+				true, true, true, true, true);
 
-		pastel.setBackgroundPaint(new Color(0, 0, 0, 0));
+		DefaultPieDataset dataPastelEmpleos = new DefaultPieDataset();
+		dataPastelEmpleos.setValue("Graduados", Controladora.getInstance().contarDemanda()[0]);
+		dataPastelEmpleos.setValue("Técnicos", Controladora.getInstance().contarDemanda()[1]);
+		dataPastelEmpleos.setValue("Obreros", Controladora.getInstance().contarDemanda()[2]);
 
-		JFreeChart barras = ChartFactory.createBarChart("Matching", "Días", "Matches", dataBarras,
-				PlotOrientation.VERTICAL, false, true, false);
+		JFreeChart pastelEmpleos = ChartFactory.createPieChart("Empleos (Demanda)", dataPastelEmpleos, true, true, false);
+		pastelEmpleos.setBackgroundPaint(new Color(0, 0, 0, 0));
+		ChartPanel chartPastelEmpleos = new ChartPanel(pastelEmpleos, 480, 230, 480, 230, 480, 230, true, true, true,
+				true, true, true);
 
-		barras.setBackgroundPaint(new Color(0, 0, 0, 0));
+		pnlPastelSolicitantes.add(chartPastelSolicitantes, BorderLayout.CENTER);
+		pnlPastelSolicitantes.validate();
 
-		ChartPanel chartPastel = new ChartPanel(pastel, 480, 230, 480, 230, 480, 230, true, true, true, true, true,
-				true);
-
-		//ChartPanel chartBarras = new ChartPanel(barras, 480, 230, 480, 230, 480, 230, true, true, false, false, false,
-				//true);
-
-		//pnlPastel.add(chartPastel, BorderLayout.CENTER);
-		//pnlPastel.validate();
-
-		//pnlBarras.add(chartBarras, BorderLayout.CENTER);
-		//pnlBarras.validate();
-
+		pnlPastelEmpleos.add(chartPastelEmpleos, BorderLayout.CENTER);
+		pnlPastelEmpleos.validate();
 	}
 }

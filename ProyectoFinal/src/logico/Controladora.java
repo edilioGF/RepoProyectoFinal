@@ -1,5 +1,13 @@
 package logico;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Controladora {
@@ -36,6 +44,97 @@ public class Controladora {
 			controladora = new Controladora();
 		}
 		return controladora;
+	}
+
+	public void saveData() throws IOException {
+
+		if (misSolicitantes.size() > 0) {
+			FileOutputStream archSolicitantes = new FileOutputStream("Solicitantes.dat");
+			ObjectOutputStream oosSolicitantes = new ObjectOutputStream(archSolicitantes);
+			oosSolicitantes.writeInt(misSolicitantes.size());
+			for (Solicitante soli : misSolicitantes) {
+				oosSolicitantes.writeObject(soli);
+			}
+			archSolicitantes.close();
+		}
+
+		if (misEmpresas.size() > 0) {
+			FileOutputStream archEmpresas = new FileOutputStream("Empresas.dat");
+			ObjectOutputStream oosEmpresas = new ObjectOutputStream(archEmpresas);
+			oosEmpresas.writeInt(misEmpresas.size());
+			for (Empresa emp : misEmpresas) {
+				oosEmpresas.writeObject(emp);
+			}
+			archEmpresas.close();
+		}
+
+		if (misEmpleos.size() > 0) {
+			FileOutputStream archEmpleos = new FileOutputStream("Empleos.dat");
+			ObjectOutputStream oosEmpleos = new ObjectOutputStream(archEmpleos);
+			oosEmpleos.writeInt(misEmpleos.size());
+			for (Empleo empl : misEmpleos) {
+				oosEmpleos.writeObject(empl);
+			}
+			archEmpleos.close();
+		}
+
+		if (misPerfiles.size() > 0) {
+			FileOutputStream archPerfiles = new FileOutputStream("Perfiles.dat");
+			ObjectOutputStream oosPerfiles = new ObjectOutputStream(archPerfiles);
+			oosPerfiles.writeInt(misPerfiles.size());
+			for (Perfil perfil : misPerfiles) {
+				oosPerfiles.writeObject(perfil);
+			}
+			archPerfiles.close();
+		}
+	}
+
+	public void loadData() throws IOException, ClassNotFoundException {
+
+		File soli = new File("Solicitantes.dat");
+		File empr = new File("Empresas.dat");
+		File empl = new File("Empleos.dat");
+		File perf = new File("Perfiles.dat");
+
+		if (soli.exists()) {
+			FileInputStream archSolicitantes = new FileInputStream("Solicitantes.dat");
+			ObjectInputStream oisSolicitantes = new ObjectInputStream(archSolicitantes);
+			int sizeSolicitantes = oisSolicitantes.readInt();
+			for (int i = 0; i < sizeSolicitantes; i++) {
+				misSolicitantes.add((Solicitante) oisSolicitantes.readObject());
+			}
+			archSolicitantes.close();
+		}
+
+		if (empr.exists()) {
+			FileInputStream archEmpresas = new FileInputStream("Empresas.dat");
+			ObjectInputStream oisEmpresas = new ObjectInputStream(archEmpresas);
+			int sizeEmpresas = oisEmpresas.readInt();
+			for (int i = 0; i < sizeEmpresas; i++) {
+				misEmpresas.add((Empresa) oisEmpresas.readObject());
+			}
+			archEmpresas.close();
+		}
+		if (empl.exists()) {
+			FileInputStream archEmpleos = new FileInputStream("Empleos.dat");
+			ObjectInputStream oisEmpleos = new ObjectInputStream(archEmpleos);
+			int sizeEmpleos = oisEmpleos.readInt();
+			for (int i = 0; i < sizeEmpleos; i++) {
+				misEmpleos.add((Empleo) oisEmpleos.readObject());
+			}
+			archEmpleos.close();
+
+		}
+		if (perf.exists()) {
+			FileInputStream archPerfiles = new FileInputStream("Perfiles.dat");
+			ObjectInputStream oisPerfiles = new ObjectInputStream(archPerfiles);
+			int sizePerfiles = oisPerfiles.readInt();
+
+			for (int i = 0; i < sizePerfiles; i++) {
+				misPerfiles.add((Perfil) oisPerfiles.readObject());
+			}
+			archPerfiles.close();
+		}
 	}
 
 	// Se busca empresa por empresa
@@ -114,30 +213,36 @@ public class Controladora {
 		}
 		return empresa;
 	}
-	/*
-	 * public Perfil buscarPerfil(String codigo) { Perfil solicitud = null;
-	 * boolean find = false; int i = 0; while (!find && i <
-	 * misSolicitudes.size()) { if
-	 * (misSolicitudes.get(i).getCodigo().equalsIgnoreCase(codigo)) { solicitud
-	 * = misSolicitudes.get(i); find = true; } i++; } return solicitud; }
-	 */
-	/*
-	 * 
-	 * public Empleo buscarEmpleo(String codigo) { Empleo empleo = null; boolean
-	 * find = false; int i = 0; while (!find && i < misEmpleos.size()) { if
-	 * (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) { empleo =
-	 * misEmpleos.get(i); find = true; } i++; } return empleo; }
-	 */
 
-	/*
-	 * 
-	 * public int[] contarHombresMujeres() { // 0 -> Mujeres // 1 -> Hombres int
-	 * arr[] = { 0, 0 };
-	 * 
-	 * for (Solicitante sol : misSolicitantes) { if
-	 * (sol.getGenero().equalsIgnoreCase("femenino")) { arr[0]++; } else {
-	 * arr[1]++; } } return arr; }
-	 */
+	public int[] contarHombresMujeres() {
+		// 0 -> Mujeres // 1 -> Hombres
+		int arr[] = { 0, 0 };
+
+		for (Solicitante sol : misSolicitantes) {
+			if (sol.getGenero().equalsIgnoreCase("femenino")) {
+				arr[0]++;
+			} else {
+				arr[1]++;
+			}
+		}
+		return arr;
+	}
+
+	public int[] contarDemanda() {
+		int arr[] = { 0, 0, 0 };
+
+		for (Empleo emp : misEmpleos) {
+			if (emp.isGraduado()) {
+				arr[0]++;
+			} else if (emp.isTecnico()) {
+				arr[1]++;
+			} else {
+				arr[2]++;
+			}
+		}
+
+		return arr;
+	}
 
 	public ArrayList<Solicitante> getMisSolicitantes() {
 		return misSolicitantes;
