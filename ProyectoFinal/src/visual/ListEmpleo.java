@@ -32,7 +32,6 @@ public class ListEmpleo extends JDialog {
 	private JTable table;
 	private Object[] fila;
 	private DefaultTableModel model;
-	private JButton btnSolicitar;
 	private JButton btnDetalles;
 	private String codigo;
 	private Empleo empleo;
@@ -62,11 +61,11 @@ public class ListEmpleo extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				btnDetalles.setEnabled(true);
-				btnSolicitar.setEnabled(true);
-				
+				// btnSolicitar.setEnabled(true);
+
 				int index = table.getSelectedRow();
 				codigo = (String) table.getModel().getValueAt(index, 0);
-				//empleo = Controladora.getInstance().buscarEmpleo(codigo);
+				// empleo = Controladora.getInstance().buscarEmpleo(codigo);
 			}
 		});
 		table.setDefaultEditor(Object.class, null);
@@ -76,11 +75,11 @@ public class ListEmpleo extends JDialog {
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
-		
+
 		JLabel lblreas = new JLabel("\u00C1reas:");
 		lblreas.setBounds(28, 20, 90, 14);
 		contentPanel.add(lblreas);
-		
+
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(102, 14, 28, 20);
 		contentPanel.add(comboBox);
@@ -88,20 +87,6 @@ public class ListEmpleo extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				btnSolicitar = new JButton("Solicitar");
-				btnSolicitar.setEnabled(false);
-				btnSolicitar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-					  RlzSolicitud rlzs = new RlzSolicitud(empleo,solicitante);
-					  setModal(false);
-					  rlzs.setVisible(true);
-					  rlzs.setModal(true);
-					}
-				});
-				buttonPane.add(btnSolicitar);
-				
-			}
 			{
 				btnDetalles = new JButton("Detalles");
 				btnDetalles.addActionListener(new ActionListener() {
@@ -135,15 +120,16 @@ public class ListEmpleo extends JDialog {
 		fila = new Object[model.getColumnCount()];
 
 		for (Empleo empleo : Controladora.getInstance().getMisEmpleos()) {
-			//if (tipo.equalsIgnoreCase("<Todas>") || tipo.equalsIgnoreCase(empleo.getArea())) {
-				//fila[0] = empleo.getCodigo();
-				fila[1] = empleo.getTitulo();
-				fila[2] = empleo.getVacantes();
-				fila[3] = empleo.getSalario();
-				fila[4] = empleo.getEmpresa().getNombre();
+			// if (tipo.equalsIgnoreCase("<Todas>") ||
+			// tipo.equalsIgnoreCase(empleo.getArea())) {
+			// fila[0] = empleo.getCodigo();
+			fila[1] = empleo.getTitulo();
+			fila[2] = empleo.getVacantes();
+			fila[3] = empleo.getSalario();
+			fila[4] = empleo.getEmpresa().getNombre();
 
-				model.addRow(fila);
-			//}
+			model.addRow(fila);
+			// }
 		}
 
 		table.setModel(model);

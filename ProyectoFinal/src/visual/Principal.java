@@ -115,21 +115,11 @@ public class Principal extends JFrame {
 			}
 		});
 		mnRegistrar.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmPerfil = new JMenuItem("Solicitud");
+		mnRegistrar.add(mntmPerfil);
 
-		JMenu mnRealizar = new JMenu("Realizar");
-		menuBar.add(mnRealizar);
-
-		JMenuItem mntmSolicitud = new JMenuItem("Solicitud");
-		mntmSolicitud.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ListEmpleo le = new ListEmpleo(null);
-				le.setModal(true);
-				le.setVisible(true);
-			}
-		});
-		mnRealizar.add(mntmSolicitud);
-
-		JMenu mnListado = new JMenu("Listado");
+		JMenu mnListado = new JMenu("Listar");
 		menuBar.add(mnListado);
 
 		JMenuItem mntmEmpleos = new JMenuItem("Empleos");
@@ -152,25 +142,11 @@ public class Principal extends JFrame {
 		});
 		mnListado.add(mntmEmpresas);
 		mnListado.add(mntmEmpleos);
-
+		
 		JMenuItem mntmSolicitantes = new JMenuItem("Solicitantes");
-		mntmSolicitantes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ListSolicitante ls = new ListSolicitante();
-				ls.setModal(true);
-				ls.setVisible(true);
-			}
-		});
 		mnListado.add(mntmSolicitantes);
-
+		
 		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
-		mntmSolicitudes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ListSolicitud ls = new ListSolicitud();
-				ls.setModal(true);
-				ls.setVisible(true);
-			}
-		});
 		mnListado.add(mntmSolicitudes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
