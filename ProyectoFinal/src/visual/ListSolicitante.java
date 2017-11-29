@@ -32,7 +32,7 @@ public class ListSolicitante extends JDialog {
 	private Object[] fila;
 	private DefaultTableModel model;
 	private JTextField txtCedula;
-	private JComboBox cbxFormacion;
+	private JComboBox cbxGenero;
 
 	/**
 	 * Create the dialog.
@@ -62,10 +62,15 @@ public class ListSolicitante extends JDialog {
 					lblFormacin.setBounds(10, 22, 64, 14);
 					contentPanel.add(lblFormacin);
 					
-					cbxFormacion = new JComboBox();
-					cbxFormacion.setModel(new DefaultComboBoxModel(new String[] {"<Todos>"}));
-					cbxFormacion.setBounds(84, 18, 250, 23);
-					contentPanel.add(cbxFormacion);
+					cbxGenero = new JComboBox();
+					cbxGenero.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							loadTable(cbxGenero.getSelectedItem().toString());
+						}
+					});
+					cbxGenero.setModel(new DefaultComboBoxModel(new String[] {"<Todos>"}));
+					cbxGenero.setBounds(84, 18, 250, 23);
+					contentPanel.add(cbxGenero);
 					
 					JLabel lblCedula = new JLabel("C\u00E9dula:");
 					lblCedula.setBounds(383, 22, 55, 14);
@@ -121,12 +126,12 @@ public class ListSolicitante extends JDialog {
 			
 		}
 		load();
-		loadTable(cbxFormacion.getSelectedItem().toString());
+		loadTable(cbxGenero.getSelectedItem().toString());
 }
 	
 	private void load() {
 		for (String genero : Controladora.getMisGeneros()) {
-			cbxFormacion.addItem(genero);
+			cbxGenero.addItem(genero);
 		}
 	}
 	private void loadTable(String genero) {
