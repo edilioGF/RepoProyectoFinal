@@ -131,6 +131,21 @@ public class RegSolicitante extends JDialog {
 				JButton btnSiguiente = new JButton("Siguiente");
 				btnSiguiente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						if (cbxGenero.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una género", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxPaisOrigen.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una país origen", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxPaisResidencia.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una país residencia", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						if (dateChooser.getDate() == null) {
 							JOptionPane.showMessageDialog(null, "La fecha de nacimiento no es válida");
 						} else {

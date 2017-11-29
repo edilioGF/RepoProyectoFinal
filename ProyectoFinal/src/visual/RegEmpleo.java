@@ -332,6 +332,27 @@ public class RegEmpleo extends JDialog {
 				JButton okButton = new JButton("Terminar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if (cbxIdioma.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un idioma", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if(cbxAreaEstudio.getSelectedIndex() <= 0){
+								JOptionPane.showMessageDialog(null, "Debe seleccionar un área de estudio ", "Aviso",
+										JOptionPane.INFORMATION_MESSAGE);
+								return;
+						}
+						if (cbxHabilidad.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxTitulo.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						
 						if (empresa == null && emp == null) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");
 						} else {
