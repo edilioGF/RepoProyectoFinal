@@ -23,6 +23,7 @@ import logico.Tecnico;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.awt.event.ActionEvent;
@@ -155,7 +156,9 @@ public class RegSolicitante extends JDialog {
 							String genero = cbxGenero.getSelectedItem().toString();
 							String paisOrigen = cbxPaisOrigen.getSelectedItem().toString();
 							String paisResidencia = cbxPaisResidencia.getSelectedItem().toString();
-							String nacimiento = dateChooser.getDateFormatString();
+							Date date = dateChooser.getDate();
+							String str = new SimpleDateFormat("dd/MM/yyyy").format(date);
+							String nacimiento = str;
 							solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
 									paisResidencia);
 							dispose();
