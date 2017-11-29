@@ -55,7 +55,6 @@ public class RegPerfil extends JDialog {
 	private Solicitante soli;
 	private Perfil perfil;
 	private JTextField txtCodigo;
-	private JTextField txtFecha;
 	private String codigo;
 
 	public RegPerfil(Solicitante solicitante) {
@@ -256,25 +255,15 @@ public class RegPerfil extends JDialog {
 		panel_3.setLayout(null);
 
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 28, 53, 14);
+		lblCdigo.setBounds(10, 28, 59, 14);
 		panel_3.add(lblCdigo);
 
 		codigo = String.format("%s-%03d", "PER", Controladora.getInstance().getMisPerfiles().size() + 1);
 		txtCodigo = new JTextField(codigo);
 		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(65, 24, 100, 23);
+		txtCodigo.setBounds(75, 24, 100, 23);
 		panel_3.add(txtCodigo);
 		txtCodigo.setColumns(10);
-
-		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(185, 28, 46, 14);
-		panel_3.add(lblFecha);
-
-		txtFecha = new JTextField();
-		txtFecha.setEditable(false);
-		txtFecha.setBounds(233, 24, 121, 23);
-		panel_3.add(txtFecha);
-		txtFecha.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -411,7 +400,6 @@ public class RegPerfil extends JDialog {
 
 		Date date = new Date();
 		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
-		txtFecha.setText(str);
 
 		for (String area : Controladora.getMisAreasDeEstudio()) {
 			cbxAestudio.addItem(area);

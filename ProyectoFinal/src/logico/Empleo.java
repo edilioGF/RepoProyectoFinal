@@ -1,6 +1,7 @@
 package logico;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,7 +44,12 @@ public class Empleo implements Serializable {
 			boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad, Empresa empresa) {
 		super();
 		this.titulo = titulo;
-		this.fecha = (new Date()).toString();
+
+		Date date = new Date();
+		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+
+		this.fecha = str;
+
 		this.vacantes = vacantes;
 		this.descripcion = descripcion;
 		this.salario = salario;
