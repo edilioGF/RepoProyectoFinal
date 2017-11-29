@@ -91,7 +91,8 @@ public class ListSolicitante extends JDialog {
 					});
 					btnBuscar.setBounds(571, 16, 89, 23);
 					contentPanel.add(btnBuscar);
-					String[] columns = { "Cédula", "Nombre", "Fecha de nacimiento", "Reside", "Género" };
+					String[] columns = { "Cédula", "Nombre", "Fecha de Nacimiento", "País de Origen",
+							"País de Residencia", "Género" };
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 				}
