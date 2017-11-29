@@ -24,7 +24,7 @@ public class Solicitante implements Serializable {
 		this.genero = genero;
 		this.paisOrigen = paisOrigen;
 		this.paisResidencia = paisResidencia;
-		this.trabajo = false;
+		this.trabajo = true;
 		this.misPerfiles = new ArrayList<>();
 	}
 

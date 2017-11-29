@@ -92,7 +92,7 @@ public class ListSolicitante extends JDialog {
 					btnBuscar.setBounds(571, 16, 89, 23);
 					contentPanel.add(btnBuscar);
 					String[] columns = { "Cédula", "Nombre", "Fecha de Nacimiento", "País de Origen",
-							"País de Residencia", "Género" };
+							"País de Residencia", "Género" , "Trabajo"  , "Cant.Perfiles" };
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 				}
@@ -127,7 +127,8 @@ public class ListSolicitante extends JDialog {
 	private void loadTable(String mode) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-
+		String trabajo;
+		
 		for (Solicitante soli : Controladora.getInstance().getMisSolicitantes()) {
 			if (mode.equalsIgnoreCase(soli.getGenero()) || mode.equalsIgnoreCase(soli.getCedula())
 					|| mode.equalsIgnoreCase("<Todos>")) {
@@ -137,7 +138,15 @@ public class ListSolicitante extends JDialog {
 				fila[3] = soli.getPaisOrigen();
 				fila[4] = soli.getPaisResidencia();
 				fila[5] = soli.getGenero();
-
+				if(soli.isTrabajo() == false){
+					trabajo = "No";
+				fila[6] = trabajo;
+				}else{
+					trabajo = "Si";
+					fila[6] = trabajo;
+				}
+				fila[7] = soli.getMisPerfiles().size();
+				
 				model.addRow(fila);
 			}
 		}
