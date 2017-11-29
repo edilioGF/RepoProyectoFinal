@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -53,7 +55,7 @@ public class RegPerfil extends JDialog {
 	private Solicitante soli;
 	private Perfil perfil;
 	private JTextField txtCodigo;
-	private JTextField textField;
+	private JTextField txtFecha;
 	private String codigo;
 
 	public RegPerfil(Solicitante solicitante) {
@@ -245,33 +247,34 @@ public class RegPerfil extends JDialog {
 		JLabel label_6 = new JLabel("A\u00F1os");
 		label_6.setBounds(304, 50, 42, 14);
 		panel_2.add(label_6);
-		
+
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Informaci\u00F3n de Registro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBorder(new TitledBorder(null, "Informaci\u00F3n de Registro", TitledBorder.LEADING, TitledBorder.TOP,
+				null, null));
 		panel_3.setBounds(10, 11, 364, 70);
 		contentPanel.add(panel_3);
 		panel_3.setLayout(null);
-		
+
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 25, 53, 14);
+		lblCdigo.setBounds(10, 28, 53, 14);
 		panel_3.add(lblCdigo);
-		
-		codigo = String.format("%s-%03","PER",Controladora.getInstance().getMisPerfiles().size()+1);
+
+		codigo = String.format("%s-%03d", "PER", Controladora.getInstance().getMisPerfiles().size() + 1);
 		txtCodigo = new JTextField(codigo);
 		txtCodigo.setEditable(false);
-		txtCodigo.setBounds(53, 21, 115, 23);
+		txtCodigo.setBounds(65, 24, 100, 23);
 		panel_3.add(txtCodigo);
 		txtCodigo.setColumns(10);
-		
+
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(196, 25, 46, 14);
+		lblFecha.setBounds(185, 28, 46, 14);
 		panel_3.add(lblFecha);
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(232, 21, 115, 23);
-		panel_3.add(textField);
-		textField.setColumns(10);
+
+		txtFecha = new JTextField();
+		txtFecha.setEditable(false);
+		txtFecha.setBounds(233, 24, 121, 23);
+		panel_3.add(txtFecha);
+		txtFecha.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -292,16 +295,16 @@ public class RegPerfil extends JDialog {
 							if (soli == null) {
 								if (rdbtnGraduado.isSelected()) {
 									String areaEstudio = cbxAestudio.getSelectedItem().toString();
-									Graduado perfil = new Graduado(codigo,solicitante, idioma, licencia, mudarse, experiencia,
-											areaEstudio);
+									Graduado perfil = new Graduado(codigo, solicitante, idioma, licencia, mudarse,
+											experiencia, areaEstudio);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 								if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
-									Obrero perfil = new Obrero(codigo,solicitante, idioma, licencia, mudarse, experiencia,
-											habilidad);
+									Obrero perfil = new Obrero(codigo, solicitante, idioma, licencia, mudarse,
+											experiencia, habilidad);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
 									Controladora.getInstance().buscarSolicitante(solicitante.getCedula())
@@ -310,8 +313,8 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
-									Tecnico perfil = new Tecnico(codigo,solicitante, idioma, licencia, mudarse, experiencia,
-											titulo);
+									Tecnico perfil = new Tecnico(codigo, solicitante, idioma, licencia, mudarse,
+											experiencia, titulo);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
 									Controladora.getInstance().buscarSolicitante(solicitante.getCedula())
@@ -322,7 +325,7 @@ public class RegPerfil extends JDialog {
 							} else {
 								if (rdbtnGraduado.isSelected()) {
 									String areaEstudio = cbxAestudio.getSelectedItem().toString();
-									Graduado perfil = new Graduado(codigo,soli, idioma, licencia, mudarse, experiencia,
+									Graduado perfil = new Graduado(codigo, soli, idioma, licencia, mudarse, experiencia,
 											areaEstudio);
 									// soli.getMisPerfiles().add(perfil);
 									// Controladora.getInstance().getMisSolicitantes().add(soli);
@@ -332,7 +335,8 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
-									Obrero perfil = new Obrero(codigo,soli, idioma, licencia, mudarse, experiencia, habilidad);
+									Obrero perfil = new Obrero(codigo, soli, idioma, licencia, mudarse, experiencia,
+											habilidad);
 									// soli.getMisPerfiles().add(perfil);
 									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
@@ -341,7 +345,8 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
-									Tecnico perfil = new Tecnico(codigo,soli, idioma, licencia, mudarse, experiencia, titulo);
+									Tecnico perfil = new Tecnico(codigo, soli, idioma, licencia, mudarse, experiencia,
+											titulo);
 									// soli.getMisPerfiles().add(perfil);
 									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
@@ -403,6 +408,10 @@ public class RegPerfil extends JDialog {
 	}
 
 	private void load() {
+
+		Date date = new Date();
+		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+		txtFecha.setText(str);
 
 		for (String area : Controladora.getMisAreasDeEstudio()) {
 			cbxAestudio.addItem(area);

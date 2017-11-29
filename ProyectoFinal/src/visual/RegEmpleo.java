@@ -337,10 +337,10 @@ public class RegEmpleo extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if(cbxAreaEstudio.getSelectedIndex() <= 0){
-								JOptionPane.showMessageDialog(null, "Debe seleccionar un área de estudio ", "Aviso",
-										JOptionPane.INFORMATION_MESSAGE);
-								return;
+						if (cbxAreaEstudio.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un área de estudio ", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
 						}
 						if (cbxHabilidad.getSelectedIndex() <= 0) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
@@ -352,7 +352,7 @@ public class RegEmpleo extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						
+
 						if (empresa == null && emp == null) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");
 						} else {
@@ -441,7 +441,7 @@ public class RegEmpleo extends JDialog {
 	private void load() {
 
 		Date date = new Date();
-		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
+		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 		txtFecha.setText(str);
 
 		for (String area : Controladora.getMisAreasDeEstudio()) {
