@@ -32,6 +32,7 @@ public abstract class Perfil implements Serializable {
 		this.activa = true;
 		this.satisfecha = false;
 	}
+	
 
 	public boolean isSatisfecha() {
 		return satisfecha;

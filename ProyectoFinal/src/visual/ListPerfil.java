@@ -24,6 +24,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ListPerfil extends JDialog {
 
@@ -64,7 +66,7 @@ public class ListPerfil extends JDialog {
 					});
 					table.setDefaultEditor(Object.class, null);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					String[] columns = {"Fecha", "Cédula - Nombre", "Licencia", "Remoto","Empleo"};
+					String[] columns = {"Fecha", "Cédula - Nombre", "Licencia", "Remoto"};
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
@@ -73,11 +75,11 @@ public class ListPerfil extends JDialog {
 		}
 		
 		JLabel lblCdula = new JLabel("C\u00E9dula:");
-		lblCdula.setBounds(25, 24, 46, 14);
+		lblCdula.setBounds(314, 24, 46, 14);
 		contentPanel.add(lblCdula);
 		
 		txtCedula = new JTextField();
-		txtCedula.setBounds(70, 20, 201, 23);
+		txtCedula.setBounds(370, 20, 180, 23);
 		contentPanel.add(txtCedula);
 		txtCedula.setColumns(10);
 		
@@ -88,8 +90,17 @@ public class ListPerfil extends JDialog {
 				loadTable(cedula);
 			}
 		});
-		btnNewButton.setBounds(302, 20, 89, 23);
+		btnNewButton.setBounds(560, 20, 89, 23);
 		contentPanel.add(btnNewButton);
+		
+		JLabel lblFormacin = new JLabel("Formaci\u00F3n:");
+		lblFormacin.setBounds(10, 24, 67, 14);
+		contentPanel.add(lblFormacin);
+		
+		JComboBox cbxFormacion = new JComboBox();
+		cbxFormacion.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Graduado", "Tecnicos", "Obreros"}));
+		cbxFormacion.setBounds(87, 20, 180, 23);
+		contentPanel.add(cbxFormacion);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -101,14 +112,6 @@ public class ListPerfil extends JDialog {
 					dispose();
 				}
 			});
-			
-			JButton btnActivar = new JButton("Activar Empleo");
-			btnActivar.setEnabled(false);
-			buttonPane.add(btnActivar);
-			
-			JButton btnDesactivar = new JButton("Desactivar Empleo");
-			btnDesactivar.setEnabled(false);
-			buttonPane.add(btnDesactivar);
 			buttonPane.add(btnCerrar);
 		}
 
@@ -127,7 +130,6 @@ public class ListPerfil extends JDialog {
 						+ perfil.getSolicitante().getApellidos();
 				fila[2] = perfil.isLicencia();
 				fila[3] = perfil.isMudarse();
-				fila[4] = perfil.isSatisfecha();
 
 				model.addRow(fila);
 			}
