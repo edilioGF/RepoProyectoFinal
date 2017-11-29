@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Perfil implements Serializable {
+	private String codigo;
 	private String fecha;
 	private Solicitante solicitante;
 	private String idioma;
@@ -15,13 +16,14 @@ public abstract class Perfil implements Serializable {
 	private boolean activa;
 	private boolean satisfecha;
 
-	public Perfil(Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia) {
+	public Perfil(String codigo , Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia) {
 		super();
 
 		Date date = new Date();
 		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
-
+		
 		this.fecha = str;
+		this.codigo = codigo;
 		this.solicitante = solicitante;
 		this.idioma = idioma;
 		this.licencia = licencia;
@@ -93,6 +95,14 @@ public abstract class Perfil implements Serializable {
 
 	public void setExperiencia(int experiencia) {
 		this.experiencia = experiencia;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 }
