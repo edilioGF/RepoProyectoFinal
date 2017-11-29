@@ -57,53 +57,41 @@ public class ListSolicitante extends JDialog {
 					table = new JTable();
 					scrollPane.setViewportView(table);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					
+
 					JLabel lblFormacin = new JLabel("G\u00E9nero:");
-					lblFormacin.setBounds(10, 22, 64, 14);
+					lblFormacin.setBounds(10, 20, 64, 14);
 					contentPanel.add(lblFormacin);
-					
+
 					cbxGenero = new JComboBox();
 					cbxGenero.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							loadTable(cbxGenero.getSelectedItem().toString());
 						}
 					});
-					cbxGenero.setModel(new DefaultComboBoxModel(new String[] {"<Todos>"}));
-					cbxGenero.setBounds(84, 18, 250, 23);
+					cbxGenero.setModel(new DefaultComboBoxModel(new String[] { "<Todos>" }));
+					cbxGenero.setBounds(84, 16, 250, 23);
 					contentPanel.add(cbxGenero);
-					
+
 					JLabel lblCedula = new JLabel("C\u00E9dula:");
-					lblCedula.setBounds(383, 22, 55, 14);
+					lblCedula.setBounds(364, 20, 55, 14);
 					contentPanel.add(lblCedula);
-					
+
 					txtCedula = new JTextField();
-					txtCedula.setBounds(448, 19, 114, 23);
+					txtCedula.setBounds(417, 16, 145, 23);
 					contentPanel.add(txtCedula);
 					txtCedula.setColumns(10);
-					
+
 					JButton btnBuscar = new JButton("Buscar");
 					btnBuscar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							String cedula = txtCedula.getText();
-							
-							if(Controladora.getInstance().buscarSolicitante(cedula) != null){
-								table.setModel(model);
-								Solicitante solicitante = Controladora.getInstance().buscarSolicitante(cedula);
-								fila[0] = solicitante.getCedula();
-								fila[1] = solicitante.getNombre();
-								fila[2] = solicitante.getNacimiento();
-								fila[3] = solicitante.getPaisResidencia();
-								fila[4] = solicitante.getGenero();
 
-								model.addRow(fila);
-								table.setModel(model);
-							}
-							
+							loadTable(cedula);
 						}
 					});
-					btnBuscar.setBounds(571, 18, 89, 23);
+					btnBuscar.setBounds(571, 16, 89, 23);
 					contentPanel.add(btnBuscar);
-					String[] columns = { "Cédula", "Nombre", "Fecha de nacimiento", "Reside","Género" };
+					String[] columns = { "Cédula", "Nombre", "Fecha de nacimiento", "Reside", "Género" };
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 				}
@@ -123,35 +111,36 @@ public class ListSolicitante extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
-			
+
 		}
 		load();
 		loadTable(cbxGenero.getSelectedItem().toString());
-}
-	
+	}
+
 	private void load() {
 		for (String genero : Controladora.getMisGeneros()) {
 			cbxGenero.addItem(genero);
 		}
 	}
-	private void loadTable(String genero) {
+
+	private void loadTable(String mode) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 
-		
-		for (Solicitante solicitante : Controladora.getInstance().getMisSolicitantes()) {
-			if (genero.equalsIgnoreCase("<Todos>") || genero.equalsIgnoreCase(solicitante.getGenero())) {
-				fila[0] = solicitante.getCedula();
-				fila[1] = solicitante.getNombre();
-				fila[2] = solicitante.getNacimiento();
-				fila[3] = solicitante.getPaisResidencia();
-				fila[4] = solicitante.getGenero();
+		for (Solicitante soli : Controladora.getInstance().getMisSolicitantes()) {
+			if (mode.equalsIgnoreCase(soli.getGenero()) || mode.equalsIgnoreCase(soli.getCedula())
+					|| mode.equalsIgnoreCase("<Todos>")) {
+				fila[0] = soli.getCedula();
+				fila[1] = soli.getNombre() + " " + soli.getApellidos();
+				fila[2] = soli.getNacimiento();
+				fila[3] = soli.getPaisOrigen();
+				fila[4] = soli.getPaisResidencia();
+				fila[5] = soli.getGenero();
 
 				model.addRow(fila);
 			}
 		}
-		
 
-			table.setModel(model);
-		}
+		table.setModel(model);
+	}
 }
