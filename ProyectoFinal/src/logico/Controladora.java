@@ -9,11 +9,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 public class Controladora {
 	private ArrayList<Solicitante> misSolicitantes;
 	private ArrayList<Empresa> misEmpresas;
 	private ArrayList<Perfil> misPerfiles;
+	private ArrayList<Perfil> misPerfiles2;
 	private ArrayList<Empleo> misEmpleos;
 
 	private static String[] misTiposDeEmpresa = { "Turismo", "Salud", "Eduación", "Software", "Alimentación", "Público",
@@ -46,6 +50,29 @@ public class Controladora {
 		}
 		return controladora;
 	}
+	
+	public void ordenarPerfiles() {
+        int i, j, mayor, pos;
+        Perfil tmp;
+        misPerfiles2 = misPerfiles;
+        
+        for (i = 0; i < misPerfiles2.size()- 1; i++) { 
+              mayor = misPerfiles2.get(i).getExperiencia(); 
+              pos = i; 
+              
+              for (j = i + 1; j < misPerfiles2.size(); j++){ 
+                    if (misPerfiles2.get(j).getExperiencia() > mayor) { 
+                        mayor = misPerfiles2.get(j).getExperiencia(); 
+                        pos = j;
+                    }
+              }
+              if (pos != i){ 
+                  tmp = misPerfiles2.get(i);
+                  misPerfiles2.set(i,misPerfiles2.get(pos));
+                  misPerfiles2.set(pos, tmp);
+              }
+        }
+}
 
 	public void saveData() throws IOException {
 
@@ -137,6 +164,7 @@ public class Controladora {
 			archPerfiles.close();
 		}
 	}
+	
 
 	// Se busca empresa por empresa
 	// Se obtienen las ofertas / empleos
@@ -339,5 +367,13 @@ public class Controladora {
 
 	public static void setMisGeneros(String[] misGeneros) {
 		Controladora.misGeneros = misGeneros;
+	}
+
+	public ArrayList<Perfil> getMisPerfiles2() {
+		return misPerfiles2;
+	}
+
+	public void setMisPerfiles2(ArrayList<Perfil> misPerfiles2) {
+		this.misPerfiles2 = misPerfiles2;
 	}
 }
