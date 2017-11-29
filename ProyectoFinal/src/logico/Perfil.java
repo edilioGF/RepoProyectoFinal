@@ -20,7 +20,7 @@ public abstract class Perfil implements Serializable {
 		super();
 
 		Date date = new Date();
-		String str = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+		String str = new SimpleDateFormat("dd/MM/yyyy").format(date);
 		
 		this.fecha = str;
 		this.codigo = codigo;
