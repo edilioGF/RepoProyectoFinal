@@ -58,7 +58,7 @@ public class ListSolicitante extends JDialog {
 					scrollPane.setViewportView(table);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					
-					JLabel lblFormacin = new JLabel("Formaci\u00F3n:");
+					JLabel lblFormacin = new JLabel("G\u00E9nero:");
 					lblFormacin.setBounds(10, 22, 64, 14);
 					contentPanel.add(lblFormacin);
 					
@@ -80,8 +80,9 @@ public class ListSolicitante extends JDialog {
 					btnBuscar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							String cedula = txtCedula.getText();
-							/*
+							
 							if(Controladora.getInstance().buscarSolicitante(cedula) != null){
+								table.setModel(model);
 								Solicitante solicitante = Controladora.getInstance().buscarSolicitante(cedula);
 								fila[0] = solicitante.getCedula();
 								fila[1] = solicitante.getNombre();
@@ -92,7 +93,7 @@ public class ListSolicitante extends JDialog {
 								model.addRow(fila);
 								table.setModel(model);
 							}
-							*/
+							
 						}
 					});
 					btnBuscar.setBounds(571, 18, 89, 23);
@@ -124,17 +125,17 @@ public class ListSolicitante extends JDialog {
 }
 	
 	private void load() {
-		for (String formacion : Controladora.getMisFormaciones()) {
-			cbxFormacion.addItem(formacion);
+		for (String genero : Controladora.getMisGeneros()) {
+			cbxFormacion.addItem(genero);
 		}
 	}
-	private void loadTable(String formacion) {
+	private void loadTable(String genero) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 
-		/*
+		
 		for (Solicitante solicitante : Controladora.getInstance().getMisSolicitantes()) {
-			if (formacion.equalsIgnoreCase("<Todos>") || formacion.equalsIgnoreCase(solicitante.getClass().getSimpleName())) {
+			if (genero.equalsIgnoreCase("<Todos>") || genero.equalsIgnoreCase(solicitante.getGenero())) {
 				fila[0] = solicitante.getCedula();
 				fila[1] = solicitante.getNombre();
 				fila[2] = solicitante.getNacimiento();
@@ -144,7 +145,7 @@ public class ListSolicitante extends JDialog {
 				model.addRow(fila);
 			}
 		}
-		*/
+		
 
 			table.setModel(model);
 		}

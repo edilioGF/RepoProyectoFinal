@@ -28,6 +28,7 @@ public class Controladora {
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
 			"Plomería", "Confeccionista", "Pintura", "Tapicería" };
 	private static String[] misFormaciones = { "Graduado", "Técnico", "Obrero" };
+	private static String[] misGeneros = {"Masculino" , "Femenino"};
 
 	private static Controladora controladora;
 
@@ -330,5 +331,13 @@ public class Controladora {
 
 	public void setMisPerfiles(ArrayList<Perfil> misPerfiles) {
 		this.misPerfiles = misPerfiles;
+	}
+
+	public static String[] getMisGeneros() {
+		return misGeneros;
+	}
+
+	public static void setMisGeneros(String[] misGeneros) {
+		Controladora.misGeneros = misGeneros;
 	}
 }
