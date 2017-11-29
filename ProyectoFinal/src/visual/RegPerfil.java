@@ -52,12 +52,15 @@ public class RegPerfil extends JDialog {
 	private JPanel pnlGraduado;
 	private Solicitante soli;
 	private Perfil perfil;
+	private JTextField txtCodigo;
+	private JTextField textField;
+	private String codigo;
 
 	public RegPerfil(Solicitante solicitante) {
 		setTitle("Registrar Perfil");
 		setModal(true);
 		setResizable(false);
-		setBounds(100, 100, 390, 560);
+		setBounds(100, 100, 390, 630);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,7 +70,7 @@ public class RegPerfil extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Informacion del Solicitante", TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
-		panel.setBounds(10, 11, 364, 140);
+		panel.setBounds(10, 89, 364, 140);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
@@ -123,7 +126,7 @@ public class RegPerfil extends JDialog {
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Formaci\u00F3n",
 
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_1.setBounds(10, 324, 364, 70);
+		panel_1.setBounds(10, 402, 364, 70);
 		contentPanel.add(panel_1);
 
 		rdbtnGraduado = new JRadioButton("Graduado");
@@ -158,7 +161,7 @@ public class RegPerfil extends JDialog {
 
 		pnlObrero = new JPanel();
 		pnlObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlObrero.setBounds(10, 405, 364, 70);
+		pnlObrero.setBounds(10, 483, 364, 70);
 		contentPanel.add(pnlObrero);
 		pnlObrero.setLayout(null);
 
@@ -172,7 +175,7 @@ public class RegPerfil extends JDialog {
 
 		pnlGraduado = new JPanel();
 		pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlGraduado.setBounds(10, 405, 364, 70);
+		pnlGraduado.setBounds(10, 483, 364, 70);
 		contentPanel.add(pnlGraduado);
 		pnlGraduado.setLayout(null);
 
@@ -187,7 +190,7 @@ public class RegPerfil extends JDialog {
 		pnlTecnico = new JPanel();
 		pnlTecnico
 				.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlTecnico.setBounds(10, 405, 364, 70);
+		pnlTecnico.setBounds(10, 483, 364, 70);
 		contentPanel.add(pnlTecnico);
 		pnlTecnico.setLayout(null);
 
@@ -203,7 +206,7 @@ public class RegPerfil extends JDialog {
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informaci\u00F3n Laboral",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(10, 162, 356, 151);
+		panel_2.setBounds(10, 240, 356, 151);
 		contentPanel.add(panel_2);
 
 		JLabel label_2 = new JLabel("Idioma:");
@@ -242,6 +245,33 @@ public class RegPerfil extends JDialog {
 		JLabel label_6 = new JLabel("A\u00F1os");
 		label_6.setBounds(304, 50, 42, 14);
 		panel_2.add(label_6);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Informaci\u00F3n de Registro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBounds(10, 11, 364, 70);
+		contentPanel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblCdigo = new JLabel("C\u00F3digo:");
+		lblCdigo.setBounds(10, 25, 53, 14);
+		panel_3.add(lblCdigo);
+		
+		codigo = String.format("%s-%03","PER",Controladora.getInstance().getMisPerfiles().size()+1);
+		txtCodigo = new JTextField(codigo);
+		txtCodigo.setEditable(false);
+		txtCodigo.setBounds(53, 21, 115, 23);
+		panel_3.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setBounds(196, 25, 46, 14);
+		panel_3.add(lblFecha);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(232, 21, 115, 23);
+		panel_3.add(textField);
+		textField.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -262,7 +292,7 @@ public class RegPerfil extends JDialog {
 							if (soli == null) {
 								if (rdbtnGraduado.isSelected()) {
 									String areaEstudio = cbxAestudio.getSelectedItem().toString();
-									Graduado perfil = new Graduado(solicitante, idioma, licencia, mudarse, experiencia,
+									Graduado perfil = new Graduado(codigo,solicitante, idioma, licencia, mudarse, experiencia,
 											areaEstudio);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
@@ -270,7 +300,7 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
-									Obrero perfil = new Obrero(solicitante, idioma, licencia, mudarse, experiencia,
+									Obrero perfil = new Obrero(codigo,solicitante, idioma, licencia, mudarse, experiencia,
 											habilidad);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
@@ -280,7 +310,7 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
-									Tecnico perfil = new Tecnico(solicitante, idioma, licencia, mudarse, experiencia,
+									Tecnico perfil = new Tecnico(codigo,solicitante, idioma, licencia, mudarse, experiencia,
 											titulo);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
@@ -292,7 +322,7 @@ public class RegPerfil extends JDialog {
 							} else {
 								if (rdbtnGraduado.isSelected()) {
 									String areaEstudio = cbxAestudio.getSelectedItem().toString();
-									Graduado perfil = new Graduado(soli, idioma, licencia, mudarse, experiencia,
+									Graduado perfil = new Graduado(codigo,soli, idioma, licencia, mudarse, experiencia,
 											areaEstudio);
 									// soli.getMisPerfiles().add(perfil);
 									// Controladora.getInstance().getMisSolicitantes().add(soli);
@@ -302,7 +332,7 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
-									Obrero perfil = new Obrero(soli, idioma, licencia, mudarse, experiencia, habilidad);
+									Obrero perfil = new Obrero(codigo,soli, idioma, licencia, mudarse, experiencia, habilidad);
 									// soli.getMisPerfiles().add(perfil);
 									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
@@ -311,7 +341,7 @@ public class RegPerfil extends JDialog {
 								}
 								if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
-									Tecnico perfil = new Tecnico(soli, idioma, licencia, mudarse, experiencia, titulo);
+									Tecnico perfil = new Tecnico(codigo,soli, idioma, licencia, mudarse, experiencia, titulo);
 									// soli.getMisPerfiles().add(perfil);
 									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
