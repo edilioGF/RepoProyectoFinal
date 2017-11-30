@@ -300,8 +300,14 @@ public class RegEmpleo extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				String codigoEmp = txtCodigoEmp.getText();
 				empresa = Controladora.getInstance().buscarEmpresa(codigoEmp);
+				if(empresa != null){
 				txtNombreEmp.setText(empresa.getNombre());
 				txtUbicacionEmp.setText(empresa.getUbicacion());
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "La empresa que busca no existe", "Aviso",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		btnBuscar.setBounds(275, 26, 89, 23);
@@ -359,7 +365,7 @@ public class RegEmpleo extends JDialog {
 						if (empresa == null && emp == null) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una empresa");
 						} else {
-							// String codigo = txtCodigo.getText();
+							String codigo = txtCodigo.getText();
 							String titulo = txtTitulo.getText();
 							int vacantes = Integer.valueOf(spnVacantes.getValue().toString());
 							String descripcion = txtDescripcion.getText();
@@ -376,21 +382,21 @@ public class RegEmpleo extends JDialog {
 
 							if (graduado) {
 								String area = cbxAreaEstudio.getSelectedItem().toString();
-								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
 										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "",
 										area, "", empresa);
 							}
 
 							if (tecnico) {
 								String tituloTecnico = cbxTitulo.getSelectedItem().toString();
-								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
 										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,
 										tituloTecnico, "", "", empresa);
 							}
 
 							if (obrero) {
 								String habilidad = cbxHabilidad.getSelectedItem().toString();
-								empleo = new Empleo(titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
 										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "", "",
 										habilidad, empresa);
 							}

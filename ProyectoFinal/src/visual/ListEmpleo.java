@@ -61,17 +61,16 @@ public class ListEmpleo extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				btnDetalles.setEnabled(true);
-				// btnSolicitar.setEnabled(true);
 
 				int index = table.getSelectedRow();
 				codigo = (String) table.getModel().getValueAt(index, 0);
-				// empleo = Controladora.getInstance().buscarEmpleo(codigo);
+				empleo = Controladora.getInstance().buscarEmpleo(codigo);
 			}
 		});
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Título", "Vacantes", "Salario", "Nombre Empresa" };
+		String[] columns = {"Código","Título", "Vacantes", "Salario", "Nombre Empresa" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
@@ -113,7 +112,8 @@ public class ListEmpleo extends JDialog {
 		}
 		loadTable();
 	}
-
+ 
+	
 	private void loadTable() {
 		// TODO Auto-generated method stub
 		model.setRowCount(0);
@@ -122,11 +122,11 @@ public class ListEmpleo extends JDialog {
 		for (Empleo empleo : Controladora.getInstance().getMisEmpleos()) {
 			// if (tipo.equalsIgnoreCase("<Todas>") ||
 			// tipo.equalsIgnoreCase(empleo.getArea())) {
-			// fila[0] = empleo.getCodigo();
-			fila[0] = empleo.getTitulo();
-			fila[1] = empleo.getVacantes();
-			fila[2] = empleo.getSalario();
-			fila[3] = empleo.getEmpresa().getNombre();
+			fila[0] = empleo.getCodigo();
+			fila[1] = empleo.getTitulo();
+			fila[2] = empleo.getVacantes();
+			fila[3] = empleo.getSalario();
+			fila[4] = empleo.getEmpresa().getNombre();
 
 			model.addRow(fila);
 			// }

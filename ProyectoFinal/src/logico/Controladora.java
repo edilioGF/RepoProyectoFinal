@@ -302,6 +302,20 @@ public class Controladora {
 		}
 		return empresa;
 	}
+	
+	public Empleo buscarEmpleo(String codigo) {
+		Empleo empleo = null;
+		boolean find = false;
+		int i = 0;
+		while (!find && i < misEmpresas.size()) {
+			if (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) {
+				empleo = misEmpleos.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return empleo;
+	}
 
 	public int[] contarHombresMujeres() {
 		// 0 -> Mujeres // 1 -> Hombres
@@ -436,4 +450,5 @@ public class Controladora {
 	public void setMisPerfiles2(ArrayList<Perfil> misPerfiles2) {
 		this.misPerfiles2 = misPerfiles2;
 	}
+
 }

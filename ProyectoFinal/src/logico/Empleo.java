@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Empleo implements Serializable {
+	private String codigo;
 	private String titulo;
 	private String fecha;
 	private int vacantes;
@@ -39,10 +40,11 @@ public class Empleo implements Serializable {
 
 	private Solicitante empleado;
 
-	public Empleo(String titulo, int vacantes, String descripcion, float salario, int horaInicial, int horaFinal,
+	public Empleo(String codigo,String titulo, int vacantes, String descripcion, float salario, int horaInicial, int horaFinal,
 			boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia, boolean graduado,
 			boolean tecnico, boolean obrero, String tituloTecnico, String area, String habilidad, Empresa empresa) {
 		super();
+		this.codigo = codigo;
 		this.titulo = titulo;
 
 		Date date = new Date();
@@ -220,5 +222,13 @@ public class Empleo implements Serializable {
 
 	public void setLicencia(boolean licencia) {
 		this.licencia = licencia;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 }
