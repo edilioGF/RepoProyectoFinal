@@ -316,7 +316,21 @@ public class Controladora {
 		}
 		return empleo;
 	}
-
+	
+	public Perfil buscarPerfil(String codigo){
+		Perfil profile = null;
+		boolean find = false;
+		int i =0;
+		while(!find && i < misPerfiles.size()){
+			if(misPerfiles.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				profile = misPerfiles.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return profile;
+	}
+	
 	public int[] contarHombresMujeres() {
 		// 0 -> Mujeres // 1 -> Hombres
 		int arr[] = { 0, 0 };
