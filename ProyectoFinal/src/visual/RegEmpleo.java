@@ -186,11 +186,11 @@ public class RegEmpleo extends JDialog {
 		cbLicencia = new JCheckBox("");
 		cbLicencia.setBounds(100, 313, 20, 23);
 		panel.add(cbLicencia);
-		
+
 		JLabel lblCdigo = new JLabel("C\u00F3digo:");
 		lblCdigo.setBounds(10, 20, 100, 14);
 		panel.add(lblCdigo);
-		
+
 		String codigo = String.format("%s-%03d", "EMP", Controladora.getInstance().getMisEmpleos().size() + 1);
 		txtCodigo = new JTextField(codigo);
 		txtCodigo.setEditable(false);
@@ -259,6 +259,7 @@ public class RegEmpleo extends JDialog {
 		pnlTecnico.add(lblTtulo_1);
 
 		cbxTitulo = new JComboBox();
+		cbxTitulo.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
 		cbxTitulo.setBounds(10, 50, 219, 23);
 		pnlTecnico.add(cbxTitulo);
 
@@ -274,6 +275,7 @@ public class RegEmpleo extends JDialog {
 		pnlObrero.add(lblHabilidad);
 
 		cbxHabilidad = new JComboBox();
+		cbxHabilidad.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
 		cbxHabilidad.setBounds(10, 50, 219, 23);
 		pnlObrero.add(cbxHabilidad);
 
@@ -338,17 +340,17 @@ public class RegEmpleo extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxAreaEstudio.getSelectedIndex() <= 0) {
+						if (cbxAreaEstudio.getSelectedIndex() <= 0 && rdbtnGraduado.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar un área de estudio ", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxHabilidad.getSelectedIndex() <= 0) {
+						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxTitulo.getSelectedIndex() <= 0) {
+						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;

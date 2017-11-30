@@ -27,6 +27,8 @@ import sun.applet.Main;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -148,13 +150,25 @@ public class Principal extends JFrame {
 			}
 		});
 		mnRegistrar.add(mntmPerfil);
-		
+
 		JMenu mnMatch = new JMenu("Match");
 		menuBar.add(mnMatch);
-		
+
 		JMenuItem mntmEjecutar = new JMenuItem("Ejecutar");
+		mntmEjecutar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Controladora.getInstance().verificarMatcheo()) {
+					EjecutandoMatcheo em = new EjecutandoMatcheo();
+					em.setModal(true);
+					em.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "No es necesario ejecutar el proceso de matcheo", "Aviso",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 		mnMatch.add(mntmEjecutar);
-		
+
 		JMenuItem mntmHistorial = new JMenuItem("Historial");
 		mnMatch.add(mntmHistorial);
 

@@ -74,29 +74,46 @@ public class Controladora {
 		}
 	}
 
-	public void match() {
-		ordenarPerfiles();
+	public boolean verificarMatcheo() {
+		boolean res = false;
+		int i = 0;
 
-		for (Empleo empleo : misEmpleos) {
-			if (empleo.getVacantes() > 0) {
-				// Perfiles organizados...
-				for (Perfil perfil : misPerfiles2) {
-					// Condiciones...
-					// #1 Experiencia
-					if (empleo.getExperiencia() <= perfil.getExperiencia()) {
-						// #2 Está dispuesto a mudarse?
-						if (perfil.isMudarse()) {
-							// #3 Tiene licencia?
-							if (perfil.isLicencia()) {
-								// #4 Idioma (?)
-								if (perfil.getIdioma().equalsIgnoreCase(empleo.getIdioma())) {
-									// #5 Formación...
-									if (empleo.isGraduado() && perfil instanceof Graduado) {
-										actualizarMatch(empleo, perfil);
-									} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
-										actualizarMatch(empleo, perfil);
-									} else {
-										actualizarMatch(empleo, perfil);
+		while (i < misEmpleos.size() && !res) {
+			if (!misEmpleos.get(i).isSatisfecho()) {
+				res = true;
+			}
+
+			i++;
+		}
+
+		return res;
+	}
+
+	public void match() {
+		if (verificarMatcheo()) {
+			ordenarPerfiles();
+
+			for (Empleo empleo : misEmpleos) {
+				if (empleo.getVacantes() > 0) {
+					// Perfiles organizados...
+					for (Perfil perfil : misPerfiles2) {
+						// Condiciones...
+						// #1 Experiencia
+						if (empleo.getExperiencia() <= perfil.getExperiencia()) {
+							// #2 Está dispuesto a mudarse?
+							if ((perfil.isMudarse() && empleo.isRemoto()) || (!empleo.isRemoto())) {
+								// #3 Tiene licencia?
+								if ((perfil.isLicencia() && empleo.isLicencia()) || (!empleo.isLicencia())) {
+									// #4 Idioma (?)
+									if (perfil.getIdioma().equalsIgnoreCase(empleo.getIdioma())) {
+										// #5 Formación...
+										if (empleo.isGraduado() && perfil instanceof Graduado) {
+											actualizarMatch(empleo, perfil);
+										} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
+											actualizarMatch(empleo, perfil);
+										} else {
+											actualizarMatch(empleo, perfil);
+										}
 									}
 								}
 							}
@@ -108,8 +125,10 @@ public class Controladora {
 	}
 
 	private void actualizarMatch(Empleo empleo, Perfil perfil) {
-		empleo.setSatisfecho(true);
 		empleo.setVacantes(empleo.getVacantes() - 1);
+		if (empleo.getVacantes() == 0) {
+			empleo.setSatisfecho(true);
+		}
 		perfil.setSatisfecha(true);
 		perfil.getSolicitante().desactivarPerfiles();
 		perfil.getSolicitante().setTrabajo(true);
