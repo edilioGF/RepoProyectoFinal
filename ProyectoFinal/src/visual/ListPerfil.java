@@ -44,6 +44,7 @@ public class ListPerfil extends JDialog {
 	private JTextField txtCedula;
 	private JComboBox cbxFormacion;
 	private Perfil perfil;
+	private JButton btnGuardar;
 
 	public ListPerfil() {
 		setResizable(false);
@@ -68,8 +69,10 @@ public class ListPerfil extends JDialog {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							if (table.getSelectedRow() >= 0) {
+								btnGuardar.setEnabled(true);
 								int index = table.getSelectedRow();
 								String codigo = table.getModel().getValueAt(index, 0).toString();
+								perfil = Controladora.getInstance().buscarPerfil(codigo);
 							}
 						}
 					});
@@ -130,18 +133,60 @@ public class ListPerfil extends JDialog {
 				}
 			});
 
-			JButton btnGuardar = new JButton("Guardar");
+			btnGuardar = new JButton("Guardar");
 			btnGuardar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						BufferedWriter writer = new BufferedWriter(new FileWriter(perfil.getCodigo()));
-						writer.write(perfil.getFecha());
+						writer.write("Fecha: " + perfil.getFecha());
 						writer.newLine();
 						writer.write("Código: " + perfil.getCodigo());
 						writer.newLine();
 						writer.write("Pertenece a: " + perfil.getSolicitante().getCedula() + " - "
 								+ perfil.getSolicitante().getNombre() + " " + perfil.getSolicitante().getApellidos());
 						writer.newLine();
+						writer.newLine();
+						writer.write("Estado: ");
+						if (perfil.isActiva()) {
+							writer.write("Activo");
+						} else {
+							writer.write("Inactivo");
+						}
+						writer.newLine();
+						writer.write("Idioma: " + perfil.getIdioma());
+						writer.newLine();
+						writer.write("Perfil de: ");
+
+						if (perfil instanceof Graduado) {
+							writer.write("Graduado");
+							writer.newLine();
+							writer.write("Área de Estudio: " + ((Graduado) perfil).getAreaEstudio());
+						} else if (perfil instanceof Tecnico) {
+							writer.write("Técnico");
+							writer.newLine();
+							writer.write("Título: " + ((Tecnico) perfil).getTitulo());
+						} else {
+							writer.write("Obrero");
+							writer.newLine();
+							writer.write("Habilidad: " + ((Obrero) perfil).getHabilidad());
+						}
+
+						writer.newLine();
+						writer.write("Experiencia: " + perfil.getExperiencia());
+						writer.newLine();
+
+						if (perfil.isLicencia()) {
+							writer.write("Licencia: " + "Sí");
+						} else {
+							writer.write("Licencia: " + "No");
+						}
+						writer.newLine();
+						if (perfil.isMudarse()) {
+							writer.write("Disposición a mudarse: " + "Sí");
+						} else {
+							writer.write("Disposición a mudarse: " + "No");
+						}
+
 						writer.close();
 
 						JOptionPane.showMessageDialog(null, "Se ha guardado un archivo con los datos de este perfil",

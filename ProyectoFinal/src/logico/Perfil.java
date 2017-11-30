@@ -16,12 +16,13 @@ public abstract class Perfil implements Serializable {
 	private boolean activa;
 	private boolean satisfecha;
 
-	public Perfil(String codigo , Solicitante solicitante, String idioma, boolean licencia, boolean mudarse, int experiencia) {
+	public Perfil(String codigo, Solicitante solicitante, String idioma, boolean licencia, boolean mudarse,
+			int experiencia) {
 		super();
 
 		Date date = new Date();
 		String str = new SimpleDateFormat("dd/MM/yyyy").format(date);
-		
+
 		this.fecha = str;
 		this.codigo = codigo;
 		this.solicitante = solicitante;
@@ -29,10 +30,15 @@ public abstract class Perfil implements Serializable {
 		this.licencia = licencia;
 		this.mudarse = mudarse;
 		this.experiencia = experiencia;
-		this.activa = true;
+
+		if (this.solicitante.isTrabajo()) {
+			this.activa = false;
+		} else {
+			this.activa = true;
+		}
+
 		this.satisfecha = false;
 	}
-	
 
 	public boolean isSatisfecha() {
 		return satisfecha;
