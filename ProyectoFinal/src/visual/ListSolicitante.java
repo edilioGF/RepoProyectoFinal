@@ -65,7 +65,7 @@ public class ListSolicitante extends JDialog {
 					cbxGenero = new JComboBox();
 					cbxGenero.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							loadTable(cbxGenero.getSelectedItem().toString());
+							loadTable(cbxGenero.getSelectedItem().toString(), txtCedula.getText());
 						}
 					});
 					cbxGenero.setModel(new DefaultComboBoxModel(new String[] { "<Todos>" }));
@@ -86,13 +86,13 @@ public class ListSolicitante extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							String cedula = txtCedula.getText();
 
-							loadTable(cedula);
+							loadTable(cbxGenero.getSelectedItem().toString(), cedula);
 						}
 					});
 					btnBuscar.setBounds(571, 16, 89, 23);
 					contentPanel.add(btnBuscar);
 					String[] columns = { "Cédula", "Nombre", "Fecha de Nacimiento", "País de Origen",
-							"País de Residencia", "Género" , "Trabajo"  , "Cant.Perfiles" };
+							"País de Residencia", "Género", "Trabajo", "Cant.Perfiles" };
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 				}
@@ -115,7 +115,7 @@ public class ListSolicitante extends JDialog {
 
 		}
 		load();
-		loadTable(cbxGenero.getSelectedItem().toString());
+		loadTable(cbxGenero.getSelectedItem().toString(), txtCedula.getText());
 	}
 
 	private void load() {
@@ -124,14 +124,15 @@ public class ListSolicitante extends JDialog {
 		}
 	}
 
-	private void loadTable(String mode) {
+	private void loadTable(String mode, String mode2) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		String trabajo;
 		
 		for (Solicitante soli : Controladora.getInstance().getMisSolicitantes()) {
-			if (mode.equalsIgnoreCase(soli.getGenero()) || mode.equalsIgnoreCase(soli.getCedula())
-					|| mode.equalsIgnoreCase("<Todos>")) {
+	
+			 if((mode.equalsIgnoreCase(soli.getGenero()) || mode.equalsIgnoreCase("<Todos>")) && 
+				(mode2.equalsIgnoreCase(soli.getCedula()) || mode2.equalsIgnoreCase(""))){
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombre() + " " + soli.getApellidos();
 				fila[2] = soli.getNacimiento();
