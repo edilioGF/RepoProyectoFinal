@@ -24,9 +24,14 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -38,6 +43,7 @@ public class ListPerfil extends JDialog {
 	private DefaultTableModel model;
 	private JTextField txtCedula;
 	private JComboBox cbxFormacion;
+	private Perfil perfil;
 
 	public ListPerfil() {
 		setResizable(false);
@@ -63,16 +69,15 @@ public class ListPerfil extends JDialog {
 						public void mouseClicked(MouseEvent arg0) {
 							if (table.getSelectedRow() >= 0) {
 								int index = table.getSelectedRow();
-								// cedula = (String)
-								// table.getModel().getValueAt(index, 2);
+								String codigo = table.getModel().getValueAt(index, 0).toString();
 							}
 						}
 					});
 					table.setDefaultEditor(Object.class, null);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					model = new DefaultTableModel();
-					String[] columns = { "Código", "Cédula - Nombre", "Formación", "Experiencia", "Licencia",
-							"movilidad geográfica" };
+					String[] columns = { "Cï¿½digo", "Cï¿½dula - Nombre", "Formaciï¿½n", "Experiencia", "Licencia",
+							"movilidad geogrï¿½fica" };
 					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
 				}
@@ -92,7 +97,7 @@ public class ListPerfil extends JDialog {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String cedula = txtCedula.getText();
-				loadTable(cbxFormacion.getSelectedItem().toString(),cedula);
+				loadTable(cbxFormacion.getSelectedItem().toString(), cedula);
 			}
 		});
 		btnNewButton.setBounds(560, 20, 89, 23);
@@ -106,7 +111,7 @@ public class ListPerfil extends JDialog {
 		cbxFormacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String cedula = txtCedula.getText();
-				loadTable(cbxFormacion.getSelectedItem().toString(),cedula);
+				loadTable(cbxFormacion.getSelectedItem().toString(), cedula);
 			}
 		});
 		cbxFormacion.setModel(
@@ -124,10 +129,35 @@ public class ListPerfil extends JDialog {
 					dispose();
 				}
 			});
+
+			JButton btnGuardar = new JButton("Guardar");
+			btnGuardar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						BufferedWriter writer = new BufferedWriter(new FileWriter(perfil.getCodigo()));
+						writer.write(perfil.getFecha());
+						writer.newLine();
+						writer.write("CÃ³digo: " + perfil.getCodigo());
+						writer.newLine();
+						writer.write("Pertenece a: " + perfil.getSolicitante().getCedula() + " - "
+								+ perfil.getSolicitante().getNombre() + " " + perfil.getSolicitante().getApellidos());
+						writer.newLine();
+						writer.close();
+
+						JOptionPane.showMessageDialog(null, "Se ha guardado un archivo con los datos de este perfil",
+								"Aviso", JOptionPane.INFORMATION_MESSAGE);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			btnGuardar.setEnabled(false);
+			buttonPane.add(btnGuardar);
 			buttonPane.add(btnCerrar);
 		}
 
-		loadTable(cbxFormacion.getSelectedItem().toString(),"");
+		loadTable(cbxFormacion.getSelectedItem().toString(), "");
 	}
 
 	private void loadTable(String formacion, String cedula) {
@@ -136,53 +166,53 @@ public class ListPerfil extends JDialog {
 		fila = new Object[model.getColumnCount()];
 
 		for (Perfil perfil : Controladora.getInstance().getMisPerfiles()) {
-				
-				if (perfil instanceof Graduado && 
-				   (formacion.equalsIgnoreCase("Graduados")|| formacion.equalsIgnoreCase("<Todos>"))) {
-					
-					if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
-						fila[0] = perfil.getCodigo();
-						fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre()
-								+ " " + perfil.getSolicitante().getApellidos();
-						fila[2] = "Graduado";
-						fila[3] = perfil.getExperiencia();
-						fila[4] = (perfil.isLicencia()) ? "Si" : "No";
-						fila[5] = (perfil.isMudarse()) ? "Si" : "No";
 
-						model.addRow(fila);
-					}
-				}
+			if (perfil instanceof Graduado
+					&& (formacion.equalsIgnoreCase("Graduados") || formacion.equalsIgnoreCase("<Todos>"))) {
 
-				if (perfil instanceof Tecnico && 
-						(formacion.equalsIgnoreCase("Técnicos")|| formacion.equalsIgnoreCase("<Todos>"))) {
-					if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
-						fila[0] = perfil.getCodigo();
-						fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre()
-								+ " " + perfil.getSolicitante().getApellidos();
-						fila[2] = "Técnico";
-						fila[3] = perfil.getExperiencia();
-						fila[4] = (perfil.isLicencia()) ? "Si" : "No";
-						fila[5] = (perfil.isMudarse()) ? "Si" : "No";
+				if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
+					fila[0] = perfil.getCodigo();
+					fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre() + " "
+							+ perfil.getSolicitante().getApellidos();
+					fila[2] = "Graduado";
+					fila[3] = perfil.getExperiencia();
+					fila[4] = (perfil.isLicencia()) ? "Si" : "No";
+					fila[5] = (perfil.isMudarse()) ? "Si" : "No";
 
-						model.addRow(fila);
-					}
-				}
-
-				if (perfil instanceof Obrero &&
-						(formacion.equalsIgnoreCase("Obreros")|| formacion.equalsIgnoreCase("<Todos>"))) {
-					if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
-						fila[0] = perfil.getCodigo();
-						fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre()
-								+ " " + perfil.getSolicitante().getApellidos();
-						fila[2] = "Obrero";
-						fila[3] = perfil.getExperiencia();
-						fila[4] = (perfil.isLicencia()) ? "Si" : "No";
-						fila[5] = (perfil.isMudarse()) ? "Si" : "No";
-
-						model.addRow(fila);
-					}
+					model.addRow(fila);
 				}
 			}
+
+			if (perfil instanceof Tecnico
+					&& (formacion.equalsIgnoreCase("Tï¿½cnicos") || formacion.equalsIgnoreCase("<Todos>"))) {
+				if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
+					fila[0] = perfil.getCodigo();
+					fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre() + " "
+							+ perfil.getSolicitante().getApellidos();
+					fila[2] = "Tï¿½cnico";
+					fila[3] = perfil.getExperiencia();
+					fila[4] = (perfil.isLicencia()) ? "Si" : "No";
+					fila[5] = (perfil.isMudarse()) ? "Si" : "No";
+
+					model.addRow(fila);
+				}
+			}
+
+			if (perfil instanceof Obrero
+					&& (formacion.equalsIgnoreCase("Obreros") || formacion.equalsIgnoreCase("<Todos>"))) {
+				if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
+					fila[0] = perfil.getCodigo();
+					fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre() + " "
+							+ perfil.getSolicitante().getApellidos();
+					fila[2] = "Obrero";
+					fila[3] = perfil.getExperiencia();
+					fila[4] = (perfil.isLicencia()) ? "Si" : "No";
+					fila[5] = (perfil.isMudarse()) ? "Si" : "No";
+
+					model.addRow(fila);
+				}
+			}
+		}
 
 		table.setModel(model);
 	}
