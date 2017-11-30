@@ -126,6 +126,7 @@ public class Controladora {
 
 	private void actualizarMatch(Empleo empleo, Perfil perfil) {
 		empleo.setVacantes(empleo.getVacantes() - 1);
+		empleo.setEmpleado(perfil.getSolicitante());
 		if (empleo.getVacantes() == 0) {
 			empleo.setSatisfecho(true);
 		}
