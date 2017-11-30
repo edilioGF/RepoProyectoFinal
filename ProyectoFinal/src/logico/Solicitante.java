@@ -27,6 +27,14 @@ public class Solicitante implements Serializable {
 		this.trabajo = true;
 		this.misPerfiles = new ArrayList<>();
 	}
+	
+
+	public void desactivarPerfiles() {
+		// TODO Auto-generated method stub
+		for (Perfil perfil : misPerfiles) {
+			perfil.setActiva(false);
+		}
+	}
 
 	public String getCedula() {
 		return cedula;
@@ -99,5 +107,4 @@ public class Solicitante implements Serializable {
 	public void setMisPerfiles(ArrayList<Perfil> misPerfiles) {
 		this.misPerfiles = misPerfiles;
 	}
-
 }

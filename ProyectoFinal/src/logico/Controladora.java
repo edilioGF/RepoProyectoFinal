@@ -32,7 +32,7 @@ public class Controladora {
 	private static String[] misHabilidades = { "Albañilería", "Carpintería", "Ebanistería", "Herrería", "Mecánica",
 			"Plomería", "Confeccionista", "Pintura", "Tapicería" };
 	private static String[] misFormaciones = { "Graduado", "Técnico", "Obrero" };
-	private static String[] misGeneros = {"Masculino" , "Femenino"};
+	private static String[] misGeneros = { "Masculino", "Femenino" };
 
 	private static Controladora controladora;
 
@@ -50,33 +50,69 @@ public class Controladora {
 		}
 		return controladora;
 	}
-	
+
 	public void ordenarPerfiles() {
-        int i, j, mayor, pos;
-        Perfil tmp;
-        misPerfiles2 = misPerfiles;
-        
-        for (i = 0; i < misPerfiles2.size()- 1; i++) { 
-              mayor = misPerfiles2.get(i).getExperiencia(); 
-              pos = i; 
-              
-              for (j = i + 1; j < misPerfiles2.size(); j++){ 
-                    if (misPerfiles2.get(j).getExperiencia() > mayor) { 
-                        mayor = misPerfiles2.get(j).getExperiencia(); 
-                        pos = j;
-                    }
-              }
-              if (pos != i){ 
-                  tmp = misPerfiles2.get(i);
-                  misPerfiles2.set(i,misPerfiles2.get(pos));
-                  misPerfiles2.set(pos, tmp);
-              }
-        }
+		int i, j, mayor, pos;
+		Perfil tmp;
+		misPerfiles2 = misPerfiles;
+
+		for (i = 0; i < misPerfiles2.size() - 1; i++) {
+			mayor = misPerfiles2.get(i).getExperiencia();
+			pos = i;
+
+			for (j = i + 1; j < misPerfiles2.size(); j++) {
+				if (misPerfiles2.get(j).getExperiencia() > mayor) {
+					mayor = misPerfiles2.get(j).getExperiencia();
+					pos = j;
+				}
+			}
+			if (pos != i) {
+				tmp = misPerfiles2.get(i);
+				misPerfiles2.set(i, misPerfiles2.get(pos));
+				misPerfiles2.set(pos, tmp);
+			}
+		}
 	}
-	
-	public void match()
-	{
-		
+
+	public void match() {
+		ordenarPerfiles();
+
+		for (Empleo empleo : misEmpleos) {
+			if (empleo.getVacantes() > 0) {
+				// Perfiles organizados...
+				for (Perfil perfil : misPerfiles2) {
+					// Condiciones...
+					// #1 Experiencia
+					if (empleo.getExperiencia() <= perfil.getExperiencia()) {
+						// #2 Está dispuesto a mudarse?
+						if (perfil.isMudarse()) {
+							// #3 Tiene licencia?
+							if (perfil.isLicencia()) {
+								// #4 Idioma (?)
+								if (perfil.getIdioma().equalsIgnoreCase(empleo.getIdioma())) {
+									// #5 Formación...
+									if (empleo.isGraduado() && perfil instanceof Graduado) {
+										actualizarMatch(empleo, perfil);
+									} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
+										actualizarMatch(empleo, perfil);
+									} else {
+										actualizarMatch(empleo, perfil);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void actualizarMatch(Empleo empleo, Perfil perfil) {
+		empleo.setSatisfecho(true);
+		empleo.setVacantes(empleo.getVacantes() - 1);
+		perfil.setSatisfecha(true);
+		perfil.getSolicitante().desactivarPerfiles();
+		perfil.getSolicitante().setTrabajo(true);
 	}
 
 	public void saveData() throws IOException {
@@ -169,7 +205,6 @@ public class Controladora {
 			archPerfiles.close();
 		}
 	}
-	
 
 	// Se busca empresa por empresa
 	// Se obtienen las ofertas / empleos
