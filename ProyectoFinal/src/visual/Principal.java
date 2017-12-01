@@ -169,9 +169,6 @@ public class Principal extends JFrame {
 		});
 		mnMatch.add(mntmEjecutar);
 
-		JMenuItem mntmHistorial = new JMenuItem("Historial");
-		mnMatch.add(mntmHistorial);
-
 		JMenu mnListado = new JMenu("Listar");
 		menuBar.add(mnListado);
 
