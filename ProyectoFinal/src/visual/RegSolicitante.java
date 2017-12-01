@@ -159,13 +159,20 @@ public class RegSolicitante extends JDialog {
 							Date date = dateChooser.getDate();
 							String str = new SimpleDateFormat("dd/MM/yyyy").format(date);
 							String nacimiento = str;
-							solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
+							if(cedula.isEmpty() || nombre.isEmpty() || apellidos.isEmpty()){
+								JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
+										JOptionPane.INFORMATION_MESSAGE);
+								return;
+							}else{
+								solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
 									paisResidencia);
 							dispose();
 
 							RegPerfil perfil = new RegPerfil(solicitante);
 							perfil.setModal(true);
 							perfil.setVisible(true);
+							}
+							
 						}
 
 					}
