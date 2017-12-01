@@ -273,6 +273,16 @@ public class RegPerfil extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						if(txtCedula.getText().isEmpty()){
+							JOptionPane.showMessageDialog(null, "Debe buscar un solicitante primero", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxIdioma.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un idioma", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						if (solicitante == null && soli == null) {
 							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
 						} else {
