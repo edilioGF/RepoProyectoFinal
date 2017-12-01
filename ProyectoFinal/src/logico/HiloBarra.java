@@ -1,5 +1,7 @@
 package logico;
 
+import java.io.IOException;
+
 import visual.EjecutandoMatcheo;
 
 public class HiloBarra extends Thread {
@@ -17,7 +19,12 @@ public class HiloBarra extends Thread {
 				e.printStackTrace();
 			}
 		}
-		
-		Controladora.getInstance().match();
+
+		try {
+			Controladora.getInstance().match();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

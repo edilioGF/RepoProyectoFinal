@@ -1,15 +1,19 @@
 package logico;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
@@ -89,30 +93,46 @@ public class Controladora {
 		return res;
 	}
 
-	public void match() {
+	public void match() throws IOException {
 		if (verificarMatcheo()) {
 			ordenarPerfiles();
+
+			Date date = new Date();
+			String str = new SimpleDateFormat("dd_MM_yyyy_hh_mm").format(date);
+			BufferedWriter writer = new BufferedWriter(new FileWriter("Match_" + str + ".txt"));
 
 			for (Empleo empleo : misEmpleos) {
 				if (empleo.getVacantes() > 0) {
 					// Perfiles organizados...
 					for (Perfil perfil : misPerfiles2) {
-						// Condiciones...
-						// #1 Experiencia
-						if (empleo.getExperiencia() <= perfil.getExperiencia()) {
-							// #2 Está dispuesto a mudarse?
-							if ((perfil.isMudarse() && empleo.isRemoto()) || (!empleo.isRemoto())) {
-								// #3 Tiene licencia?
-								if ((perfil.isLicencia() && empleo.isLicencia()) || (!empleo.isLicencia())) {
-									// #4 Idioma (?)
-									if (perfil.getIdioma().equalsIgnoreCase(empleo.getIdioma())) {
-										// #5 Formación...
-										if (empleo.isGraduado() && perfil instanceof Graduado) {
-											actualizarMatch(empleo, perfil);
-										} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
-											actualizarMatch(empleo, perfil);
-										} else {
-											actualizarMatch(empleo, perfil);
+						if (!perfil.getSolicitante().isTrabajo()) {
+							// Condiciones...
+							// #1 Experiencia
+							if (empleo.getExperiencia() <= perfil.getExperiencia()) {
+								// #2 Está dispuesto a mudarse?
+								if ((perfil.isMudarse() && empleo.isRemoto()) || (!empleo.isRemoto())) {
+									// #3 Tiene licencia?
+									if ((perfil.isLicencia() && empleo.isLicencia()) || (!empleo.isLicencia())) {
+										// #4 Idioma (?)
+										if (perfil.getIdioma().equalsIgnoreCase(empleo.getIdioma())) {
+											// #5 Formación...
+											if (empleo.isGraduado() && perfil instanceof Graduado) {
+												actualizarMatch(empleo, perfil);
+											} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
+												actualizarMatch(empleo, perfil);
+											} else {
+												actualizarMatch(empleo, perfil);
+											}
+
+											writer.write(empleo.getEmpleado().getCedula() + "-"
+													+ empleo.getEmpleado().getNombre() + " "
+													+ empleo.getEmpleado().getApellidos() + " ahora trabaja con: "
+													+ empleo.getEmpresa().getRnc() + "-"
+													+ empleo.getEmpresa().getNombre() + ", en el empleo: "
+													+ empleo.getCodigo() + " " + empleo.getTitulo());
+
+											writer.newLine();
+											writer.newLine();
 										}
 									}
 								}
@@ -121,6 +141,8 @@ public class Controladora {
 					}
 				}
 			}
+
+			writer.close();
 		}
 	}
 
@@ -302,7 +324,7 @@ public class Controladora {
 		}
 		return empresa;
 	}
-	
+
 	public Empleo buscarEmpleo(String codigo) {
 		Empleo empleo = null;
 		boolean find = false;
@@ -316,13 +338,13 @@ public class Controladora {
 		}
 		return empleo;
 	}
-	
-	public Perfil buscarPerfil(String codigo){
+
+	public Perfil buscarPerfil(String codigo) {
 		Perfil profile = null;
 		boolean find = false;
-		int i =0;
-		while(!find && i < misPerfiles.size()){
-			if(misPerfiles.get(i).getCodigo().equalsIgnoreCase(codigo)){
+		int i = 0;
+		while (!find && i < misPerfiles.size()) {
+			if (misPerfiles.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				profile = misPerfiles.get(i);
 				find = true;
 			}
@@ -330,7 +352,7 @@ public class Controladora {
 		}
 		return profile;
 	}
-	
+
 	public int[] contarHombresMujeres() {
 		// 0 -> Mujeres // 1 -> Hombres
 		int arr[] = { 0, 0 };
