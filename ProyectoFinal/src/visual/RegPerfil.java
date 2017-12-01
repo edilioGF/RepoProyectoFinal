@@ -159,6 +159,37 @@ public class RegPerfil extends JDialog {
 		rdbtnObrero.setSelected(false);
 		rdbtnObrero.setBounds(249, 23, 90, 23);
 		panel_1.add(rdbtnObrero);
+		
+				pnlGraduado = new JPanel();
+				pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				pnlGraduado.setBounds(10, 483, 364, 70);
+				contentPanel.add(pnlGraduado);
+				pnlGraduado.setLayout(null);
+				
+						JLabel lblNewLabel_1 = new JLabel("\u00C1rea de Estudio:");
+						lblNewLabel_1.setBounds(10, 30, 124, 14);
+						pnlGraduado.add(lblNewLabel_1);
+						
+								cbxAestudio = new JComboBox();
+								cbxAestudio.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+								cbxAestudio.setBounds(144, 27, 210, 20);
+								pnlGraduado.add(cbxAestudio);
+		
+				pnlTecnico = new JPanel();
+				pnlTecnico
+						.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				pnlTecnico.setBounds(10, 483, 364, 70);
+				contentPanel.add(pnlTecnico);
+				pnlTecnico.setLayout(null);
+				
+						JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
+						lblNewLabel.setBounds(10, 30, 54, 14);
+						pnlTecnico.add(lblNewLabel);
+						
+								cbxTitulo = new JComboBox();
+								cbxTitulo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+								cbxTitulo.setBounds(144, 27, 210, 20);
+								pnlTecnico.add(cbxTitulo);
 
 		pnlObrero = new JPanel();
 		pnlObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -171,37 +202,9 @@ public class RegPerfil extends JDialog {
 		pnlObrero.add(lblHabilidad);
 
 		cbxHabilidad = new JComboBox();
+		cbxHabilidad.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
 		cbxHabilidad.setBounds(144, 27, 210, 20);
 		pnlObrero.add(cbxHabilidad);
-
-		pnlGraduado = new JPanel();
-		pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlGraduado.setBounds(10, 483, 364, 70);
-		contentPanel.add(pnlGraduado);
-		pnlGraduado.setLayout(null);
-
-		JLabel lblNewLabel_1 = new JLabel("\u00C1rea de Estudio:");
-		lblNewLabel_1.setBounds(10, 30, 124, 14);
-		pnlGraduado.add(lblNewLabel_1);
-
-		cbxAestudio = new JComboBox();
-		cbxAestudio.setBounds(144, 27, 210, 20);
-		pnlGraduado.add(cbxAestudio);
-
-		pnlTecnico = new JPanel();
-		pnlTecnico
-				.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlTecnico.setBounds(10, 483, 364, 70);
-		contentPanel.add(pnlTecnico);
-		pnlTecnico.setLayout(null);
-
-		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
-		lblNewLabel.setBounds(10, 30, 54, 14);
-		pnlTecnico.add(lblNewLabel);
-
-		cbxTitulo = new JComboBox();
-		cbxTitulo.setBounds(144, 27, 210, 20);
-		pnlTecnico.add(cbxTitulo);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
