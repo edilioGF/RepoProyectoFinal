@@ -405,6 +405,7 @@ public class RegEmpleo extends JDialog {
 								empleo.setEmpresa(emp);
 								Controladora.getInstance().addEmpresa(emp);
 							}
+							System.out.println("KLK");
 							Controladora.getInstance().addEmpleo(empleo);
 							Principal.loadStats();
 							JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Aviso",
