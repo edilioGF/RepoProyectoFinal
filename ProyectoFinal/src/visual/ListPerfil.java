@@ -34,6 +34,7 @@ import java.io.IOException;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.EtchedBorder;
 
 public class ListPerfil extends JDialog {
 
@@ -49,7 +50,7 @@ public class ListPerfil extends JDialog {
 	public ListPerfil() {
 		setResizable(false);
 		setTitle("Listado de Perfiles");
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 1000, 600);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,7 +58,7 @@ public class ListPerfil extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(10, 60, 774, 367);
+			panel.setBounds(10, 60, 974, 467);
 			contentPanel.add(panel);
 			panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 			{
@@ -80,7 +81,7 @@ public class ListPerfil extends JDialog {
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					model = new DefaultTableModel();
 					String[] columns = { "Código", "Cédula - Nombre", "Formación", "Experiencia (Años)", "Licencia",
-							"Mudanza" , "Activa"};
+							"Mudanza", "Activa" };
 					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
 				}
@@ -123,6 +124,7 @@ public class ListPerfil extends JDialog {
 		contentPanel.add(cbxFormacion);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 

@@ -126,7 +126,7 @@ public class RegEmpleo extends JDialog {
 		panel.add(lblExperiencia);
 
 		spnExp = new JSpinner();
-		spnExp.setModel(new SpinnerNumberModel(new Integer(0), null, null, new Integer(1)));
+		spnExp.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnExp.setBounds(100, 213, 70, 23);
 		panel.add(spnExp);
 
@@ -151,10 +151,12 @@ public class RegEmpleo extends JDialog {
 		panel.add(lblHoraFinal);
 
 		spnHoraInicial = new JSpinner();
+		spnHoraInicial.setModel(new SpinnerNumberModel(0, 0, 23, 1));
 		spnHoraInicial.setBounds(10, 260, 70, 23);
 		panel.add(spnHoraInicial);
 
 		spnHoraFinal = new JSpinner();
+		spnHoraFinal.setModel(new SpinnerNumberModel(0, 0, 23, 1));
 		spnHoraFinal.setBounds(100, 260, 70, 23);
 		panel.add(spnHoraFinal);
 

@@ -27,6 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.EtchedBorder;
 
 public class ListEmpleo extends JDialog {
 
@@ -45,7 +46,7 @@ public class ListEmpleo extends JDialog {
 	public ListEmpleo(Solicitante solicitante) {
 		setResizable(false);
 		setTitle("Listado de Empleos");
-		setBounds(100, 100, 700, 454);
+		setBounds(100, 100, 1000, 600);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +54,7 @@ public class ListEmpleo extends JDialog {
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 45, 664, 322);
+		panel.setBounds(10, 45, 974, 482);
 		contentPanel.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
@@ -120,6 +121,7 @@ public class ListEmpleo extends JDialog {
 		contentPanel.add(cbxFormacion);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

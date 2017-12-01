@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.EtchedBorder;
 
 public class ListSolicitante extends JDialog {
 
@@ -40,7 +41,7 @@ public class ListSolicitante extends JDialog {
 	public ListSolicitante() {
 		setResizable(false);
 		setTitle("Listado de Solicitantes");
-		setBounds(100, 100, 685, 428);
+		setBounds(100, 100, 1000, 600);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,7 +49,7 @@ public class ListSolicitante extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(10, 47, 650, 298);
+			panel.setBounds(10, 47, 974, 480);
 			contentPanel.add(panel);
 			panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 			{
@@ -92,8 +93,8 @@ public class ListSolicitante extends JDialog {
 					});
 					btnBuscar.setBounds(571, 16, 89, 23);
 					contentPanel.add(btnBuscar);
-					String[] columns = { "Cédula", "Nombre", "Fecha de Nacimiento", "País de Origen",
-							"País de Residencia", "Género", "Trabajo", "Cant.Perfiles" };
+					String[] columns = { "Cédula", "Nombre", "Nacimiento", "País de Origen", "País de Residencia",
+							"Género", "Trabajo", "Perfiles" };
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columns);
 				}
@@ -101,6 +102,7 @@ public class ListSolicitante extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -129,26 +131,26 @@ public class ListSolicitante extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		String trabajo;
-		
+
 		for (Solicitante soli : Controladora.getInstance().getMisSolicitantes()) {
-	
-			 if((mode.equalsIgnoreCase(soli.getGenero()) || mode.equalsIgnoreCase("<Todos>")) && 
-				(mode2.equalsIgnoreCase(soli.getCedula()) || mode2.equalsIgnoreCase(""))){
+
+			if ((mode.equalsIgnoreCase(soli.getGenero()) || mode.equalsIgnoreCase("<Todos>"))
+					&& (mode2.equalsIgnoreCase(soli.getCedula()) || mode2.equalsIgnoreCase(""))) {
 				fila[0] = soli.getCedula();
 				fila[1] = soli.getNombre() + " " + soli.getApellidos();
 				fila[2] = soli.getNacimiento();
 				fila[3] = soli.getPaisOrigen();
 				fila[4] = soli.getPaisResidencia();
 				fila[5] = soli.getGenero();
-				if(soli.isTrabajo() == false){
+				if (soli.isTrabajo() == false) {
 					trabajo = "No";
-				fila[6] = trabajo;
-				}else{
+					fila[6] = trabajo;
+				} else {
 					trabajo = "Si";
 					fila[6] = trabajo;
 				}
 				fila[7] = soli.getMisPerfiles().size();
-				
+
 				model.addRow(fila);
 			}
 		}

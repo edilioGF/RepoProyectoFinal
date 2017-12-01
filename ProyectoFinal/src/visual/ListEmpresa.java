@@ -36,7 +36,7 @@ public class ListEmpresa extends JDialog {
 	public ListEmpresa() {
 		setResizable(false);
 		setTitle("Listado de Empresas");
-		setBounds(100, 100, 700, 450);
+		setBounds(100, 100, 1000, 600);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,7 +44,7 @@ public class ListEmpresa extends JDialog {
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 49, 672, 324);
+		panel.setBounds(12, 49, 972, 474);
 		contentPanel.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
