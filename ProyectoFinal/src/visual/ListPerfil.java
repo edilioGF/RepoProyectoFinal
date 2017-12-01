@@ -80,7 +80,7 @@ public class ListPerfil extends JDialog {
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					model = new DefaultTableModel();
 					String[] columns = { "Código", "Cédula - Nombre", "Formación", "Experiencia (Años)", "Licencia",
-							"Mudanza" };
+							"Mudanza" , "Activa"};
 					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
 				}
@@ -223,6 +223,7 @@ public class ListPerfil extends JDialog {
 					fila[3] = perfil.getExperiencia();
 					fila[4] = (perfil.isLicencia()) ? "Sí" : "No";
 					fila[5] = (perfil.isMudarse()) ? "Sí" : "No";
+					fila[6] = (perfil.isActiva()) ? "Sí" : "No";
 
 					model.addRow(fila);
 				}
@@ -238,6 +239,7 @@ public class ListPerfil extends JDialog {
 					fila[3] = perfil.getExperiencia();
 					fila[4] = (perfil.isLicencia()) ? "Sí" : "No";
 					fila[5] = (perfil.isMudarse()) ? "Sí" : "No";
+					fila[6] = (perfil.isActiva()) ? "Sí" : "No";
 
 					model.addRow(fila);
 				}
@@ -253,6 +255,7 @@ public class ListPerfil extends JDialog {
 					fila[3] = perfil.getExperiencia();
 					fila[4] = (perfil.isLicencia()) ? "Sí" : "No";
 					fila[5] = (perfil.isMudarse()) ? "Sí" : "No";
+					fila[6] = (perfil.isActiva()) ? "Sí" : "No";
 
 					model.addRow(fila);
 				}
