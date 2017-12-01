@@ -381,7 +381,7 @@ public class RegPerfil extends JDialog {
 			txtApellido.setText(solicitante.getApellidos());
 
 			txtCedula.setEditable(false);
-			btnBuscar.setEnabled(false);
+			btnBuscar.setVisible(false);
 
 		}
 	}

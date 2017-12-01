@@ -38,6 +38,7 @@ public class ListSolicitante extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListSolicitante() {
+		setResizable(false);
 		setTitle("Listado de Solicitantes");
 		setBounds(100, 100, 685, 428);
 		setLocationRelativeTo(null);

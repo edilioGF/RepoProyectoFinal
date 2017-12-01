@@ -34,7 +34,6 @@ public class ListEmpleo extends JDialog {
 	private JTable table;
 	private Object[] fila;
 	private DefaultTableModel model;
-	private JButton btnDetalles;
 	private String codigo;
 	private Empleo empleo;
 	private JComboBox cbxFormacion;
@@ -44,6 +43,7 @@ public class ListEmpleo extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListEmpleo(Solicitante solicitante) {
+		setResizable(false);
 		setTitle("Listado de Empleos");
 		setBounds(100, 100, 700, 454);
 		setLocationRelativeTo(null);
@@ -61,20 +61,10 @@ public class ListEmpleo extends JDialog {
 		panel.add(scrollPane);
 
 		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				btnDetalles.setEnabled(true);
-
-				int index = table.getSelectedRow();
-				codigo = (String) table.getModel().getValueAt(index, 0);
-				empleo = Controladora.getInstance().buscarEmpleo(codigo);
-			}
-		});
 		table.setDefaultEditor(Object.class, null);
-		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Código", "Título", "Salario", "Nombre Empresa" , "Idioma" , "Año de Experiencia", "Hora Inical" , "Hora Final" , "Vacantes"};
+		String[] columns = { "Código", "Título", "Salario", "Nombre Empresa", "Idioma", "Año de Experiencia",
+				"Hora Inical", "Hora Final", "Vacantes" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
@@ -132,19 +122,6 @@ public class ListEmpleo extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				btnDetalles = new JButton("Detalles");
-				btnDetalles.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						DetallesEmpleo dtEmp = new DetallesEmpleo(empleo);
-						setModal(false);
-						dtEmp.setModal(true);
-						dtEmp.setVisible(true);
-					}
-				});
-				btnDetalles.setEnabled(false);
-				buttonPane.add(btnDetalles);
-			}
 			{
 				JButton cancelButton = new JButton("Cerrar");
 				cancelButton.addActionListener(new ActionListener() {
@@ -216,7 +193,7 @@ public class ListEmpleo extends JDialog {
 				fila[6] = empleo.getHoraInicial();
 				fila[7] = empleo.getHoraFinal();
 				fila[8] = empleo.getVacantes();
-			
+
 				model.addRow(fila);
 			} else if (p1.equalsIgnoreCase("Técnico") && empleo.isTecnico() && (p2.equalsIgnoreCase("<Todas>"))
 					|| p2.equalsIgnoreCase(empleo.getTitulo())) {
