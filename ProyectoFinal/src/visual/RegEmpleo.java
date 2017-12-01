@@ -379,31 +379,38 @@ public class RegEmpleo extends JDialog {
 							boolean graduado = rdbtnGraduado.isSelected();
 							boolean tecnico = rdbtnTecnico.isSelected();
 							boolean obrero = rdbtnObrero.isSelected();
-
-							if (graduado) {
+							if (codigo.isEmpty() || titulo.isEmpty() || descripcion.isEmpty() )
+							{
+								JOptionPane.showMessageDialog(null, "Le falto campos por llenar", "Aviso",
+										JOptionPane.INFORMATION_MESSAGE);
+								return;
+							
+							}else{
+								
+								   if (graduado) {
 								String area = cbxAreaEstudio.getSelectedItem().toString();
 								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
 										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "",
 										area, "", empresa);
 							}
 
-							if (tecnico) {
-								String tituloTecnico = cbxTitulo.getSelectedItem().toString();
-								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
-										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,
-										tituloTecnico, "", "", empresa);
+							    if (tecnico) {
+							    	String tituloTecnico = cbxTitulo.getSelectedItem().toString();
+							    	empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+							    			false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,
+							    			tituloTecnico, "", "", empresa);
 							}
 
-							if (obrero) {
-								String habilidad = cbxHabilidad.getSelectedItem().toString();
-								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
+							    if (obrero) {
+							    	String habilidad = cbxHabilidad.getSelectedItem().toString();
+							    	empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
 										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "", "",
 										habilidad, empresa);
 							}
 
-							if (emp != null) {
-								empleo.setEmpresa(emp);
-								Controladora.getInstance().addEmpresa(emp);
+							    if (emp != null) {
+							    	empleo.setEmpresa(emp);
+							    	Controladora.getInstance().addEmpresa(emp);
 							}
 							System.out.println("KLK");
 							Controladora.getInstance().addEmpleo(empleo);
@@ -417,6 +424,9 @@ public class RegEmpleo extends JDialog {
 								re.setModal(true);
 								re.setVisible(true);
 							}
+							
+							}
+					
 						}
 					}
 				});
