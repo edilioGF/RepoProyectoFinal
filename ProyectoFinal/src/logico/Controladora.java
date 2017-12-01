@@ -101,6 +101,12 @@ public class Controladora {
 			String str = new SimpleDateFormat("dd_MM_yyyy_hh_mm").format(date);
 			BufferedWriter writer = new BufferedWriter(new FileWriter("Match_" + str + ".txt"));
 
+			writer.write("Datos del matcheo:");
+			writer.newLine();
+			writer.newLine();
+
+			int cont = 0;
+
 			for (Empleo empleo : misEmpleos) {
 				if (empleo.getVacantes() > 0) {
 					// Perfiles organizados...
@@ -124,6 +130,8 @@ public class Controladora {
 												actualizarMatch(empleo, perfil);
 											}
 
+											cont++;
+
 											writer.write(empleo.getEmpleado().getCedula() + "-"
 													+ empleo.getEmpleado().getNombre() + " "
 													+ empleo.getEmpleado().getApellidos() + " ahora trabaja con: "
@@ -140,6 +148,10 @@ public class Controladora {
 						}
 					}
 				}
+			}
+
+			if (cont == 0) {
+				writer.write("No se realizaron matcheos.");
 			}
 
 			writer.close();
