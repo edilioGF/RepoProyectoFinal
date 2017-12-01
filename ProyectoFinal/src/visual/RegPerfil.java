@@ -159,37 +159,37 @@ public class RegPerfil extends JDialog {
 		rdbtnObrero.setSelected(false);
 		rdbtnObrero.setBounds(249, 23, 90, 23);
 		panel_1.add(rdbtnObrero);
-		
-				pnlGraduado = new JPanel();
-				pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				pnlGraduado.setBounds(10, 483, 364, 70);
-				contentPanel.add(pnlGraduado);
-				pnlGraduado.setLayout(null);
-				
-						JLabel lblNewLabel_1 = new JLabel("\u00C1rea de Estudio:");
-						lblNewLabel_1.setBounds(10, 30, 124, 14);
-						pnlGraduado.add(lblNewLabel_1);
-						
-								cbxAestudio = new JComboBox();
-								cbxAestudio.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
-								cbxAestudio.setBounds(144, 27, 210, 20);
-								pnlGraduado.add(cbxAestudio);
-		
-				pnlTecnico = new JPanel();
-				pnlTecnico
-						.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				pnlTecnico.setBounds(10, 483, 364, 70);
-				contentPanel.add(pnlTecnico);
-				pnlTecnico.setLayout(null);
-				
-						JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
-						lblNewLabel.setBounds(10, 30, 54, 14);
-						pnlTecnico.add(lblNewLabel);
-						
-								cbxTitulo = new JComboBox();
-								cbxTitulo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
-								cbxTitulo.setBounds(144, 27, 210, 20);
-								pnlTecnico.add(cbxTitulo);
+
+		pnlGraduado = new JPanel();
+		pnlGraduado.setBorder(new TitledBorder(null, "Graduado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlGraduado.setBounds(10, 483, 364, 70);
+		contentPanel.add(pnlGraduado);
+		pnlGraduado.setLayout(null);
+
+		JLabel lblNewLabel_1 = new JLabel("\u00C1rea de Estudio:");
+		lblNewLabel_1.setBounds(10, 30, 124, 14);
+		pnlGraduado.add(lblNewLabel_1);
+
+		cbxAestudio = new JComboBox();
+		cbxAestudio.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
+		cbxAestudio.setBounds(144, 27, 210, 20);
+		pnlGraduado.add(cbxAestudio);
+
+		pnlTecnico = new JPanel();
+		pnlTecnico
+				.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlTecnico.setBounds(10, 483, 364, 70);
+		contentPanel.add(pnlTecnico);
+		pnlTecnico.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
+		lblNewLabel.setBounds(10, 30, 54, 14);
+		pnlTecnico.add(lblNewLabel);
+
+		cbxTitulo = new JComboBox();
+		cbxTitulo.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
+		cbxTitulo.setBounds(144, 27, 210, 20);
+		pnlTecnico.add(cbxTitulo);
 
 		pnlObrero = new JPanel();
 		pnlObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -202,7 +202,7 @@ public class RegPerfil extends JDialog {
 		pnlObrero.add(lblHabilidad);
 
 		cbxHabilidad = new JComboBox();
-		cbxHabilidad.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+		cbxHabilidad.setModel(new DefaultComboBoxModel(new String[] { "<Seleccione>" }));
 		cbxHabilidad.setBounds(144, 27, 210, 20);
 		pnlObrero.add(cbxHabilidad);
 
@@ -276,7 +276,7 @@ public class RegPerfil extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if(txtCedula.getText().isEmpty()){
+						if (txtCedula.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Debe buscar un solicitante primero", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
@@ -286,17 +286,17 @@ public class RegPerfil extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxAestudio.getSelectedIndex() <= 0) {
+						if (cbxAestudio.getSelectedIndex() <= 0 && rdbtnGraduado.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una área de estudio", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxHabilidad.getSelectedIndex() <= 0) {
+						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxTitulo.getSelectedIndex() <= 0) {
+						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
@@ -344,8 +344,6 @@ public class RegPerfil extends JDialog {
 									String areaEstudio = cbxAestudio.getSelectedItem().toString();
 									Graduado perfil = new Graduado(codigo, soli, idioma, licencia, mudarse, experiencia,
 											areaEstudio);
-									// soli.getMisPerfiles().add(perfil);
-									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
 											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
@@ -354,8 +352,6 @@ public class RegPerfil extends JDialog {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
 									Obrero perfil = new Obrero(codigo, soli, idioma, licencia, mudarse, experiencia,
 											habilidad);
-									// soli.getMisPerfiles().add(perfil);
-									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
 											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
@@ -364,8 +360,6 @@ public class RegPerfil extends JDialog {
 									String titulo = cbxTitulo.getSelectedItem().toString();
 									Tecnico perfil = new Tecnico(codigo, soli, idioma, licencia, mudarse, experiencia,
 											titulo);
-									// soli.getMisPerfiles().add(perfil);
-									// Controladora.getInstance().getMisSolicitantes().add(soli);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
 											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
