@@ -49,7 +49,7 @@ public class ListPerfil extends JDialog {
 	public ListPerfil() {
 		setResizable(false);
 		setTitle("Listado de Perfiles");
-		setBounds(100, 100, 700, 450);
+		setBounds(100, 100, 800, 500);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,7 +57,7 @@ public class ListPerfil extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(10, 60, 674, 317);
+			panel.setBounds(10, 60, 774, 367);
 			contentPanel.add(panel);
 			panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 			{
@@ -79,8 +79,8 @@ public class ListPerfil extends JDialog {
 					table.setDefaultEditor(Object.class, null);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					model = new DefaultTableModel();
-					String[] columns = { "CÔøΩdigo", "CÔøΩdula - Nombre", "FormaciÔøΩn", "Experiencia", "Licencia",
-							"movilidad geogrÔøΩfica" };
+					String[] columns = { "CÛdigo", "CÈdula - Nombre", "FormaciÛn", "Experiencia (AÒos)", "Licencia",
+							"Mudanza" };
 					model.setColumnIdentifiers(columns);
 					scrollPane.setViewportView(table);
 				}
@@ -88,11 +88,11 @@ public class ListPerfil extends JDialog {
 		}
 
 		JLabel lblCdula = new JLabel("C\u00E9dula:");
-		lblCdula.setBounds(314, 24, 46, 14);
+		lblCdula.setBounds(349, 24, 46, 14);
 		contentPanel.add(lblCdula);
 
 		txtCedula = new JTextField();
-		txtCedula.setBounds(370, 20, 180, 23);
+		txtCedula.setBounds(405, 20, 180, 23);
 		contentPanel.add(txtCedula);
 		txtCedula.setColumns(10);
 
@@ -103,7 +103,7 @@ public class ListPerfil extends JDialog {
 				loadTable(cbxFormacion.getSelectedItem().toString(), cedula);
 			}
 		});
-		btnNewButton.setBounds(560, 20, 89, 23);
+		btnNewButton.setBounds(595, 20, 89, 23);
 		contentPanel.add(btnNewButton);
 
 		JLabel lblFormacin = new JLabel("Formaci\u00F3n:");
@@ -137,10 +137,10 @@ public class ListPerfil extends JDialog {
 			btnGuardar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						BufferedWriter writer = new BufferedWriter(new FileWriter(perfil.getCodigo()));
+						BufferedWriter writer = new BufferedWriter(new FileWriter(perfil.getCodigo() + ".txt"));
 						writer.write("Fecha: " + perfil.getFecha());
 						writer.newLine();
-						writer.write("C√≥digo: " + perfil.getCodigo());
+						writer.write("CÛdigo: " + perfil.getCodigo());
 						writer.newLine();
 						writer.write("Pertenece a: " + perfil.getSolicitante().getCedula() + " - "
 								+ perfil.getSolicitante().getNombre() + " " + perfil.getSolicitante().getApellidos());
@@ -160,11 +160,11 @@ public class ListPerfil extends JDialog {
 						if (perfil instanceof Graduado) {
 							writer.write("Graduado");
 							writer.newLine();
-							writer.write("√Årea de Estudio: " + ((Graduado) perfil).getAreaEstudio());
+							writer.write("¡rea de Estudio: " + ((Graduado) perfil).getAreaEstudio());
 						} else if (perfil instanceof Tecnico) {
-							writer.write("T√©cnico");
+							writer.write("TÈcnico");
 							writer.newLine();
-							writer.write("T√≠tulo: " + ((Tecnico) perfil).getTitulo());
+							writer.write("TÌtulo: " + ((Tecnico) perfil).getTitulo());
 						} else {
 							writer.write("Obrero");
 							writer.newLine();
@@ -176,15 +176,15 @@ public class ListPerfil extends JDialog {
 						writer.newLine();
 
 						if (perfil.isLicencia()) {
-							writer.write("Licencia: " + "S√≠");
+							writer.write("Licencia: " + "SÌ");
 						} else {
 							writer.write("Licencia: " + "No");
 						}
 						writer.newLine();
 						if (perfil.isMudarse()) {
-							writer.write("Disposici√≥n a mudarse: " + "S√≠");
+							writer.write("DisposiciÛn a mudarse: " + "SÌ");
 						} else {
-							writer.write("Disposici√≥n a mudarse: " + "No");
+							writer.write("DisposiciÛn a mudarse: " + "No");
 						}
 
 						writer.close();
@@ -221,23 +221,23 @@ public class ListPerfil extends JDialog {
 							+ perfil.getSolicitante().getApellidos();
 					fila[2] = "Graduado";
 					fila[3] = perfil.getExperiencia();
-					fila[4] = (perfil.isLicencia()) ? "Si" : "No";
-					fila[5] = (perfil.isMudarse()) ? "Si" : "No";
+					fila[4] = (perfil.isLicencia()) ? "SÌ" : "No";
+					fila[5] = (perfil.isMudarse()) ? "SÌ" : "No";
 
 					model.addRow(fila);
 				}
 			}
 
 			if (perfil instanceof Tecnico
-					&& (formacion.equalsIgnoreCase("TÔøΩcnicos") || formacion.equalsIgnoreCase("<Todos>"))) {
+					&& (formacion.equalsIgnoreCase("TÈcnicos") || formacion.equalsIgnoreCase("<Todos>"))) {
 				if (cedula.equalsIgnoreCase("") || cedula.equalsIgnoreCase(perfil.getSolicitante().getCedula())) {
 					fila[0] = perfil.getCodigo();
 					fila[1] = perfil.getSolicitante().getCedula() + " - " + perfil.getSolicitante().getNombre() + " "
 							+ perfil.getSolicitante().getApellidos();
-					fila[2] = "TÔøΩcnico";
+					fila[2] = "TÈcnico";
 					fila[3] = perfil.getExperiencia();
-					fila[4] = (perfil.isLicencia()) ? "Si" : "No";
-					fila[5] = (perfil.isMudarse()) ? "Si" : "No";
+					fila[4] = (perfil.isLicencia()) ? "SÌ" : "No";
+					fila[5] = (perfil.isMudarse()) ? "SÌ" : "No";
 
 					model.addRow(fila);
 				}
@@ -251,8 +251,8 @@ public class ListPerfil extends JDialog {
 							+ perfil.getSolicitante().getApellidos();
 					fila[2] = "Obrero";
 					fila[3] = perfil.getExperiencia();
-					fila[4] = (perfil.isLicencia()) ? "Si" : "No";
-					fila[5] = (perfil.isMudarse()) ? "Si" : "No";
+					fila[4] = (perfil.isLicencia()) ? "SÌ" : "No";
+					fila[5] = (perfil.isMudarse()) ? "SÌ" : "No";
 
 					model.addRow(fila);
 				}
