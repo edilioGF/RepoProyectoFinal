@@ -381,7 +381,7 @@ public class RegEmpleo extends JDialog {
 							boolean obrero = rdbtnObrero.isSelected();
 							if (codigo.isEmpty() || titulo.isEmpty() || descripcion.isEmpty() )
 							{
-								JOptionPane.showMessageDialog(null, "Le falto campos por llenar", "Aviso",
+								JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
 										JOptionPane.INFORMATION_MESSAGE);
 								return;
 							

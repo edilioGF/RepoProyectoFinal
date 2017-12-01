@@ -99,16 +99,23 @@ public class RegEmpresa extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-
+						
+					
 						String codigo = txtRnc.getText();
 						String nombre = txtNombre.getText();
 						String ubicacion = cbxUbicacion.getSelectedItem().toString();
 						String tipo = cbxTipo.getSelectedItem().toString();
+						if(codigo.isEmpty() || nombre.isEmpty()){
+							JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}else{
 						Empresa empresa = new Empresa(codigo, nombre, ubicacion, tipo);
 						dispose();
 						RegEmpleo re = new RegEmpleo(empresa);
 						re.setModal(true);
 						re.setVisible(true);
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
