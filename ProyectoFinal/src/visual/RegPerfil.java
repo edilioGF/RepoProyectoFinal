@@ -286,6 +286,21 @@ public class RegPerfil extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
+						if (cbxAestudio.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una área de estudio", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxHabilidad.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						if (cbxTitulo.getSelectedIndex() <= 0) {
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						if (solicitante == null && soli == null) {
 							JOptionPane.showMessageDialog(null, "Debe elegir un Solicitante");
 						} else {
