@@ -133,17 +133,17 @@ public class RegSolicitante extends JDialog {
 				btnSiguiente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if (cbxGenero.getSelectedIndex() <= 0) {
-							JOptionPane.showMessageDialog(null, "Debe seleccionar una género", "Aviso",
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un género", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
 						if (cbxPaisOrigen.getSelectedIndex() <= 0) {
-							JOptionPane.showMessageDialog(null, "Debe seleccionar una país origen", "Aviso",
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un país de origen", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
 						if (cbxPaisResidencia.getSelectedIndex() <= 0) {
-							JOptionPane.showMessageDialog(null, "Debe seleccionar una país residencia", "Aviso",
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un país de residencia", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
@@ -159,20 +159,20 @@ public class RegSolicitante extends JDialog {
 							Date date = dateChooser.getDate();
 							String str = new SimpleDateFormat("dd/MM/yyyy").format(date);
 							String nacimiento = str;
-							if(cedula.isEmpty() || nombre.isEmpty() || apellidos.isEmpty()){
+							if (cedula.isEmpty() || nombre.isEmpty() || apellidos.isEmpty()) {
 								JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
 										JOptionPane.INFORMATION_MESSAGE);
 								return;
-							}else{
+							} else {
 								solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
-									paisResidencia);
-							dispose();
+										paisResidencia);
+								dispose();
 
-							RegPerfil perfil = new RegPerfil(solicitante);
-							perfil.setModal(true);
-							perfil.setVisible(true);
+								RegPerfil perfil = new RegPerfil(solicitante);
+								perfil.setModal(true);
+								perfil.setVisible(true);
 							}
-							
+
 						}
 
 					}

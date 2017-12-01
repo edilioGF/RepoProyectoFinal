@@ -300,11 +300,10 @@ public class RegEmpleo extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				String codigoEmp = txtCodigoEmp.getText();
 				empresa = Controladora.getInstance().buscarEmpresa(codigoEmp);
-				if(empresa != null){
-				txtNombreEmp.setText(empresa.getNombre());
-				txtUbicacionEmp.setText(empresa.getUbicacion());
-				}
-				else{
+				if (empresa != null) {
+					txtNombreEmp.setText(empresa.getNombre());
+					txtUbicacionEmp.setText(empresa.getUbicacion());
+				} else {
 					JOptionPane.showMessageDialog(null, "La empresa que busca no existe", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -352,12 +351,12 @@ public class RegEmpleo extends JDialog {
 							return;
 						}
 						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
-							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
+							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
 						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
-							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
+							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
@@ -379,54 +378,53 @@ public class RegEmpleo extends JDialog {
 							boolean graduado = rdbtnGraduado.isSelected();
 							boolean tecnico = rdbtnTecnico.isSelected();
 							boolean obrero = rdbtnObrero.isSelected();
-							if (codigo.isEmpty() || titulo.isEmpty() || descripcion.isEmpty() )
-							{
+							if (codigo.isEmpty() || titulo.isEmpty() || descripcion.isEmpty()) {
 								JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
 										JOptionPane.INFORMATION_MESSAGE);
 								return;
-							
-							}else{
-								
-								   if (graduado) {
-								String area = cbxAreaEstudio.getSelectedItem().toString();
-								empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
-										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "",
-										area, "", empresa);
+
+							} else {
+
+								if (graduado) {
+									String area = cbxAreaEstudio.getSelectedItem().toString();
+									empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
+											horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
+											obrero, "", area, "", empresa);
+								}
+
+								if (tecnico) {
+									String tituloTecnico = cbxTitulo.getSelectedItem().toString();
+									empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
+											horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
+											obrero, tituloTecnico, "", "", empresa);
+								}
+
+								if (obrero) {
+									String habilidad = cbxHabilidad.getSelectedItem().toString();
+									empleo = new Empleo(codigo, titulo, vacantes, descripcion, salario, horaInicial,
+											horaFinal, false, idioma, experiencia, remoto, licencia, graduado, tecnico,
+											obrero, "", "", habilidad, empresa);
+								}
+
+								if (emp != null) {
+									empleo.setEmpresa(emp);
+									Controladora.getInstance().addEmpresa(emp);
+								}
+								System.out.println("KLK");
+								Controladora.getInstance().addEmpleo(empleo);
+								Principal.loadStats();
+								JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Aviso",
+										JOptionPane.INFORMATION_MESSAGE);
+
+								if (emp != null) {
+									dispose();
+									RegEmpresa re = new RegEmpresa();
+									re.setModal(true);
+									re.setVisible(true);
+								}
+
 							}
 
-							    if (tecnico) {
-							    	String tituloTecnico = cbxTitulo.getSelectedItem().toString();
-							    	empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
-							    			false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero,
-							    			tituloTecnico, "", "", empresa);
-							}
-
-							    if (obrero) {
-							    	String habilidad = cbxHabilidad.getSelectedItem().toString();
-							    	empleo = new Empleo(codigo,titulo, vacantes, descripcion, salario, horaInicial, horaFinal,
-										false, idioma, experiencia, remoto, licencia, graduado, tecnico, obrero, "", "",
-										habilidad, empresa);
-							}
-
-							    if (emp != null) {
-							    	empleo.setEmpresa(emp);
-							    	Controladora.getInstance().addEmpresa(emp);
-							}
-							System.out.println("KLK");
-							Controladora.getInstance().addEmpleo(empleo);
-							Principal.loadStats();
-							JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Aviso",
-									JOptionPane.INFORMATION_MESSAGE);
-
-							if (emp != null) {
-								dispose();
-								RegEmpresa re = new RegEmpresa();
-								re.setModal(true);
-								re.setVisible(true);
-							}
-							
-							}
-					
 						}
 					}
 				});
