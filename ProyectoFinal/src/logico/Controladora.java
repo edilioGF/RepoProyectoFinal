@@ -110,15 +110,15 @@ public class Controladora {
 		return res;
 	}
 
-	public Empleo buscarEmpl(Solicitante solicitante) {
-		Empleo emp = null;
+	public void retirarSolicitante(Solicitante solicitante) {
+		Empleo empleo = null;
 		boolean find = false;
 		int i = 0;
 		int j = 0;
 		while (!find && i < misEmpleos.size()) {
 			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {
 				if (misEmpleos.get(i).getEmpleados().get(j) == solicitante) {
-					emp = misEmpleos.get(i);
+					empleo = misEmpleos.get(i);
 					find = true;
 				}
 				j++;
@@ -126,8 +126,8 @@ public class Controladora {
 			j = 0;
 			i++;
 		}
-
-		return emp;
+		empleo.getEmpleados().remove(solicitante);
+		empleo.setVacantes(empleo.getVacantes()-1);
 	}
 
 	public void match() throws IOException {
