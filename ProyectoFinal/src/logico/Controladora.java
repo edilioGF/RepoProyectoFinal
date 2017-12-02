@@ -80,7 +80,7 @@ public class Controladora {
 		}
 	}
 
-	public boolean verificarMatcheo() {
+	public boolean verificarEmpleos() {
 		boolean res = false;
 		int i = 0;
 
@@ -95,8 +95,23 @@ public class Controladora {
 		return res;
 	}
 
+	public boolean verificarPerfiles() {
+		boolean res = false;
+		int i = 0;
+
+		while (i < misPerfiles.size() && !res) {
+			if (!misPerfiles.get(i).getSolicitante().isTrabajo()) {
+				res = true;
+			}
+
+			i++;
+		}
+
+		return res;
+	}
+
 	public void match() throws IOException {
-		if (verificarMatcheo()) {
+		if (verificarEmpleos() && verificarPerfiles()) {
 			ordenarPerfiles();
 
 			Date date = new Date();
