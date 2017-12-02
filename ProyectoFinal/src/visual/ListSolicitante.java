@@ -141,6 +141,8 @@ public class ListSolicitante extends JDialog {
 						solicitante.desactivarEmpleo();
 						Controladora.getInstance().retirarSolicitante(solicitante);
 						JOptionPane.showMessageDialog(null, "Se ha desactivado el empleo");
+						btnDesactivarEmpleo.setEnabled(false);
+						loadTable("<Todos>", "");
 					}
 				});
 				btnDesactivarEmpleo.setEnabled(false);
