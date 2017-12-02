@@ -127,7 +127,7 @@ public class Controladora {
 			i++;
 		}
 		empleo.getEmpleados().remove(solicitante);
-		empleo.setVacantes(empleo.getVacantes()-1);
+		empleo.setVacantes(empleo.getVacantes() + 1);
 	}
 
 	public void match() throws IOException {
