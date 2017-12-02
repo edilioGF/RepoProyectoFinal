@@ -82,7 +82,7 @@ public class ListEmpleo extends JDialog {
 		table.setDefaultEditor(Object.class, null);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		String[] columns = { "Código", "Título", "Salario", "Nombre Empresa", "Idioma", "Año de Experiencia",
-				"Hora Inical", "Hora Final", "Vacantes" };
+				"Horario", "Vacantes" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
@@ -274,9 +274,8 @@ public class ListEmpleo extends JDialog {
 				fila[3] = empleo.getEmpresa().getNombre();
 				fila[4] = empleo.getIdioma();
 				fila[5] = empleo.getExperiencia();
-				fila[6] = empleo.getHoraInicial();
-				fila[7] = empleo.getHoraFinal();
-				fila[8] = empleo.getVacantes();
+				fila[6] = empleo.getHoraInicial() + "-" + empleo.getHoraFinal();
+				fila[7] = empleo.getVacantes();
 
 				model.addRow(fila);
 			} else if (p1.equalsIgnoreCase("Graduado") && empleo.isGraduado() && (p2.equalsIgnoreCase("<Todas>"))
@@ -287,9 +286,8 @@ public class ListEmpleo extends JDialog {
 				fila[3] = empleo.getEmpresa().getNombre();
 				fila[4] = empleo.getIdioma();
 				fila[5] = empleo.getExperiencia();
-				fila[6] = empleo.getHoraInicial();
-				fila[7] = empleo.getHoraFinal();
-				fila[8] = empleo.getVacantes();
+				fila[6] = empleo.getHoraInicial() + "-" + empleo.getHoraFinal();
+				fila[7] = empleo.getVacantes();
 
 				model.addRow(fila);
 			} else if (p1.equalsIgnoreCase("Técnico") && empleo.isTecnico() && (p2.equalsIgnoreCase("<Todas>"))
@@ -300,9 +298,8 @@ public class ListEmpleo extends JDialog {
 				fila[3] = empleo.getEmpresa().getNombre();
 				fila[4] = empleo.getIdioma();
 				fila[5] = empleo.getExperiencia();
-				fila[6] = empleo.getHoraInicial();
-				fila[7] = empleo.getHoraFinal();
-				fila[8] = empleo.getVacantes();
+				fila[6] = empleo.getHoraInicial() + "-" + empleo.getHoraFinal();
+				fila[7] = empleo.getVacantes();
 
 				model.addRow(fila);
 			} else if (p1.equalsIgnoreCase("Obrero") && empleo.isObrero() && (p2.equalsIgnoreCase("<Todas>"))
@@ -313,9 +310,8 @@ public class ListEmpleo extends JDialog {
 				fila[3] = empleo.getEmpresa().getNombre();
 				fila[4] = empleo.getIdioma();
 				fila[5] = empleo.getExperiencia();
-				fila[6] = empleo.getHoraInicial();
-				fila[7] = empleo.getHoraFinal();
-				fila[8] = empleo.getVacantes();
+				fila[6] = empleo.getHoraInicial() + "-" + empleo.getHoraFinal();
+				fila[7] = empleo.getVacantes();
 
 				model.addRow(fila);
 			}
