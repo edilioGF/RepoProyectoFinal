@@ -39,6 +39,7 @@ public class ListEmpleo extends JDialog {
 	private Empleo empleo;
 	private JComboBox cbxFormacion;
 	private JComboBox cbxAreas;
+	private JButton btnGuardar;
 
 	/**
 	 * Create the dialog.
@@ -62,6 +63,17 @@ public class ListEmpleo extends JDialog {
 		panel.add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (table.getSelectedRow() >= 0) {
+					btnGuardar.setEnabled(true);
+					int index = table.getSelectedRow();
+					String codigo = table.getModel().getValueAt(index, 0).toString();
+					empleo = Controladora.getInstance().buscarEmpleo(codigo);
+				}
+			}
+		});
 		table.setDefaultEditor(Object.class, null);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		String[] columns = { "Código", "Título", "Salario", "Nombre Empresa", "Idioma", "Año de Experiencia",
@@ -131,6 +143,10 @@ public class ListEmpleo extends JDialog {
 						dispose();
 					}
 				});
+				
+				btnGuardar = new JButton("Guardar");
+				btnGuardar.setEnabled(false);
+				buttonPane.add(btnGuardar);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
