@@ -38,7 +38,7 @@ public class Empleo implements Serializable {
 		this.empresa = empresa;
 	}
 
-	private Solicitante empleado;
+	private ArrayList<Solicitante>empleados;
 
 	public Empleo(String codigo,String titulo, int vacantes, String descripcion, float salario, int horaInicial, int horaFinal,
 			boolean satisfecho, String idioma, int experiencia, boolean remoto, boolean licencia, boolean graduado,
@@ -69,7 +69,7 @@ public class Empleo implements Serializable {
 		this.area = area;
 		this.habilidad = habilidad;
 		this.empresa = empresa;
-		this.empleado = null;
+		this.empleados = new ArrayList<>();
 	}
 
 	public String getDescripcion() {
@@ -78,14 +78,6 @@ public class Empleo implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public Solicitante getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(Solicitante empleado) {
-		this.empleado = empleado;
 	}
 
 	public String getTituloTecnico() {
@@ -230,5 +222,13 @@ public class Empleo implements Serializable {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public ArrayList<Solicitante> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(ArrayList<Solicitante> empleados) {
+		this.empleados = empleados;
 	}
 }

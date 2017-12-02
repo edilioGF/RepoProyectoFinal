@@ -109,6 +109,22 @@ public class Controladora {
 
 		return res;
 	}
+	/*
+	public Empleo buscarEmpl(Solicitante solicitante){
+		Empleo emp = null;
+		boolean find = false;
+		int i = 0;
+		while (!find && i < misEmpleos.size()) {
+			if (misEmpleos.get(i).gete) {
+				emp  = misEmpleos.get(i);
+				find = true;
+			}
+			i++;
+		}
+		
+		return emp;
+	}
+	*/
 
 	public void match() throws IOException {
 		if (verificarEmpleos() && verificarPerfiles()) {
@@ -361,7 +377,7 @@ public class Controladora {
 		Empleo empleo = null;
 		boolean find = false;
 		int i = 0;
-		while (!find && i < misEmpresas.size()) {
+		while (!find && i < misEmpleos.size()) {
 			if (misEmpleos.get(i).getCodigo().equalsIgnoreCase(codigo)) {
 				empleo = misEmpleos.get(i);
 				find = true;
