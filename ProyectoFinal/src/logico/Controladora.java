@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 public class Controladora {
@@ -155,6 +157,9 @@ public class Controladora {
 			}
 
 			writer.close();
+
+			JOptionPane.showMessageDialog(null, "Se generó un archivo con los datos de este Matcheo", "Aviso",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
