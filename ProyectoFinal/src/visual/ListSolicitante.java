@@ -21,10 +21,13 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListSolicitante extends JDialog {
 
@@ -34,7 +37,8 @@ public class ListSolicitante extends JDialog {
 	private DefaultTableModel model;
 	private JTextField txtCedula;
 	private JComboBox cbxGenero;
-
+	private JButton btnDesactivarEmpleo;
+    private Solicitante solicitante;
 	/**
 	 * Create the dialog.
 	 */
@@ -57,6 +61,24 @@ public class ListSolicitante extends JDialog {
 				panel.add(scrollPane);
 				{
 					table = new JTable();
+					table.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							if(table.getSelectedRow()>=0){
+								int index = table.getSelectedRow();
+								String cedula = (String)table.getModel().getValueAt(index,0);
+								solicitante = Controladora.getInstance().buscarSolicitante(cedula);
+								
+								if(solicitante.isTrabajo()){
+									btnDesactivarEmpleo.setEnabled(true);
+								}
+								else{
+									btnDesactivarEmpleo.setEnabled(false);
+								}
+								
+							}
+						}
+					});
 					scrollPane.setViewportView(table);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -112,6 +134,16 @@ public class ListSolicitante extends JDialog {
 						dispose();
 					}
 				});
+				
+				btnDesactivarEmpleo = new JButton("Desactivar Empleo");
+				btnDesactivarEmpleo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						solicitante.desactivarEmpleo();
+						JOptionPane.showMessageDialog(null, "Se ha desactivado el empleo");
+					}
+				});
+				btnDesactivarEmpleo.setEnabled(false);
+				buttonPane.add(btnDesactivarEmpleo);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

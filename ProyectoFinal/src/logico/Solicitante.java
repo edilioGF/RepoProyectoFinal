@@ -3,6 +3,8 @@ package logico;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 public class Solicitante implements Serializable {
 	protected String cedula;
 	protected String nombre;
@@ -34,6 +36,14 @@ public class Solicitante implements Serializable {
 		for (Perfil perfil : misPerfiles) {
 			perfil.setActiva(false);
 		}
+	}
+	
+	public void desactivarEmpleo() {
+		// TODO Auto-generated method stub
+		for (Perfil perfil : misPerfiles) {
+			perfil.setActiva(true);
+		}
+		trabajo = false;
 	}
 
 	public String getCedula() {
