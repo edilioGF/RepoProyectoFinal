@@ -109,22 +109,26 @@ public class Controladora {
 
 		return res;
 	}
-	/*
-	public Empleo buscarEmpl(Solicitante solicitante){
+
+	public Empleo buscarEmpl(Solicitante solicitante) {
 		Empleo emp = null;
 		boolean find = false;
 		int i = 0;
+		int j = 0;
 		while (!find && i < misEmpleos.size()) {
-			if (misEmpleos.get(i).gete) {
-				emp  = misEmpleos.get(i);
-				find = true;
+			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {
+				if (misEmpleos.get(i).getEmpleados().get(j) == solicitante) {
+					emp = misEmpleos.get(i);
+					find = true;
+				}
+				j++;
 			}
+			j = 0;
 			i++;
 		}
-		
+
 		return emp;
 	}
-	*/
 
 	public void match() throws IOException {
 		if (verificarEmpleos() && verificarPerfiles()) {
