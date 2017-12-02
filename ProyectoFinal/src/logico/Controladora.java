@@ -128,6 +128,20 @@ public class Controladora {
 		}
 		empleo.getEmpleados().remove(solicitante);
 		empleo.setVacantes(empleo.getVacantes() + 1);
+		eliminarPerfil(solicitante);
+	}
+	
+	public void eliminarPerfil(Solicitante solicitante){
+		int i = 0;
+		boolean find = false;
+		
+		while(!find && i < solicitante.getMisPerfiles().size()){
+			if(solicitante.getMisPerfiles().get(i).isSatisfecha()){
+				find = true;
+				solicitante.getMisPerfiles().remove(i);
+			}
+			i++;
+		}
 	}
 
 	public void match() throws IOException {
