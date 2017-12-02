@@ -22,11 +22,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.border.EtchedBorder;
 
 public class ListEmpleo extends JDialog {
@@ -143,8 +148,82 @@ public class ListEmpleo extends JDialog {
 						dispose();
 					}
 				});
-				
+
 				btnGuardar = new JButton("Guardar");
+				btnGuardar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							BufferedWriter writer = new BufferedWriter(new FileWriter(empleo.getCodigo() + ".txt"));
+							writer.write("Fecha: " + empleo.getFecha());
+							writer.newLine();
+							writer.write("Código: " + empleo.getCodigo());
+							writer.newLine();
+							writer.write("Pertenece a: " + empleo.getEmpresa().getRnc() + " - "
+									+ empleo.getEmpresa().getNombre());
+							writer.newLine();
+							writer.newLine();
+							writer.write("Estado: ");
+							if (empleo.isSatisfecho()) {
+								writer.write("Satisfecho");
+							} else {
+								writer.write("No satisfecho");
+							}
+							writer.newLine();
+							writer.write("Idioma: " + empleo.getIdioma());
+							writer.newLine();
+							writer.write("Empleo para: ");
+
+							if (empleo.isGraduado()) {
+								writer.write("Graduado");
+								writer.newLine();
+								writer.write("Área de Estudio: " + empleo.getArea());
+							} else if (empleo.isTecnico()) {
+								writer.write("Técnico");
+								writer.newLine();
+								writer.write("Título: " + empleo.getTituloTecnico());
+							} else {
+								writer.write("Obrero");
+								writer.newLine();
+								writer.write("Habilidad: " + empleo.getHabilidad());
+							}
+							writer.newLine();
+							writer.write("Experienca: " + empleo.getExperiencia());
+							writer.newLine();
+							writer.write("Vacantes: " + empleo.getVacantes());
+							writer.newLine();
+							if (empleo.isLicencia()) {
+								writer.write("Licencia: " + "Sí");
+							} else {
+								writer.write("Licencia: " + "No");
+							}
+							writer.newLine();
+							if (empleo.isRemoto()) {
+								writer.write("Remoto: " + "Sí");
+							} else {
+								writer.write("Remoto: " + "No");
+							}
+							writer.newLine();
+							writer.write("Empleados: " + empleo.getEmpleados().size());
+
+							writer.newLine();
+							writer.newLine();
+							for (Solicitante empleado : empleo.getEmpleados()) {
+								writer.write(empleado.getCedula() + " - " + empleado.getNombre() + " "
+										+ empleado.getApellidos());
+								writer.newLine();
+							}
+							writer.close();
+
+							JOptionPane.showMessageDialog(null,
+									"Se ha guardado un archivo con la información de este empleo", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 				btnGuardar.setEnabled(false);
 				buttonPane.add(btnGuardar);
 				cancelButton.setActionCommand("Cancel");
