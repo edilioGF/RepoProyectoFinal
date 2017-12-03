@@ -423,7 +423,7 @@ public class RegEmpleo extends JDialog {
 									RegEmpresa re = new RegEmpresa();
 									re.setModal(true);
 									re.setVisible(true);
-								}else{
+								} else {
 									clean();
 								}
 
@@ -486,8 +486,8 @@ public class RegEmpleo extends JDialog {
 			cbxIdioma.addItem(string);
 		}
 	}
-	
-	private void clean(){
+
+	private void clean() {
 		txtTitulo.setText("");
 		txtCodigo.setText(String.format("%s-%03d", "EMP", Controladora.getInstance().getMisEmpleos().size() + 1));
 		txtCodigoEmp.setText("");
@@ -496,7 +496,7 @@ public class RegEmpleo extends JDialog {
 		txtDescripcion.setText("");
 		spnVacantes.setValue(1);
 		spnExp.setValue(0);
-	    spnSalario.setValue(0);
+		spnSalario.setValue(0);
 		spnHoraInicial.setValue(0);
 		spnHoraFinal.setValue(0);
 		cbxIdioma.setSelectedIndex(0);
@@ -506,8 +506,8 @@ public class RegEmpleo extends JDialog {
 		cbxHabilidad.setSelectedIndex(0);
 		cbxTitulo.setSelectedIndex(0);
 		cbxAreaEstudio.setSelectedIndex(0);
-	    btnTerminar.setEnabled(false);
-		
+		btnTerminar.setEnabled(false);
+
 	}
 
 	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {

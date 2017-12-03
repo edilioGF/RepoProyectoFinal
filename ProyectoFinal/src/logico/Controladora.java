@@ -245,6 +245,9 @@ public class Controladora {
 				oosSolicitantes.writeObject(soli);
 			}
 			archSolicitantes.close();
+		} else {
+			File arch = new File("Solicitantes.dat");
+			arch.delete();
 		}
 
 		if (misEmpresas.size() > 0) {
@@ -255,6 +258,9 @@ public class Controladora {
 				oosEmpresas.writeObject(emp);
 			}
 			archEmpresas.close();
+		} else {
+			File arch = new File("Empresas.dat");
+			arch.delete();
 		}
 
 		if (misEmpleos.size() > 0) {
@@ -265,6 +271,9 @@ public class Controladora {
 				oosEmpleos.writeObject(empl);
 			}
 			archEmpleos.close();
+		} else {
+			File arch = new File("Empleos.dat");
+			arch.delete();
 		}
 
 		if (misPerfiles.size() > 0) {
@@ -275,6 +284,9 @@ public class Controladora {
 				oosPerfiles.writeObject(perfil);
 			}
 			archPerfiles.close();
+		} else {
+			File arch = new File("Perfiles.dat");
+			arch.delete();
 		}
 	}
 
@@ -325,43 +337,6 @@ public class Controladora {
 			archPerfiles.close();
 		}
 	}
-
-	// Se busca empresa por empresa
-	// Se obtienen las ofertas / empleos
-	// Se obtienen las solicitudes
-	// Se comparan
-	// Se marca el solicitante como trabajo = true, solicitud como satisfecha e
-	// inactiva y se marcan
-	// las otras solicitudes de ese solicitante como inactivas
-
-	/*
-	 * public void match() { for (Empleo empleo : misEmpleos) { for (Solicitud
-	 * solicitud : empleo.getMisSolicitudes()) { if (empleo.getVacantes() > 0 &&
-	 * solicitud.isActiva()) { if (empleo.getExperiencia() <=
-	 * solicitud.getExperiencia()) { if ((empleo.isRemoto() &&
-	 * solicitud.isMudarse()) || !empleo.isRemoto()) { if (empleo.isLicencia()
-	 * && solicitud.isLicencia() || !empleo.isLicencia()) { if
-	 * (empleo.isGraduado() && solicitud.getSolicitante() instanceof Graduado) {
-	 * if (empleo.getArea().equalsIgnoreCase( ((Graduado)
-	 * solicitud.getSolicitante()).getAreaEstudio())) {
-	 * evaluarSolicitud(solicitud, empleo); } } else if (empleo.isTecnico() &&
-	 * solicitud.getSolicitante() instanceof Tecnico) {
-	 * 
-	 * if (empleo.getTitulo() .equalsIgnoreCase(((Tecnico)
-	 * solicitud.getSolicitante()).getTitulo())) { evaluarSolicitud(solicitud,
-	 * empleo); } } else { if (empleo.getHabilidad() .equalsIgnoreCase(((Obrero)
-	 * solicitud.getSolicitante()).getHabilidad())) {
-	 * evaluarSolicitud(solicitud, empleo); } } } } } } } } }
-	 */
-
-	/*
-	 * private void evaluarSolicitud(Perfil , Empleo empleo) {
-	 * solicitud.getSolicitante().setTrabajo(true);
-	 * solicitud.setSatisfecha(true); empleo.setSatisfecho(true);
-	 * empleo.setVacantes(empleo.getVacantes() - 1);
-	 * empleo.setEmpleado(solicitud.getSolicitante()); //
-	 * empleo.inactivarSolicitudes(); }
-	 */
 
 	public void addSolicitante(Solicitante soli) {
 		misSolicitantes.add(soli);

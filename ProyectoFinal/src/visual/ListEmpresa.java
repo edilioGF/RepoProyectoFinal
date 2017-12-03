@@ -21,8 +21,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListEmpresa extends JDialog {
 
@@ -30,8 +33,9 @@ public class ListEmpresa extends JDialog {
 	private JTable table;
 	private Object[] fila;
 	private DefaultTableModel model;
-
 	private JComboBox cbxTipo;
+	private Empresa empresaList;
+	private JButton btnEliminar;
 
 	public ListEmpresa() {
 		setResizable(false);
@@ -52,6 +56,17 @@ public class ListEmpresa extends JDialog {
 		panel.add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (table.getSelectedRow() >= 0) {
+					btnEliminar.setEnabled(true);
+					int index = table.getSelectedRow();
+					String rnc = table.getModel().getValueAt(index, 0).toString();
+					empresaList = Controladora.getInstance().buscarEmpresa(rnc);
+				}
+			}
+		});
 		table.setDefaultEditor(Object.class, null);
 		;
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -86,12 +101,21 @@ public class ListEmpresa extends JDialog {
 					dispose();
 				}
 			});
-			
-			JButton btnEliminar = new JButton("Eliminar");
+
+			btnEliminar = new JButton("Eliminar");
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
+					int op = JOptionPane.showConfirmDialog(null,
+							"¿Desea eliminar esta empresa? Se eliminarán también sus empleos", "Aviso",
+							JOptionPane.OK_CANCEL_OPTION);
+					if (op == JOptionPane.OK_OPTION) {
+						Controladora.getInstance().getMisEmpresas().remove(empresaList);
+						// Se necesitan eliminar los empleos de esyta empresa
+						loadTable("<Todos>");
+						JOptionPane.showMessageDialog(null, "Se ha eliminado esta empresa y sus empleos", "Aviso",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			});
 			buttonPane.add(btnEliminar);

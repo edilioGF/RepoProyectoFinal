@@ -42,7 +42,6 @@ public class ListEmpleo extends JDialog {
 	private DefaultTableModel model;
 	private String codigo;
 	private Empleo empleo;
-	private Empresa empresa;
 	private JComboBox cbxFormacion;
 	private JComboBox cbxAreas;
 	private JButton btnGuardar;
@@ -75,7 +74,7 @@ public class ListEmpleo extends JDialog {
 			public void mouseClicked(MouseEvent arg0) {
 				if (table.getSelectedRow() >= 0) {
 					btnGuardar.setEnabled(true);
-					btnEliminar.setEnabled(true);;
+					btnEliminar.setEnabled(true);
 					int index = table.getSelectedRow();
 					String codigo = table.getModel().getValueAt(index, 0).toString();
 					empleo = Controladora.getInstance().buscarEmpleo(codigo);
@@ -84,8 +83,8 @@ public class ListEmpleo extends JDialog {
 		});
 		table.setDefaultEditor(Object.class, null);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Código", "Título", "Salario", "Nombre Empresa", "Idioma", "Año de Experiencia",
-				"Horario", "Vacantes" };
+		String[] columns = { "Código", "Título", "Salario", "Nombre Empresa", "Idioma", "Año de Experiencia", "Horario",
+				"Vacantes" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		scrollPane.setViewportView(table);
@@ -227,16 +226,18 @@ public class ListEmpleo extends JDialog {
 						}
 					}
 				});
-				
+
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-				            model=(DefaultTableModel) table.getModel();
-				            model.removeRow(table.getSelectedRow());
-				            model=null;
-				            Controladora.getInstance().getMisEmpleos().remove(empleo);
-				            
+						int op = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este empleo?", "Aviso",
+								JOptionPane.OK_CANCEL_OPTION);
+						if (op == JOptionPane.OK_OPTION) {
+							Controladora.getInstance().getMisEmpleos().remove(empleo);
+							loadTable("<Todas>", "");
+							JOptionPane.showMessageDialog(null, "Se ha eliminado este empleo", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
 				});
 				btnEliminar.setEnabled(false);
