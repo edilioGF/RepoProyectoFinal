@@ -291,12 +291,12 @@ public class RegPerfil extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
+						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
+						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
@@ -451,6 +451,9 @@ public class RegPerfil extends JDialog {
 		spnExp.setValue(0);
 		cbLicencia.setSelected(false);
 		cbMudarse.setSelected(false);
+		cbxHabilidad.setSelectedIndex(0);
+		cbxAestudio.setSelectedIndex(0);
+		cbxTitulo.setSelectedIndex(0);
 		loadPanel(true, false, false);
 	}
 }
