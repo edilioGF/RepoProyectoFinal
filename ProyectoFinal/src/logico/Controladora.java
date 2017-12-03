@@ -198,31 +198,24 @@ public class Controladora {
 												if (empleo.getArea()
 														.equalsIgnoreCase(((Graduado) perfil).getAreaEstudio())) {
 													actualizarMatch(empleo, perfil);
+													cont++;
+													escribirMatch(writer, perfil, empleo);
 												}
 											} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
 												if (empleo.getTituloTecnico()
 														.equalsIgnoreCase(((Tecnico) perfil).getTitulo())) {
+													cont++;
 													actualizarMatch(empleo, perfil);
+													escribirMatch(writer, perfil, empleo);
 												}
 											} else if (empleo.isObrero() && perfil instanceof Obrero) {
 												if (empleo.getHabilidad()
 														.equalsIgnoreCase(((Obrero) perfil).getHabilidad())) {
+													cont++;
 													actualizarMatch(empleo, perfil);
+													escribirMatch(writer, perfil, empleo);
 												}
 											}
-
-											perfil.getSolicitante().setTrabajo(true);
-
-											cont++;
-
-											writer.write(perfil.getSolicitante().getCedula() + "-"
-													+ perfil.getSolicitante().getNombre() + " "
-													+ perfil.getSolicitante().getApellidos() + " ahora trabaja con: "
-													+ empleo.getEmpresa().getRnc() + "-"
-													+ empleo.getEmpresa().getNombre() + ", en el empleo: "
-													+ empleo.getCodigo() + " " + empleo.getTitulo());
-											writer.newLine();
-											writer.newLine();
 										}
 									}
 								}
@@ -241,6 +234,17 @@ public class Controladora {
 			JOptionPane.showMessageDialog(null, "Se generó un archivo con los datos de este Matcheo", "Aviso",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
+	}
+
+	private void escribirMatch(BufferedWriter writer, Perfil perfil, Empleo empleo) throws IOException {
+		// TODO Auto-generated method stub
+		perfil.getSolicitante().setTrabajo(true);
+
+		writer.write(perfil.getSolicitante().getCedula() + "-" + perfil.getSolicitante().getNombre() + " "
+				+ perfil.getSolicitante().getApellidos() + " ahora trabaja con: " + empleo.getEmpresa().getRnc() + "-"
+				+ empleo.getEmpresa().getNombre() + ", en el empleo: " + empleo.getCodigo() + " " + empleo.getTitulo());
+		writer.newLine();
+		writer.newLine();
 	}
 
 	private void actualizarMatch(Empleo empleo, Perfil perfil) {
