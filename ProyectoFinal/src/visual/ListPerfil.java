@@ -46,6 +46,7 @@ public class ListPerfil extends JDialog {
 	private JComboBox cbxFormacion;
 	private Perfil perfil;
 	private JButton btnGuardar;
+	private JButton btnEliminar;
 
 	public ListPerfil() {
 		setResizable(false);
@@ -71,6 +72,7 @@ public class ListPerfil extends JDialog {
 						public void mouseClicked(MouseEvent arg0) {
 							if (table.getSelectedRow() >= 0) {
 								btnGuardar.setEnabled(true);
+								btnEliminar.setEnabled(true);
 								int index = table.getSelectedRow();
 								String codigo = table.getModel().getValueAt(index, 0).toString();
 								perfil = Controladora.getInstance().buscarPerfil(codigo);
@@ -199,6 +201,31 @@ public class ListPerfil extends JDialog {
 					}
 				}
 			});
+
+			btnEliminar = new JButton("Eliminar");
+			btnEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					if (Controladora.getInstance().buscarSolicitante(perfil.getSolicitante().getCedula())
+							.getMisPerfiles().size() == 1) {
+						JOptionPane.showMessageDialog(null, "El Solicitante debe tener al menos 1 perfil", "Aviso",
+								JOptionPane.INFORMATION_MESSAGE);
+						return;
+					}
+
+					int op = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este perfil?", "Aviso",
+							JOptionPane.OK_CANCEL_OPTION);
+					if (op == JOptionPane.OK_OPTION) {
+						Controladora.getInstance().eliminarPerfilSolicitante(perfil);
+						Controladora.getInstance().getMisPerfiles().remove(perfil);
+						loadTable("<Todos>", "");
+						JOptionPane.showMessageDialog(null, "Se ha eliminado este perfil", "Aviso",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			});
+			btnEliminar.setEnabled(false);
+			buttonPane.add(btnEliminar);
 			btnGuardar.setEnabled(false);
 			buttonPane.add(btnGuardar);
 			buttonPane.add(btnCerrar);

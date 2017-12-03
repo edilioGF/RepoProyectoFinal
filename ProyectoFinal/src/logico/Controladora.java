@@ -432,6 +432,24 @@ public class Controladora {
 		return profile;
 	}
 
+	public void eliminarPerfilSolicitante(Perfil perfil) {
+		ArrayList<Perfil> delete = new ArrayList<>();
+
+		for (Solicitante sol : misSolicitantes) {
+			for (Perfil perf : sol.getMisPerfiles()) {
+				if (perf.getCodigo().equalsIgnoreCase(perfil.getCodigo())) {
+					delete.add(perf);
+				}
+			}
+
+			if (perfil.getSolicitante().getCedula().equalsIgnoreCase(sol.getCedula())) {
+				for (Perfil perfil2 : delete) {
+					sol.getMisPerfiles().remove(perfil2);
+				}
+			}
+		}
+	}
+
 	public void eliminarEmpleosEmpresa(Empresa empresaList) {
 		ArrayList<Empleo> delete = new ArrayList<>();
 

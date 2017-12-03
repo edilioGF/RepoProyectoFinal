@@ -40,7 +40,6 @@ public class ListSolicitante extends JDialog {
 	private JButton btnDesactivarEmpleo;
 	private Solicitante solicitante;
 	private JButton btnEliminar;
-	private JButton btnModificar;
 
 	/**
 	 * Create the dialog.
@@ -75,14 +74,11 @@ public class ListSolicitante extends JDialog {
 
 								if (solicitante.isTrabajo()) {
 									btnDesactivarEmpleo.setEnabled(true);
-									btnEliminar.setEnabled(false);
-									btnModificar.setEnabled(false);
 								} else {
-									btnEliminar.setEnabled(true);
-									btnModificar.setEnabled(true);
 									btnDesactivarEmpleo.setEnabled(false);
 								}
 
+								btnEliminar.setEnabled(true);
 							}
 						}
 					});
@@ -155,21 +151,18 @@ public class ListSolicitante extends JDialog {
 				btnDesactivarEmpleo.setEnabled(false);
 				buttonPane.add(btnDesactivarEmpleo);
 
-				btnModificar = new JButton("Modificar");
-				btnModificar.setEnabled(false);
-				buttonPane.add(btnModificar);
-
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						int option = JOptionPane.showConfirmDialog(null,
-								"¿Estás seguro de que desea eliminar este solicitante?", "Aviso",
-								JOptionPane.INFORMATION_MESSAGE);
+								"¿Estás seguro de que desea eliminar este solicitante? Se eliminarán sus perfiles",
+								"Aviso", JOptionPane.INFORMATION_MESSAGE);
 						if (option == JOptionPane.OK_OPTION) {
 							Controladora.getInstance().eliminarSolicitante(solicitante);
 							loadTable("<Todos>", "");
 							btnEliminar.setEnabled(false);
-							btnModificar.setEnabled(false);
+							JOptionPane.showMessageDialog(null, "Se eliminó el solicitante y sus perfiles", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				});

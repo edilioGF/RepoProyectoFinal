@@ -230,6 +230,13 @@ public class ListEmpleo extends JDialog {
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if (Controladora.getInstance().buscarEmpresa(empleo.getEmpresa().getRnc()).getMisEmpleos()
+								.size() == 1) {
+							JOptionPane.showMessageDialog(null, "La Empresa debe tener al menos 1 empleo", "Aviso",
+									JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+
 						int op = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este empleo?", "Aviso",
 								JOptionPane.OK_CANCEL_OPTION);
 						if (op == JOptionPane.OK_OPTION) {
