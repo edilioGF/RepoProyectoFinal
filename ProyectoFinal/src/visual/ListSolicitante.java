@@ -38,9 +38,10 @@ public class ListSolicitante extends JDialog {
 	private JTextField txtCedula;
 	private JComboBox cbxGenero;
 	private JButton btnDesactivarEmpleo;
-    private Solicitante solicitante;
-    private JButton btnEliminar;
-    private JButton btnModificar;
+	private Solicitante solicitante;
+	private JButton btnEliminar;
+	private JButton btnModificar;
+
 	/**
 	 * Create the dialog.
 	 */
@@ -63,26 +64,25 @@ public class ListSolicitante extends JDialog {
 				panel.add(scrollPane);
 				{
 					table = new JTable();
+					table.setDefaultEditor(Object.class, null);
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							if(table.getSelectedRow()>=0){
+							if (table.getSelectedRow() >= 0) {
 								int index = table.getSelectedRow();
-								String cedula = (String)table.getModel().getValueAt(index,0);
+								String cedula = (String) table.getModel().getValueAt(index, 0);
 								solicitante = Controladora.getInstance().buscarSolicitante(cedula);
-								
-								
-								if(solicitante.isTrabajo()){
+
+								if (solicitante.isTrabajo()) {
 									btnDesactivarEmpleo.setEnabled(true);
 									btnEliminar.setEnabled(false);
 									btnModificar.setEnabled(false);
-								}
-								else{
+								} else {
 									btnEliminar.setEnabled(true);
 									btnModificar.setEnabled(true);
 									btnDesactivarEmpleo.setEnabled(false);
 								}
-								
+
 							}
 						}
 					});
@@ -141,7 +141,7 @@ public class ListSolicitante extends JDialog {
 						dispose();
 					}
 				});
-				
+
 				btnDesactivarEmpleo = new JButton("Desactivar Empleo");
 				btnDesactivarEmpleo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -154,17 +154,18 @@ public class ListSolicitante extends JDialog {
 				});
 				btnDesactivarEmpleo.setEnabled(false);
 				buttonPane.add(btnDesactivarEmpleo);
-				
+
 				btnModificar = new JButton("Modificar");
 				btnModificar.setEnabled(false);
 				buttonPane.add(btnModificar);
-				
+
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						int option = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que desea eliminar este solicitante?", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-						if(option == JOptionPane.OK_OPTION)
-						{
+						int option = JOptionPane.showConfirmDialog(null,
+								"¿Estás seguro de que desea eliminar este solicitante?", "Aviso",
+								JOptionPane.INFORMATION_MESSAGE);
+						if (option == JOptionPane.OK_OPTION) {
 							Controladora.getInstance().eliminarSolicitante(solicitante);
 							loadTable("<Todos>", "");
 							btnEliminar.setEnabled(false);

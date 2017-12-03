@@ -63,7 +63,13 @@ public class Controladora {
 	public void ordenarPerfiles() {
 		int i, j, mayor, pos;
 		Perfil tmp;
-		misPerfiles2 = misPerfiles;
+		// misPerfiles2 = misPerfiles;
+
+		misPerfiles2.clear();
+
+		for (Perfil perfil : misPerfiles) {
+			misPerfiles2.add(perfil);
+		}
 
 		for (i = 0; i < misPerfiles2.size() - 1; i++) {
 			mayor = misPerfiles2.get(i).getExperiencia();
@@ -146,8 +152,8 @@ public class Controladora {
 			i++;
 		}
 	}
-	
-	public void eliminarSolicitante(Solicitante solicitante){
+
+	public void eliminarSolicitante(Solicitante solicitante) {
 		for (Perfil perfil : solicitante.getMisPerfiles()) {
 			misPerfiles.remove(perfil);
 		}

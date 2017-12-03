@@ -317,25 +317,19 @@ public class RegPerfil extends JDialog {
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
-								}
-								if (rdbtnObrero.isSelected()) {
+								} else if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
 									Obrero perfil = new Obrero(codigo, solicitante, idioma, licencia, mudarse,
 											experiencia, habilidad);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
-									Controladora.getInstance().buscarSolicitante(solicitante.getCedula())
-											.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
-								}
-								if (rdbtnTecnico.isSelected()) {
+								} else if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
 									Tecnico perfil = new Tecnico(codigo, solicitante, idioma, licencia, mudarse,
 											experiencia, titulo);
 									solicitante.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisSolicitantes().add(solicitante);
-									Controladora.getInstance().buscarSolicitante(solicitante.getCedula())
-											.getMisPerfiles().add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
 								}
 
@@ -347,16 +341,14 @@ public class RegPerfil extends JDialog {
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
 											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
-								}
-								if (rdbtnObrero.isSelected()) {
+								} else if (rdbtnObrero.isSelected()) {
 									String habilidad = cbxHabilidad.getSelectedItem().toString();
 									Obrero perfil = new Obrero(codigo, soli, idioma, licencia, mudarse, experiencia,
 											habilidad);
 									Controladora.getInstance().buscarSolicitante(soli.getCedula()).getMisPerfiles()
 											.add(perfil);
 									Controladora.getInstance().getMisPerfiles().add(perfil);
-								}
-								if (rdbtnTecnico.isSelected()) {
+								} else if (rdbtnTecnico.isSelected()) {
 									String titulo = cbxTitulo.getSelectedItem().toString();
 									Tecnico perfil = new Tecnico(codigo, soli, idioma, licencia, mudarse, experiencia,
 											titulo);
