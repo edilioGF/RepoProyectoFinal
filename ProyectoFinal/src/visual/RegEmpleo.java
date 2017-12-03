@@ -62,6 +62,7 @@ public class RegEmpleo extends JDialog {
 	private JComboBox cbxAreaEstudio;
 	private Empresa empresa;
 	private Empleo empleo;
+	private JButton btnTerminar;
 
 	private JPanel pnlGraduado;
 	private JPanel pnlTecnico;
@@ -339,8 +340,8 @@ public class RegEmpleo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Terminar");
-				okButton.addActionListener(new ActionListener() {
+				btnTerminar = new JButton("Terminar");
+				btnTerminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (cbxIdioma.getSelectedIndex() <= 0) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar un idioma", "Aviso",
@@ -352,12 +353,12 @@ public class RegEmpleo extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
+						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnTecnico.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar un título", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						if (cbxTitulo.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
+						if (cbxHabilidad.getSelectedIndex() <= 0 && rdbtnObrero.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Debe seleccionar una habilidad", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
@@ -422,6 +423,8 @@ public class RegEmpleo extends JDialog {
 									RegEmpresa re = new RegEmpresa();
 									re.setModal(true);
 									re.setVisible(true);
+								}else{
+									clean();
 								}
 
 							}
@@ -429,9 +432,9 @@ public class RegEmpleo extends JDialog {
 						}
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btnTerminar.setActionCommand("OK");
+				buttonPane.add(btnTerminar);
+				getRootPane().setDefaultButton(btnTerminar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
@@ -482,6 +485,29 @@ public class RegEmpleo extends JDialog {
 					+ loc.getDisplayLanguage().substring(1);
 			cbxIdioma.addItem(string);
 		}
+	}
+	
+	private void clean(){
+		txtTitulo.setText("");
+		txtCodigo.setText(String.format("%s-%03d", "EMP", Controladora.getInstance().getMisEmpleos().size() + 1));
+		txtCodigoEmp.setText("");
+		txtNombreEmp.setText("");
+		txtUbicacionEmp.setText("");
+		txtDescripcion.setText("");
+		spnVacantes.setValue(1);
+		spnExp.setValue(0);
+	    spnSalario.setValue(0);
+		spnHoraInicial.setValue(0);
+		spnHoraFinal.setValue(0);
+		cbxIdioma.setSelectedIndex(0);
+		cbRemoto.setSelected(false);
+		cbLicencia.setSelected(false);
+		loadPanel(true, false, false);
+		cbxHabilidad.setSelectedIndex(0);
+		cbxTitulo.setSelectedIndex(0);
+		cbxAreaEstudio.setSelectedIndex(0);
+	    btnTerminar.setEnabled(false);
+		
 	}
 
 	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {

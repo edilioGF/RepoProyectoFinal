@@ -39,6 +39,8 @@ public class ListSolicitante extends JDialog {
 	private JComboBox cbxGenero;
 	private JButton btnDesactivarEmpleo;
     private Solicitante solicitante;
+    private JButton btnEliminar;
+    private JButton btnModificar;
 	/**
 	 * Create the dialog.
 	 */
@@ -69,10 +71,15 @@ public class ListSolicitante extends JDialog {
 								String cedula = (String)table.getModel().getValueAt(index,0);
 								solicitante = Controladora.getInstance().buscarSolicitante(cedula);
 								
+								
 								if(solicitante.isTrabajo()){
 									btnDesactivarEmpleo.setEnabled(true);
+									btnEliminar.setEnabled(false);
+									btnModificar.setEnabled(false);
 								}
 								else{
+									btnEliminar.setEnabled(true);
+									btnModificar.setEnabled(true);
 									btnDesactivarEmpleo.setEnabled(false);
 								}
 								
@@ -147,6 +154,26 @@ public class ListSolicitante extends JDialog {
 				});
 				btnDesactivarEmpleo.setEnabled(false);
 				buttonPane.add(btnDesactivarEmpleo);
+				
+				btnModificar = new JButton("Modificar");
+				btnModificar.setEnabled(false);
+				buttonPane.add(btnModificar);
+				
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Controladora.getInstance().getMisSolicitantes().remove(solicitante);
+						int option = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que desea eliminar este solicitante?", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+						if(option == JOptionPane.OK_OPTION)
+						{
+							loadTable("<Todos>", "");
+							btnEliminar.setEnabled(false);
+							btnModificar.setEnabled(false);
+						}
+					}
+				});
+				btnEliminar.setEnabled(false);
+				buttonPane.add(btnEliminar);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
