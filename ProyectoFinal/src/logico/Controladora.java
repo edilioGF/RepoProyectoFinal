@@ -51,6 +51,7 @@ public class Controladora {
 		this.misEmpresas = new ArrayList<>();
 		this.misPerfiles = new ArrayList<>();
 		this.misEmpleos = new ArrayList<>();
+		this.misPerfiles2 = new ArrayList<>();
 	}
 
 	public static Controladora getInstance() {
