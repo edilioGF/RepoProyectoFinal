@@ -42,9 +42,11 @@ public class ListEmpleo extends JDialog {
 	private DefaultTableModel model;
 	private String codigo;
 	private Empleo empleo;
+	private Empresa empresa;
 	private JComboBox cbxFormacion;
 	private JComboBox cbxAreas;
 	private JButton btnGuardar;
+	private JButton btnEliminar;
 
 	/**
 	 * Create the dialog.
@@ -73,6 +75,7 @@ public class ListEmpleo extends JDialog {
 			public void mouseClicked(MouseEvent arg0) {
 				if (table.getSelectedRow() >= 0) {
 					btnGuardar.setEnabled(true);
+					btnEliminar.setEnabled(true);;
 					int index = table.getSelectedRow();
 					String codigo = table.getModel().getValueAt(index, 0).toString();
 					empleo = Controladora.getInstance().buscarEmpleo(codigo);
@@ -224,6 +227,20 @@ public class ListEmpleo extends JDialog {
 						}
 					}
 				});
+				
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+				            model=(DefaultTableModel) table.getModel();
+				            model.removeRow(table.getSelectedRow());
+				            model=null;
+				            Controladora.getInstance().getMisEmpleos().remove(empleo);
+				            
+					}
+				});
+				btnEliminar.setEnabled(false);
+				buttonPane.add(btnEliminar);
 				btnGuardar.setEnabled(false);
 				buttonPane.add(btnGuardar);
 				cancelButton.setActionCommand("Cancel");
