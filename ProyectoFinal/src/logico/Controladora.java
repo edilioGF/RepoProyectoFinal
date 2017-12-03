@@ -146,6 +146,13 @@ public class Controladora {
 			i++;
 		}
 	}
+	
+	public void eliminarSolicitante(Solicitante solicitante){
+		for (Perfil perfil : solicitante.getMisPerfiles()) {
+			misPerfiles.remove(perfil);
+		}
+		misSolicitantes.remove(solicitante);
+	}
 
 	public void match() throws IOException {
 		if (verificarEmpleos() && verificarPerfiles()) {
@@ -190,7 +197,7 @@ public class Controladora {
 														.equalsIgnoreCase(((Tecnico) perfil).getTitulo())) {
 													actualizarMatch(empleo, perfil);
 												}
-											} else {
+											} else if (empleo.isObrero() && perfil instanceof Obrero) {
 												if (empleo.getHabilidad()
 														.equalsIgnoreCase(((Obrero) perfil).getHabilidad())) {
 													actualizarMatch(empleo, perfil);

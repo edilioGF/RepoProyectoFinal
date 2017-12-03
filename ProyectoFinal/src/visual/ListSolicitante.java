@@ -162,10 +162,10 @@ public class ListSolicitante extends JDialog {
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						Controladora.getInstance().getMisSolicitantes().remove(solicitante);
 						int option = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que desea eliminar este solicitante?", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 						if(option == JOptionPane.OK_OPTION)
 						{
+							Controladora.getInstance().eliminarSolicitante(solicitante);
 							loadTable("<Todos>", "");
 							btnEliminar.setEnabled(false);
 							btnModificar.setEnabled(false);

@@ -512,7 +512,6 @@ public class RegEmpleo extends JDialog {
 		cbxHabilidad.setSelectedIndex(0);
 		cbxTitulo.setSelectedIndex(0);
 		cbxAreaEstudio.setSelectedIndex(0);
-		btnTerminar.setEnabled(false);
 
 	}
 
