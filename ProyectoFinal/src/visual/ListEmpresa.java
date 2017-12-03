@@ -86,6 +86,15 @@ public class ListEmpresa extends JDialog {
 					dispose();
 				}
 			});
+			
+			JButton btnEliminar = new JButton("Eliminar");
+			btnEliminar.setEnabled(false);
+			btnEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+				}
+			});
+			buttonPane.add(btnEliminar);
 			buttonPane.add(btnCerrar);
 		}
 
