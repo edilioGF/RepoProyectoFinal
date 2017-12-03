@@ -157,7 +157,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmEjecutar = new JMenuItem("Ejecutar");
 		mntmEjecutar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (Controladora.getInstance().verificarEmpleos()) {
+				if (Controladora.getInstance().verificarEmpleos() && Controladora.getInstance().verificarPerfiles()) {
 					EjecutandoMatcheo em = new EjecutandoMatcheo();
 					em.setModal(true);
 					em.setVisible(true);

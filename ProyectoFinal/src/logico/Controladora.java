@@ -211,6 +211,8 @@ public class Controladora {
 												}
 											}
 
+											perfil.getSolicitante().setTrabajo(true);
+
 											cont++;
 
 											writer.write(perfil.getSolicitante().getCedula() + "-"
@@ -247,9 +249,12 @@ public class Controladora {
 		if (empleo.getVacantes() == 0) {
 			empleo.setSatisfecho(true);
 		}
-		perfil.setSatisfecha(true);
-		perfil.getSolicitante().desactivarPerfiles();
 		perfil.getSolicitante().setTrabajo(true);
+		Perfil per = buscarPerfil(perfil.getCodigo());
+		per.setSatisfecha(true);
+		Solicitante sol = buscarSolicitante(perfil.getSolicitante().getCedula());
+		sol.desactivarPerfiles();
+		sol.setTrabajo(true);
 	}
 
 	public void saveData() throws IOException {
