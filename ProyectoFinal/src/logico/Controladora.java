@@ -130,13 +130,13 @@ public class Controladora {
 		empleo.setVacantes(empleo.getVacantes() + 1);
 		eliminarPerfil(solicitante);
 	}
-	
-	public void eliminarPerfil(Solicitante solicitante){
+
+	public void eliminarPerfil(Solicitante solicitante) {
 		int i = 0;
 		boolean find = false;
-		
-		while(!find && i < solicitante.getMisPerfiles().size()){
-			if(solicitante.getMisPerfiles().get(i).isSatisfecha()){
+
+		while (!find && i < solicitante.getMisPerfiles().size()) {
+			if (solicitante.getMisPerfiles().get(i).isSatisfecha()) {
 				find = true;
 				solicitante.getMisPerfiles().remove(i);
 			}
@@ -178,11 +178,20 @@ public class Controladora {
 										if (perfil.getIdioma().equalsIgnoreCase(empleo.getIdioma())) {
 											// #5 Formación...
 											if (empleo.isGraduado() && perfil instanceof Graduado) {
-												actualizarMatch(empleo, perfil);
+												if (empleo.getArea()
+														.equalsIgnoreCase(((Graduado) perfil).getAreaEstudio())) {
+													actualizarMatch(empleo, perfil);
+												}
 											} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
-												actualizarMatch(empleo, perfil);
+												if (empleo.getTituloTecnico()
+														.equalsIgnoreCase(((Tecnico) perfil).getTitulo())) {
+													actualizarMatch(empleo, perfil);
+												}
 											} else {
-												actualizarMatch(empleo, perfil);
+												if (empleo.getHabilidad()
+														.equalsIgnoreCase(((Obrero) perfil).getHabilidad())) {
+													actualizarMatch(empleo, perfil);
+												}
 											}
 
 											cont++;
