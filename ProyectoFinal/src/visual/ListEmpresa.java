@@ -117,6 +117,8 @@ public class ListEmpresa extends JDialog {
 						JOptionPane.showMessageDialog(null, "Se ha eliminado esta empresa y sus empleos", "Aviso",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
+
+					Principal.loadStats();
 				}
 			});
 			buttonPane.add(btnEliminar);

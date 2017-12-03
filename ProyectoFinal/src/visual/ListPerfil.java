@@ -222,6 +222,8 @@ public class ListPerfil extends JDialog {
 						JOptionPane.showMessageDialog(null, "Se ha eliminado este perfil", "Aviso",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
+
+					Principal.loadStats();
 				}
 			});
 			btnEliminar.setEnabled(false);

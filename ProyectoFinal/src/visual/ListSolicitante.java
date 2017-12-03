@@ -164,6 +164,9 @@ public class ListSolicitante extends JDialog {
 							JOptionPane.showMessageDialog(null, "Se eliminó el solicitante y sus perfiles", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
+
+						Principal.loadStats();
+
 					}
 				});
 				btnEliminar.setEnabled(false);

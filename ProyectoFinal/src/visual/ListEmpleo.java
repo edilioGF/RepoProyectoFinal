@@ -245,6 +245,8 @@ public class ListEmpleo extends JDialog {
 							JOptionPane.showMessageDialog(null, "Se ha eliminado este empleo", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 						}
+						
+						Principal.loadStats();
 					}
 				});
 				btnEliminar.setEnabled(false);
