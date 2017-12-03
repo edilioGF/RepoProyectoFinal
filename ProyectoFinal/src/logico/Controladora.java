@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.security.KeyStore.LoadStoreParameter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
+import visual.Principal;
 
 public class Controladora {
 	private ArrayList<Solicitante> misSolicitantes;
@@ -406,6 +409,24 @@ public class Controladora {
 		return profile;
 	}
 
+	public void eliminarEmpleosEmpresa(Empresa empresaList) {
+		ArrayList<Empleo> delete = new ArrayList<>();
+
+		for (Empleo empleo : misEmpleos) {
+			for (Empleo empl : empresaList.getMisEmpleos()) {
+				if (empleo.getCodigo().equalsIgnoreCase(empl.getCodigo())) {
+					delete.add(empleo);
+				}
+			}
+		}
+
+		for (Empleo empleo : delete) {
+			misEmpleos.remove(empleo);
+		}
+
+		Principal.loadStats();
+	}
+
 	public int[] contarHombresMujeres() {
 		// 0 -> Mujeres // 1 -> Hombres
 		int arr[] = { 0, 0 };
@@ -539,5 +560,4 @@ public class Controladora {
 	public void setMisPerfiles2(ArrayList<Perfil> misPerfiles2) {
 		this.misPerfiles2 = misPerfiles2;
 	}
-
 }

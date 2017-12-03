@@ -110,6 +110,7 @@ public class ListEmpresa extends JDialog {
 							"¿Desea eliminar esta empresa? Se eliminarán también sus empleos", "Aviso",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (op == JOptionPane.OK_OPTION) {
+						Controladora.getInstance().eliminarEmpleosEmpresa(empresaList);
 						Controladora.getInstance().getMisEmpresas().remove(empresaList);
 						// Se necesitan eliminar los empleos de esyta empresa
 						loadTable("<Todos>");

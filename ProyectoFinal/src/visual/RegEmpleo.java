@@ -411,8 +411,14 @@ public class RegEmpleo extends JDialog {
 
 								if (emp != null) {
 									empleo.setEmpresa(emp);
+									emp.getMisEmpleos().add(empleo);
 									Controladora.getInstance().addEmpresa(emp);
 								}
+								if (empresa != null) {
+									empleo.setEmpresa(empresa);
+									empresa.getMisEmpleos().add(empleo);
+								}
+
 								Controladora.getInstance().addEmpleo(empleo);
 								Principal.loadStats();
 								JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Aviso",
