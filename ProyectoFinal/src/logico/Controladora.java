@@ -126,7 +126,8 @@ public class Controladora {
 		int i = 0;
 		int j = 0;
 		while (!find && i < misEmpleos.size()) {
-			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {
+			
+			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {			
 				if (misEmpleos.get(i).getEmpleados().get(j) == solicitante) {
 					empleo = misEmpleos.get(i);
 					find = true;
@@ -149,6 +150,7 @@ public class Controladora {
 			if (solicitante.getMisPerfiles().get(i).isSatisfecha()) {
 				find = true;
 				solicitante.getMisPerfiles().remove(i);
+				misPerfiles.remove(i);
 			}
 			i++;
 		}
