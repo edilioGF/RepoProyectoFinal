@@ -141,11 +141,26 @@ public class ListSolicitante extends JDialog {
 				btnDesactivarEmpleo = new JButton("Desactivar Empleo");
 				btnDesactivarEmpleo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						solicitante.desactivarEmpleo();
-						Controladora.getInstance().retirarSolicitante(solicitante);
-						JOptionPane.showMessageDialog(null, "Se ha desactivado el empleo");
-						btnDesactivarEmpleo.setEnabled(false);
-						loadTable("<Todos>", "");
+						int op = JOptionPane.showConfirmDialog(null, "¿Desea desactivar el empleo a este solicitante?",
+								"Aviso", JOptionPane.OK_CANCEL_OPTION);
+						if (op == JOptionPane.OK_OPTION) {
+							if (solicitante.getMisPerfiles().size() == 1) {
+								JOptionPane.showConfirmDialog(null,
+										"Ya que el solicitante tiene un solo perfil, se eliminará del sistema. ¿Desea continuar?",
+										"Aviso", JOptionPane.OK_CANCEL_OPTION);
+								Controladora.getInstance().eliminarSolicitante(solicitante);
+								JOptionPane.showMessageDialog(null, "Se ha eliminado este solicitante con su perfil",
+										"Aviso", JOptionPane.INFORMATION_MESSAGE);
+							} else {
+								solicitante.desactivarEmpleo();
+								Controladora.getInstance().retirarSolicitante(solicitante);
+								JOptionPane.showMessageDialog(null, "Se ha desactivado el empleo", "Aviso",
+										JOptionPane.INFORMATION_MESSAGE);
+							}
+
+							btnDesactivarEmpleo.setEnabled(false);
+							loadTable("<Todos>", "");
+						}
 					}
 				});
 				btnDesactivarEmpleo.setEnabled(false);
