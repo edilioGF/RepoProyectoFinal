@@ -30,9 +30,13 @@ public class RegEmpresa extends JDialog {
 	private JComboBox cbxUbicacion;
 	private JComboBox cbxTipo;
 
-	public RegEmpresa() {
+	public RegEmpresa(Empresa empr) {
 		setResizable(false);
-		setTitle("Registro de Empresa");
+		if (empr == null) {
+			setTitle("Registro de Empresa");
+		} else {
+			setTitle("Modificación de Empresa");
+		}
 		setBounds(100, 100, 307, 325);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -86,7 +90,11 @@ public class RegEmpresa extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Siguiente");
+				
+			    JButton okButton = new JButton("Siguiente");
+			    if(empr != null){
+			    	okButton.setText("Modificar");
+			    }
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (cbxUbicacion.getSelectedIndex() <= 0) {
@@ -99,23 +107,31 @@ public class RegEmpresa extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
 						}
-						
-					
+
 						String codigo = txtRnc.getText();
 						String nombre = txtNombre.getText();
 						String ubicacion = cbxUbicacion.getSelectedItem().toString();
 						String tipo = cbxTipo.getSelectedItem().toString();
-						if(codigo.isEmpty() || nombre.isEmpty()){
+						if (codigo.isEmpty() || nombre.isEmpty()) {
 							JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
 									JOptionPane.INFORMATION_MESSAGE);
 							return;
-						}else{
-						Empresa empresa = new Empresa(codigo, nombre, ubicacion, tipo);
-						dispose();
-						RegEmpleo re = new RegEmpleo(empresa);
-						re.setModal(true);
-						re.setVisible(true);
-						}
+						} else if (empr == null) {
+							Empresa empresa = new Empresa(codigo, nombre, ubicacion, tipo);
+							dispose();
+							RegEmpleo re = new RegEmpleo(empresa);
+							re.setModal(true);
+							re.setVisible(true);
+						} else {
+							empr.setNombre(nombre);
+							empr.setRnc(codigo);
+							empr.setUbicacion(ubicacion);
+							empr.setTipo(tipo);
+							ListEmpresa.loadTable("<Todos>");
+							JOptionPane.showMessageDialog(null, "Se ha realizado la modificación", "Información",
+									JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						}	
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -135,6 +151,9 @@ public class RegEmpresa extends JDialog {
 		}
 
 		load();
+		if (empr != null) {
+			loadEmpresa(empr);
+		}
 	}
 
 	private void load() {
@@ -152,6 +171,23 @@ public class RegEmpresa extends JDialog {
 		for (String tipo : Controladora.getMisTiposDeEmpresa()) {
 			cbxTipo.addItem(tipo);
 		}
+	}
+
+	private void loadEmpresa(Empresa empr) {
+		int i = 0;
+		txtRnc.setText(empr.getRnc());
+		txtNombre.setText(empr.getNombre());
+		for (i = 0; i < cbxUbicacion.getItemCount(); i++) {
+			if (cbxUbicacion.getItemAt(i).toString().equalsIgnoreCase(empr.getUbicacion())) {
+				cbxUbicacion.setSelectedIndex(i);
+			}
+		}
+		for (i = 0; i < cbxTipo.getItemCount(); i++) {
+			if (cbxTipo.getItemAt(i).toString().equalsIgnoreCase(empr.getTipo())) {
+				cbxTipo.setSelectedIndex(i);
+			}
+		}
+
 	}
 
 	private void clean() {

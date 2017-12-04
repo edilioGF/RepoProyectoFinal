@@ -30,9 +30,9 @@ import java.awt.event.MouseEvent;
 public class ListEmpresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private Object[] fila;
-	private DefaultTableModel model;
+	private static JTable table;
+	private static Object[] fila;
+	private static DefaultTableModel model;
 	private JComboBox cbxTipo;
 	private Empresa empresaList;
 	private JButton btnEliminar;
@@ -128,6 +128,9 @@ public class ListEmpresa extends JDialog {
 			btnModificar.setEnabled(false);
 			btnModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					RegEmpresa rgEmpr = new RegEmpresa(empresaList);
+					rgEmpr.setModal(true);
+					rgEmpr.setVisible(true);
 				}
 			});
 			buttonPane.add(btnModificar);
@@ -145,7 +148,7 @@ public class ListEmpresa extends JDialog {
 		}
 	}
 
-	private void loadTable(String tipo) {
+	public static void loadTable(String tipo) {
 		// TODO Auto-generated method stub
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];

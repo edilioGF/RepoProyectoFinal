@@ -426,7 +426,7 @@ public class RegEmpleo extends JDialog {
 
 								if (emp != null) {
 									dispose();
-									RegEmpresa re = new RegEmpresa();
+									RegEmpresa re = new RegEmpresa(null);
 									re.setModal(true);
 									re.setVisible(true);
 								} else {
