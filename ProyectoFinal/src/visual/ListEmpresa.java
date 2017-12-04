@@ -36,6 +36,7 @@ public class ListEmpresa extends JDialog {
 	private JComboBox cbxTipo;
 	private Empresa empresaList;
 	private JButton btnEliminar;
+	private JButton btnModificar;
 
 	public ListEmpresa() {
 		setResizable(false);
@@ -61,6 +62,7 @@ public class ListEmpresa extends JDialog {
 			public void mouseClicked(MouseEvent arg0) {
 				if (table.getSelectedRow() >= 0) {
 					btnEliminar.setEnabled(true);
+					btnModificar.setEnabled(true);
 					int index = table.getSelectedRow();
 					String rnc = table.getModel().getValueAt(index, 0).toString();
 					empresaList = Controladora.getInstance().buscarEmpresa(rnc);
@@ -121,6 +123,14 @@ public class ListEmpresa extends JDialog {
 					Principal.loadStats();
 				}
 			});
+			
+			btnModificar = new JButton("Modificar");
+			btnModificar.setEnabled(false);
+			btnModificar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
+			buttonPane.add(btnModificar);
 			buttonPane.add(btnEliminar);
 			buttonPane.add(btnCerrar);
 		}
