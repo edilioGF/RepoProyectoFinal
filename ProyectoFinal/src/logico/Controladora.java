@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
+import visual.DatosMatch;
 import visual.Principal;
 
 public class Controladora {
@@ -126,8 +127,8 @@ public class Controladora {
 		int i = 0;
 		int j = 0;
 		while (!find && i < misEmpleos.size()) {
-			
-			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {			
+
+			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {
 				if (misEmpleos.get(i).getEmpleados().get(j) == solicitante) {
 					empleo = misEmpleos.get(i);
 					find = true;
@@ -167,6 +168,9 @@ public class Controladora {
 		if (verificarEmpleos() && verificarPerfiles()) {
 			ordenarPerfiles();
 
+			ArrayList<Perfil> perfs = new ArrayList<>();
+			ArrayList<Empleo> empls = new ArrayList<>();
+
 			Date date = new Date();
 			String str = new SimpleDateFormat("dd_MM_yyyy_hh_mm").format(date);
 			String str2 = new SimpleDateFormat("dd/MM/yyyy hh:mm").format(date);
@@ -202,6 +206,8 @@ public class Controladora {
 													actualizarMatch(empleo, perfil);
 													cont++;
 													escribirMatch(writer, perfil, empleo);
+													perfs.add(perfil);
+													empls.add(empleo);
 												}
 											} else if (empleo.isTecnico() && perfil instanceof Tecnico) {
 												if (empleo.getTituloTecnico()
@@ -209,6 +215,8 @@ public class Controladora {
 													cont++;
 													actualizarMatch(empleo, perfil);
 													escribirMatch(writer, perfil, empleo);
+													perfs.add(perfil);
+													empls.add(empleo);
 												}
 											} else if (empleo.isObrero() && perfil instanceof Obrero) {
 												if (empleo.getHabilidad()
@@ -216,6 +224,8 @@ public class Controladora {
 													cont++;
 													actualizarMatch(empleo, perfil);
 													escribirMatch(writer, perfil, empleo);
+													perfs.add(perfil);
+													empls.add(empleo);
 												}
 											}
 										}
@@ -235,6 +245,9 @@ public class Controladora {
 
 			JOptionPane.showMessageDialog(null, "Se generó un archivo con los datos de este Matcheo", "Aviso",
 					JOptionPane.INFORMATION_MESSAGE);
+			DatosMatch dm = new DatosMatch(perfs, empls);
+			dm.setModal(true);
+			dm.setVisible(true);
 		}
 	}
 

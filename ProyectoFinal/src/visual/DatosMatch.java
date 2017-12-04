@@ -11,7 +11,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
 import logico.Controladora;
+import logico.Empleo;
 import logico.Empresa;
+import logico.Perfil;
 
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
@@ -26,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class DatosMatch extends JDialog {
 
@@ -34,9 +37,14 @@ public class DatosMatch extends JDialog {
 	private Object[] fila;
 	private DefaultTableModel model;
 
+	private ArrayList<Perfil> misPerfiles;
+	private ArrayList<Empleo> misEmpleos;
 
-	
-	public DatosMatch() {
+	public DatosMatch(ArrayList<Perfil> perfiles, ArrayList<Empleo> empleos) {
+
+		misPerfiles = perfiles;
+		misEmpleos = empleos;
+
 		setResizable(false);
 		setTitle("Datos del Match");
 		setBounds(100, 100, 1000, 600);
@@ -47,7 +55,7 @@ public class DatosMatch extends JDialog {
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 49, 972, 474);
+		panel.setBounds(12, 11, 972, 512);
 		contentPanel.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
@@ -57,7 +65,7 @@ public class DatosMatch extends JDialog {
 		table = new JTable();
 		table.setDefaultEditor(Object.class, null);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		String[] columns = { "Cedula", "Nombre", "Empresa", "Empleo" };
+		String[] columns = { "Solicitante", "Empresa", "Empleo" };
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 
@@ -76,6 +84,25 @@ public class DatosMatch extends JDialog {
 			});
 			buttonPane.add(btnCerrar);
 		}
+
+		loadTable();
 	}
-	
+
+	private void loadTable() {
+		// TODO Auto-generated method stub
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+
+		for (int i = 0; i < misPerfiles.size(); i++) {
+			fila[0] = misPerfiles.get(i).getSolicitante().getCedula() + " - "
+					+ misPerfiles.get(i).getSolicitante().getNombre() + " "
+					+ misPerfiles.get(i).getSolicitante().getApellidos();
+			fila[1] = misEmpleos.get(i).getEmpresa().getRnc() + " - " + misEmpleos.get(i).getEmpresa().getNombre();
+			fila[2] = misEmpleos.get(i).getCodigo() + " - " + misEmpleos.get(i).getTitulo();
+			model.addRow(fila);
+		}
+
+		table.setModel(model);
+	}
+
 }
