@@ -136,6 +136,7 @@ public class RegEmpleo extends JDialog {
 		panel.add(lblSalario);
 
 		spnSalario = new JSpinner();
+		spnSalario.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnSalario.setBounds(254, 213, 110, 23);
 		panel.add(spnSalario);
 
