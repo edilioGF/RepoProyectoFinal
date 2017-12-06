@@ -273,6 +273,15 @@ public class Controladora {
 		per.setSatisfecha(true);
 		Solicitante sol = buscarSolicitante(perfil.getSolicitante().getCedula());
 		sol.desactivarPerfiles();
+
+		for (Perfil perf : misPerfiles) {
+			for (Perfil perf2 : sol.getMisPerfiles()) {
+				if (perf.getCodigo().equalsIgnoreCase(perf2.getCodigo())) {
+					perf.setActiva(false);
+				}
+			}
+		}
+
 		sol.setTrabajo(true);
 	}
 
