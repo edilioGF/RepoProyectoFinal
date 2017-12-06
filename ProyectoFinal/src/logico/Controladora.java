@@ -126,7 +126,7 @@ public class Controladora {
 		boolean find = false;
 		int i = 0;
 		int j = 0;
-		
+
 		for (Empleo empl : misEmpleos) {
 			for (Solicitante soli : empl.getEmpleados()) {
 				if (soli.getCedula().equalsIgnoreCase(solicitante.getCedula())) {
@@ -135,7 +135,7 @@ public class Controladora {
 
 			}
 		}
-		
+
 		empleo.getEmpleados().remove(solicitante);
 		empleo.setVacantes(empleo.getVacantes() + 1);
 		eliminarPerfil(solicitante);
