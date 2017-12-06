@@ -47,8 +47,12 @@ public class RegSolicitante extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegSolicitante() {
-		setTitle("Registro de Solicitante");
+	public RegSolicitante(Solicitante soli ) {
+		if (soli == null) {
+			setTitle("Registro de Empresa");
+		} else {
+			setTitle("Modificación de Empresa");
+		}
 		setResizable(false);
 		setBounds(100, 100, 390, 375);
 		setLocationRelativeTo(null);
@@ -130,6 +134,9 @@ public class RegSolicitante extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnSiguiente = new JButton("Siguiente");
+				if(soli != null){
+			    	btnSiguiente.setText("Modificar");
+			    }
 				btnSiguiente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if (cbxGenero.getSelectedIndex() <= 0) {
@@ -163,7 +170,7 @@ public class RegSolicitante extends JDialog {
 								JOptionPane.showMessageDialog(null, "Le falto campos por completar", "Aviso",
 										JOptionPane.INFORMATION_MESSAGE);
 								return;
-							} else {
+							} else if (soli == null) {
 								solicitante = new Solicitante(cedula, nombre, apellidos, nacimiento, genero, paisOrigen,
 										paisResidencia);
 								dispose();
@@ -171,6 +178,18 @@ public class RegSolicitante extends JDialog {
 								RegPerfil perfil = new RegPerfil(solicitante);
 								perfil.setModal(true);
 								perfil.setVisible(true);
+							} else{
+								soli.setCedula(cedula);
+								soli.setNombre(nombre);
+								soli.setApellidos(apellidos);
+								soli.setGenero(genero);
+								soli.setPaisOrigen(paisOrigen);
+								soli.setPaisResidencia(paisResidencia);
+								soli.setNacimiento(nacimiento);
+								ListSolicitante.loadTable("<Todos>", "<Todos>");
+								JOptionPane.showMessageDialog(null, "Se ha realizado la modificación", "Información",
+										JOptionPane.INFORMATION_MESSAGE);
+								dispose();
 							}
 
 						}
@@ -193,6 +212,9 @@ public class RegSolicitante extends JDialog {
 
 		loadCountries();
 		loadPanel(true, false, false);
+		if (soli != null) {
+			loadSoli(soli);
+		}
 
 	}
 
@@ -213,6 +235,28 @@ public class RegSolicitante extends JDialog {
 	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {
 	}
 
+	private void loadSoli(Solicitante soli){
+		int i = 0;
+		txtCedula.setText(soli.getCedula());
+		txtNombre.setText(soli.getNombre());
+		txtApellidos.setText(soli.getApellidos());
+		
+		for (i = 0; i < cbxGenero.getItemCount(); i++) {
+			if (cbxGenero.getItemAt(i).toString().equalsIgnoreCase(soli.getGenero())) {
+				cbxGenero.setSelectedIndex(i);
+			}
+		}
+		for (i = 0; i < cbxPaisOrigen.getItemCount(); i++) {
+			if (cbxPaisOrigen.getItemAt(i).toString().equalsIgnoreCase(soli.getPaisOrigen())) {
+				cbxPaisOrigen.setSelectedIndex(i);
+			}
+		}
+		for (i = 0; i < cbxPaisResidencia.getItemCount(); i++) {
+			if (cbxPaisResidencia.getItemAt(i).toString().equalsIgnoreCase(soli.getPaisResidencia())) {
+				cbxPaisResidencia.setSelectedIndex(i);
+			}
+		}
+	}
 	private void clean() {
 		txtCedula.setText("");
 		txtNombre.setText("");

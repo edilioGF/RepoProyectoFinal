@@ -32,14 +32,16 @@ import java.awt.event.MouseEvent;
 public class ListSolicitante extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private Object[] fila;
-	private DefaultTableModel model;
+	private static JTable table;
+	private static Object[] fila;
+	private static DefaultTableModel model;
 	private JTextField txtCedula;
 	private JComboBox cbxGenero;
 	private JButton btnDesactivarEmpleo;
+	private JButton btnModificar;
 	private Solicitante solicitante;
 	private JButton btnEliminar;
+
 
 	/**
 	 * Create the dialog.
@@ -68,17 +70,19 @@ public class ListSolicitante extends JDialog {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							if (table.getSelectedRow() >= 0) {
+								btnModificar.setEnabled(true);
+								btnEliminar.setEnabled(true);
 								int index = table.getSelectedRow();
 								String cedula = (String) table.getModel().getValueAt(index, 0);
 								solicitante = Controladora.getInstance().buscarSolicitante(cedula);
-
+								
 								if (solicitante.isTrabajo()) {
 									btnDesactivarEmpleo.setEnabled(true);
 								} else {
 									btnDesactivarEmpleo.setEnabled(false);
 								}
 
-								btnEliminar.setEnabled(true);
+								
 							}
 						}
 					});
@@ -163,6 +167,16 @@ public class ListSolicitante extends JDialog {
 						}
 					}
 				});
+				
+				btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						RegSolicitante rgSolicitante = new RegSolicitante(solicitante);
+						rgSolicitante.setModal(true);
+						rgSolicitante.setVisible(true);
+					}
+				});
+				buttonPane.add(btnModificar);
 				btnDesactivarEmpleo.setEnabled(false);
 				buttonPane.add(btnDesactivarEmpleo);
 
@@ -201,7 +215,7 @@ public class ListSolicitante extends JDialog {
 		}
 	}
 
-	private void loadTable(String mode, String mode2) {
+	static void loadTable(String mode, String mode2) {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		String trabajo;

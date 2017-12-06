@@ -363,7 +363,7 @@ public class RegPerfil extends JDialog {
 								clear();
 							} else {
 								dispose();
-								RegSolicitante rs = new RegSolicitante();
+								RegSolicitante rs = new RegSolicitante(null);
 								rs.setModal(true);
 								rs.setVisible(true);
 							}
