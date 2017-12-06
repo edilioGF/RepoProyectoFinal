@@ -32,6 +32,7 @@ import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
 import javax.swing.border.EtchedBorder;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.SpinnerNumberModel;
 
 public class RegPerfil extends JDialog {
 
@@ -231,6 +232,7 @@ public class RegPerfil extends JDialog {
 		panel_2.add(cbxIdioma);
 
 		spnExp = new JSpinner();
+		spnExp.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnExp.setBounds(195, 46, 105, 23);
 		panel_2.add(spnExp);
 
