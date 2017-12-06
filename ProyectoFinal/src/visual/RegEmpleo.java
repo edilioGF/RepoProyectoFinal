@@ -424,7 +424,8 @@ public class RegEmpleo extends JDialog {
 								Principal.loadStats();
 								JOptionPane.showMessageDialog(null, "Operación satisfactoria", "Aviso",
 										JOptionPane.INFORMATION_MESSAGE);
-								txtCodigo.setText("EMP-" + Controladora.getInstance().getMisEmpleos().size() + 1);
+								txtCodigo.setText(String.format("%s-%03d", "EMP",
+										Controladora.getInstance().getMisEmpleos().size() + 1));
 
 								if (emp != null) {
 									dispose();

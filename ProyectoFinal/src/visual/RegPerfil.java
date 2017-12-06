@@ -361,7 +361,8 @@ public class RegPerfil extends JDialog {
 							}
 							Principal.loadStats();
 							JOptionPane.showMessageDialog(null, "Su perfil se ha registrado satisfactorimente");
-							txtCodigo.setText("PER-" + Controladora.getInstance().getMisPerfiles().size() + 1);
+							txtCodigo.setText(String.format("%s-%03d", "PER",
+									Controladora.getInstance().getMisPerfiles().size() + 1));
 							if (solicitante == null) {
 								clear();
 							} else {
