@@ -23,6 +23,8 @@ import logico.Tecnico;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -47,11 +49,11 @@ public class RegSolicitante extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegSolicitante(Solicitante soli ) {
+	public RegSolicitante(Solicitante soli) {
 		if (soli == null) {
-			setTitle("Registro de Empresa");
+			setTitle("Registro de Solicitante");
 		} else {
-			setTitle("Modificación de Empresa");
+			setTitle("Modificación de Solicitante");
 		}
 		setResizable(false);
 		setBounds(100, 100, 390, 375);
@@ -134,9 +136,9 @@ public class RegSolicitante extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnSiguiente = new JButton("Siguiente");
-				if(soli != null){
-			    	btnSiguiente.setText("Modificar");
-			    }
+				if (soli != null) {
+					btnSiguiente.setText("Modificar");
+				}
 				btnSiguiente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if (cbxGenero.getSelectedIndex() <= 0) {
@@ -178,7 +180,7 @@ public class RegSolicitante extends JDialog {
 								RegPerfil perfil = new RegPerfil(solicitante);
 								perfil.setModal(true);
 								perfil.setVisible(true);
-							} else{
+							} else {
 								soli.setCedula(cedula);
 								soli.setNombre(nombre);
 								soli.setApellidos(apellidos);
@@ -186,7 +188,8 @@ public class RegSolicitante extends JDialog {
 								soli.setPaisOrigen(paisOrigen);
 								soli.setPaisResidencia(paisResidencia);
 								soli.setNacimiento(nacimiento);
-								ListSolicitante.loadTable("<Todos>", "<Todos>");
+								Controladora.getInstance().actualizarPerfiles(soli);
+								ListSolicitante.loadTable("<Todos>", "");
 								JOptionPane.showMessageDialog(null, "Se ha realizado la modificación", "Información",
 										JOptionPane.INFORMATION_MESSAGE);
 								dispose();
@@ -211,9 +214,13 @@ public class RegSolicitante extends JDialog {
 		}
 
 		loadCountries();
-		loadPanel(true, false, false);
 		if (soli != null) {
-			loadSoli(soli);
+			try {
+				loadSoli(soli);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -232,15 +239,15 @@ public class RegSolicitante extends JDialog {
 		}
 	}
 
-	private void loadPanel(boolean graduado, boolean tecnico, boolean obrero) {
-	}
-
-	private void loadSoli(Solicitante soli){
+	private void loadSoli(Solicitante soli) throws ParseException {
 		int i = 0;
 		txtCedula.setText(soli.getCedula());
 		txtNombre.setText(soli.getNombre());
 		txtApellidos.setText(soli.getApellidos());
-		
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(soli.getNacimiento());
+		dateChooser.setDate(date);
+
 		for (i = 0; i < cbxGenero.getItemCount(); i++) {
 			if (cbxGenero.getItemAt(i).toString().equalsIgnoreCase(soli.getGenero())) {
 				cbxGenero.setSelectedIndex(i);
@@ -257,6 +264,7 @@ public class RegSolicitante extends JDialog {
 			}
 		}
 	}
+
 	private void clean() {
 		txtCedula.setText("");
 		txtNombre.setText("");
@@ -264,7 +272,5 @@ public class RegSolicitante extends JDialog {
 		cbxGenero.setSelectedIndex(0);
 		cbxPaisOrigen.setSelectedIndex(0);
 		cbxPaisResidencia.setSelectedIndex(0);
-		loadPanel(true, false, false);
-
 	}
 }

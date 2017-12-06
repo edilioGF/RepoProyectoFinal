@@ -167,16 +167,6 @@ public class ListSolicitante extends JDialog {
 						}
 					}
 				});
-				
-				btnModificar = new JButton("Modificar");
-				btnModificar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						RegSolicitante rgSolicitante = new RegSolicitante(solicitante);
-						rgSolicitante.setModal(true);
-						rgSolicitante.setVisible(true);
-					}
-				});
-				buttonPane.add(btnModificar);
 				btnDesactivarEmpleo.setEnabled(false);
 				buttonPane.add(btnDesactivarEmpleo);
 
@@ -200,6 +190,16 @@ public class ListSolicitante extends JDialog {
 				});
 				btnEliminar.setEnabled(false);
 				buttonPane.add(btnEliminar);
+				
+				btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						RegSolicitante rgSolicitante = new RegSolicitante(solicitante);
+						rgSolicitante.setModal(true);
+						rgSolicitante.setVisible(true);
+					}
+				});
+				buttonPane.add(btnModificar);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

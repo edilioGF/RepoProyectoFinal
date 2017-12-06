@@ -463,6 +463,10 @@ public class Controladora {
 				}
 			}
 		}
+
+		for (Perfil perf : delete) {
+			misPerfiles.remove(perf);
+		}
 	}
 
 	public void eliminarEmpleosEmpresa(Empresa empresaList) {
@@ -527,6 +531,17 @@ public class Controladora {
 		}
 
 		return arr;
+	}
+
+	public void actualizarPerfiles(Solicitante soli) {
+		// TODO Auto-generated method stub
+		for (Perfil perfil : misPerfiles) {
+			for (Perfil perf : soli.getMisPerfiles()) {
+				if (perf.getCodigo().equalsIgnoreCase(perfil.getCodigo())) {
+					perfil.setSolicitante(soli);
+				}
+			}
+		}
 	}
 
 	public ArrayList<Solicitante> getMisSolicitantes() {
