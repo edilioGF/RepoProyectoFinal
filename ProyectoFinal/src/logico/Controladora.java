@@ -126,18 +126,16 @@ public class Controladora {
 		boolean find = false;
 		int i = 0;
 		int j = 0;
-		while (!find && i < misEmpleos.size()) {
-
-			while (!find && j < misEmpleos.get(i).getEmpleados().size()) {
-				if (misEmpleos.get(i).getEmpleados().get(j) == solicitante) {
-					empleo = misEmpleos.get(i);
-					find = true;
+		
+		for (Empleo empl : misEmpleos) {
+			for (Solicitante soli : empl.getEmpleados()) {
+				if (soli.getCedula().equalsIgnoreCase(solicitante.getCedula())) {
+					empleo = empl;
 				}
-				j++;
+
 			}
-			j = 0;
-			i++;
 		}
+		
 		empleo.getEmpleados().remove(solicitante);
 		empleo.setVacantes(empleo.getVacantes() + 1);
 		eliminarPerfil(solicitante);
